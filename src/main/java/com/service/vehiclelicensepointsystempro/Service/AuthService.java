@@ -2,7 +2,6 @@ package com.service.vehiclelicensepointsystempro.Service;
 
 
 import com.service.vehiclelicensepointsystempro.Dto.AuthResponse;
-import com.service.vehiclelicensepointsystempro.Dto.LoginRequest;
 import com.service.vehiclelicensepointsystempro.Dto.RegisterRequest;
 import com.service.vehiclelicensepointsystempro.Entity.Role;
 import com.service.vehiclelicensepointsystempro.Entity.User;
@@ -20,7 +19,7 @@ public class AuthService {
     private final PasswordEncoder passwordEncoder;
     private final JwtUtil jwtUtil;
 
-   public AuthResponse authenticate(LoginRequest authDTO){
+   public AuthResponse authenticate(com.service.vehiclelicensepointsystempro.Dto.LoginRequest authDTO){
         // validate credentials
         User user = userRepository.findByUsername(authDTO.getUsername())
                 .orElseThrow(() -> new RuntimeException("User not found"));
@@ -33,6 +32,15 @@ public class AuthService {
         return new AuthResponse(token);
     }
 
+    // Generate a JWT token for a given user (used by OAuth2Controller)
+    public String generateToken(User user) {
+        String username = user.getUsername();
+        String role = user.getRole() != null ? user.getRole().name() : null;
+        if (role != null) {
+            return jwtUtil.generateToken(username, role);
+        }
+        return jwtUtil.generateToken(username);
+    }
 
     public String register(RegisterRequest registerDto){
         if (userRepository.findByUsername(registerDto.getUsername()).isPresent()){
@@ -42,15 +50,11 @@ public class AuthService {
          User user = User.builder()
                 .username(registerDto.getUsername())
                 .password(passwordEncoder.encode(registerDto.getPassword()))
-                 .userEmail(registerDto.getUseremail())
+                 .userEmail(registerDto.getUserEmail())
                 .role(Role.valueOf(registerDto.getRole()))
                 .build();
         userRepository.save(user);
         return "User registered successfully";
     }
-
-
-
-
 
 }

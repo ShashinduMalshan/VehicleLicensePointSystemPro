@@ -9,10 +9,11 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class DriverDto {
 
-    private String lic;
+    private String drivingLicNum;
     private String name;
     private String email;
-    private int total_point;
+    private int totalPoint;
+    private String status;
 }
 
 

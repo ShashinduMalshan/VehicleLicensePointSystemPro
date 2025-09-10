@@ -1,6 +1,30 @@
 $(document).ready(function() {
+  // Mobile sidebar toggle
+  const $mobileSidebar = $('#mobile-sidebar');
+  const $mobileOverlay = $('#mobile-overlay');
+  const $mobileMenuBtn = $('#mobile-menu-button');
+  const $mobileCloseBtn = $('#mobile-close-button');
+
+  function openMobile() {
+    $mobileSidebar.removeClass('-translate-x-full');
+    $mobileOverlay.removeClass('pointer-events-none').addClass('opacity-100');
+    $mobileMenuBtn.attr('aria-expanded', 'true');
+    $('body').addClass('overflow-hidden');
+  }
+  function closeMobile() {
+    $mobileSidebar.addClass('-translate-x-full');
+    $mobileOverlay.addClass('pointer-events-none').removeClass('opacity-100');
+    $mobileMenuBtn.attr('aria-expanded', 'false');
+    $('body').removeClass('overflow-hidden');
+  }
+  window.__closeMobile = closeMobile;
+
+  $mobileMenuBtn.on('click', openMobile);
+  $mobileCloseBtn.on('click', closeMobile);
+  $mobileOverlay.on('click', closeMobile);
+  $(document).on('keydown', function(e){ if(e.key === 'Escape') closeMobile(); });
   function navigateTo(page) {
-    $('#page-overview, #page-drivers, #page-violations').addClass('hidden');
+    $('#page-overview, #page-drivers, #page-violations, #page-points, #page-reports,#page-notifications').addClass('hidden');
 
     $('.nav-link')
       .removeClass('bg-[#084a9e] text-white')
