@@ -1,4 +1,4 @@
-package com.service.vehiclelicensepointsystempro.Service.Impl;
+package com.service.vehiclelicensepointsystempro.Service;
 
 import com.service.vehiclelicensepointsystempro.Dto.OAuth2UserInfo;
 import com.service.vehiclelicensepointsystempro.Entity.AuthProvider;

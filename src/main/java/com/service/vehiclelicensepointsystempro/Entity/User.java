@@ -30,4 +30,9 @@ public class User {
 
     @Column(unique = true)
     private String providerId; // <-- add this
+
+    @ManyToOne
+    @JoinColumn(name = "officer_id")
+    private PoliceOfficer officer;
+
 }

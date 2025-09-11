@@ -122,4 +122,31 @@ $(document).ready(function () {
         });
     });
 
+    // Handle google login form submission
+    // Handle Google login button click
+    $('#google_login').on('click', function (e) {
+        e.preventDefault();
+        // Redirect user to Spring Boot Google OAuth2 endpoint
+        window.location.href = "http://localhost:8080/oauth2/authorization/google";
+
+                // Get token from URL query params
+        const params = new URLSearchParams(window.location.search);
+        const token = params.get("token");
+        const email = params.get("email");
+        const role = params.get("role");
+
+        if (token) {
+            // Save token in localStorage for future API calls
+            localStorage.setItem("authToken", token);
+            localStorage.setItem("userEmail", email);
+            localStorage.setItem("userRole", role);
+            window.location.href = '../Pages/DashBord.html';
+
+            // Remove token from URL for cleanliness
+            window.history.replaceState({}, document.title, window.location.pathname);
+
+        }
+
+    });
+
 });

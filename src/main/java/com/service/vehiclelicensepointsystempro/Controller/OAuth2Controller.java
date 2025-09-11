@@ -23,7 +23,6 @@ public class OAuth2Controller {
 
     @GetMapping("/success")
     public ResponseEntity<ApiResponse> success(@AuthenticationPrincipal OAuth2User oAuth2User) {
-                    System.out.println(oAuth2User);
 
         try {
             String email = oAuth2User.getAttribute("email");

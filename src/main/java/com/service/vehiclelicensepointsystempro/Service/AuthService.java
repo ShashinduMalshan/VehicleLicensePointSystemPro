@@ -3,6 +3,7 @@ package com.service.vehiclelicensepointsystempro.Service;
 
 import com.service.vehiclelicensepointsystempro.Dto.AuthResponse;
 import com.service.vehiclelicensepointsystempro.Dto.RegisterRequest;
+import com.service.vehiclelicensepointsystempro.Entity.AuthProvider;
 import com.service.vehiclelicensepointsystempro.Entity.Role;
 import com.service.vehiclelicensepointsystempro.Entity.User;
 import com.service.vehiclelicensepointsystempro.Repo.UserRepository;
@@ -50,7 +51,8 @@ public class AuthService {
          User user = User.builder()
                 .username(registerDto.getUsername())
                 .password(passwordEncoder.encode(registerDto.getPassword()))
-                 .userEmail(registerDto.getUserEmail())
+                .userEmail(registerDto.getUserEmail())
+                .provider(AuthProvider.LOCAL)
                 .role(Role.valueOf(registerDto.getRole()))
                 .build();
         userRepository.save(user);

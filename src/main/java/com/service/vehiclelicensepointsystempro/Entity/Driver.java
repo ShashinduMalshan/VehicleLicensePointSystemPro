@@ -1,9 +1,6 @@
 package com.service.vehiclelicensepointsystempro.Entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
@@ -11,8 +8,10 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Entity
+import java.util.List;
+
 @Table(name = "Driver")
+@Entity
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
@@ -38,4 +37,16 @@ public class Driver {
 
     @Column(name = "status")
     private String status;
+
+    @OneToMany(mappedBy = "driver")
+    private List<ReLicenceComplete> reLicenceCompletes;
+
+    @OneToMany(mappedBy = "driver")
+    private List<SuspendLic> suspendLicenses;
+
+    @OneToMany(mappedBy = "driver")
+    private List<Training> trainings;
+
+    @OneToMany(mappedBy = "driver")
+    private List<ViolationPoint> violationPoints;
 }
