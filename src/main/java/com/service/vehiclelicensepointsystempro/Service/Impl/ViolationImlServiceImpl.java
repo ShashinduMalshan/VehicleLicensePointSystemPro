@@ -1,14 +1,16 @@
 package com.service.vehiclelicensepointsystempro.Service.Impl;
 
 import com.service.vehiclelicensepointsystempro.Dto.ViolationPointDto;
-import com.service.vehiclelicensepointsystempro.Entity.ViolationPoint;
-import com.service.vehiclelicensepointsystempro.Repo.ViolationRepository;
+import com.service.vehiclelicensepointsystempro.Entity.*;
+import com.service.vehiclelicensepointsystempro.Repo.*;
 import com.service.vehiclelicensepointsystempro.Service.ViolationImlService;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
-import org.modelmapper.TypeToken;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.List;
 
 @Service
@@ -18,10 +20,23 @@ public class ViolationImlServiceImpl implements ViolationImlService {
     private final ViolationRepository violationRepository;
     private final ModelMapper modelMApper;
 
+    @Autowired
+    private RevenueLicRepository revenueLicRepository;
+
+    @Autowired
+    private LawRepository lawRepository;
+
+    @Autowired
+    private PoliceOfficerRepository policeOfficerRepository;
+
+    @Autowired
+    private DriverRepository driverRepository;
+
     @Override
     public List<ViolationPointDto> getAllViolations() {
 
-        List<ViolationPoint> all = violationRepository.findAll();
+    List<ViolationPoint> all = violationRepository.findAll();
+
     return all.stream().map(vp -> {
             ViolationPointDto dto = new ViolationPointDto();
             dto.setPointId(vp.getPointId());
@@ -40,5 +55,38 @@ public class ViolationImlServiceImpl implements ViolationImlService {
         }).toList();
     }
 
+    @Override
+    public void save(ViolationPointDto violationPointDto) {
+
+        RevenueLic revenueLic = revenueLicRepository
+            .findById(violationPointDto.getRevenueLic())
+            .orElseThrow(() -> new RuntimeException("RevenueLic not found"));
+
+        TrafficViolationLaw law = lawRepository
+            .findById(violationPointDto.getLawId())
+            .orElseThrow(() -> new RuntimeException("Law not found"));
+
+        PoliceOfficer officer = policeOfficerRepository
+            .findById(violationPointDto.getOfficerId())
+            .orElseThrow(() -> new RuntimeException("Officer not found"));
+
+        Driver driver = driverRepository
+                .findById(violationPointDto.getDriver())
+                .orElseThrow(() -> new RuntimeException("Driver not found"));
+
+        ViolationPoint violationPoint = ViolationPoint.builder()
+                .pointId(violationPointDto.getPointId())
+                .description(violationPointDto.getDescription())
+                .location(violationPointDto.getLocation())
+                .violationDate(LocalDate.now())
+                .violationTime(LocalTime.now())
+                .driver(driver)
+                .officer(officer)          // ✅ correct
+                .revenueLic(revenueLic)    // ✅ correct
+                .law(law)                  // ✅ correct
+                .build();
+
+        violationRepository.save(violationPoint);
+    }
 
 }

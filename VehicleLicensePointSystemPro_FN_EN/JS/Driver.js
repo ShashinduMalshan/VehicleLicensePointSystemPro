@@ -1,10 +1,10 @@
 
-    loadAllJobs();
+window.PageFunctions = window.PageFunctions || {};
 
-    function loadAllJobs() {
+    PageFunctions.loadDrivers = function() {
 
         const token = localStorage.getItem("authToken");
-        console.log(token);
+        console.log("driver");
         if (!token) {
             alert("You are not logged in! Please log in first.");
             window.location.href = '../Pages/sing_in_And_Sing_up.html';

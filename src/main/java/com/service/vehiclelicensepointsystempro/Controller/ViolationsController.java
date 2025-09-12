@@ -1,16 +1,20 @@
 package com.service.vehiclelicensepointsystempro.Controller;
 
+import com.service.vehiclelicensepointsystempro.Dto.LawDto;
 import com.service.vehiclelicensepointsystempro.Dto.ViolationPointDto;
+import com.service.vehiclelicensepointsystempro.Service.Impl.LawServiceImpl;
 import com.service.vehiclelicensepointsystempro.Service.Impl.ViolationImlServiceImpl;
 import lombok.Generated;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PostAuthorize;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.List;
 
 @CrossOrigin(origins = "http://localhost:63342")  // allow frontend origin
@@ -20,12 +24,32 @@ import java.util.List;
 public class ViolationsController {
 
     public final ViolationImlServiceImpl violationService;
+    public final LawServiceImpl lawService;
 
     @GetMapping("/all")
-//    @PreAuthorize("hasRole('Admin')")
+//  @PreAuthorize("hasRole('Admin')")
     private List<ViolationPointDto> getAllViolations(){
         return violationService.getAllViolations();
+
+
+    }@GetMapping("/laws")
+//  @PreAuthorize("hasRole('Admin')")
+    private List<LawDto> getAllTrafficLaw(){
+        return lawService.getAllTrafficLaw();
     }
+
+    @PostMapping("/violations")
+public ResponseEntity<?> addViolation(@RequestBody ViolationPointDto dto) {
+    try {
+        violationService.save(dto);
+        return ResponseEntity.ok("saved");
+    } catch (Exception e) {
+        e.printStackTrace(); // <-- see console log
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                             .body(e.getMessage());
+    }
+}
+
 
 
 }

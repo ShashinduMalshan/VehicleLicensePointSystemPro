@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface ViolationImlService {
     List<ViolationPointDto> getAllViolations();
+
+    void save(ViolationPointDto violationPointDto);
 }

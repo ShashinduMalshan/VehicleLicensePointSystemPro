@@ -1,11 +1,14 @@
+
+
 $(document).ready(function() {
   // Mobile sidebar toggle
   const $mobileSidebar = $('#mobile-sidebar');
   const $mobileOverlay = $('#mobile-overlay');
   const $mobileMenuBtn = $('#mobile-menu-button');
   const $mobileCloseBtn = $('#mobile-close-button');
+    let CurrentPage;
 
-  function openMobile() {
+    function openMobile() {
     $mobileSidebar.removeClass('-translate-x-full');
     $mobileOverlay.removeClass('pointer-events-none').addClass('opacity-100');
     $mobileMenuBtn.attr('aria-expanded', 'true');
@@ -39,6 +42,14 @@ $(document).ready(function() {
       .removeClass('text-blue-100 hover:bg-[#084a9e] hover:text-white')
       .find('span:first-child')
       .removeClass('hidden');
+
+
+
+    if (page === 'drivers' && PageFunctions.loadDrivers) {
+        PageFunctions.loadDrivers();
+    }else if (page === 'violations' && PageFunctions.loadViolation) {
+        PageFunctions.loadViolation();
+    }
   }
 
   function useGPS() {
