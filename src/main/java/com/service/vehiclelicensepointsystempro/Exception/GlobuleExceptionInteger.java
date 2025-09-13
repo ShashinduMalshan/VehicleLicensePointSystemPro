@@ -3,11 +3,15 @@ package com.service.vehiclelicensepointsystempro.Exception;
 import com.service.vehiclelicensepointsystempro.Dto.ApiResponse;
 import io.jsonwebtoken.ExpiredJwtException;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+
+import java.util.HashMap;
+import java.util.Map;
 
 @RestControllerAdvice
 public class GlobuleExceptionInteger {
@@ -27,7 +31,7 @@ public class GlobuleExceptionInteger {
     public ApiResponse handleBadCredentialsException(BadCredentialsException e) {
         return new ApiResponse(
                 400,
-                "Bad Credentials",
+                e.getMessage(),
                 null
         );
     }
@@ -49,10 +53,13 @@ public class GlobuleExceptionInteger {
     public ApiResponse handleRuntimeException(RuntimeException e) {
         return new ApiResponse(
                 500,
-                "Internal Server Error",
+                e.getMessage(),
                 null
         );
     }
+
+
+
 
 
 

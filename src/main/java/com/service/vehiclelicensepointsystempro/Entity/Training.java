@@ -17,7 +17,8 @@ import java.time.LocalDate;
 public class Training {
 
     @Id
-    private String courseId;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long courseId;
 
     private String name;
     private LocalDate duration;

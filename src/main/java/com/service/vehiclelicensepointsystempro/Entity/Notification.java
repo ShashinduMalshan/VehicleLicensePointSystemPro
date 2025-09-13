@@ -16,7 +16,8 @@ import java.time.LocalDate;
 public class Notification {
 
     @Id
-    private String notificationId;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long notificationId;
 
     private LocalDate date;
     private Integer point;

@@ -15,7 +15,8 @@ import lombok.NoArgsConstructor;
 public class SuspendDetails {
 
     @Id
-    private String suspendDetailId;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long suspendDetailId;
 
     private String description;
 

@@ -17,7 +17,8 @@ import java.time.LocalDate;
 public class ReLicenceComplete {
 
     @Id
-    private String testId;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long testId;
 
     private Integer lastScore;
     private LocalDate date;

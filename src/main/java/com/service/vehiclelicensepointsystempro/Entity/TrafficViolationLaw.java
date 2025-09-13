@@ -16,7 +16,8 @@ import java.util.List;
 public class TrafficViolationLaw {
 
     @Id
-    private String lawId;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long lawId;
 
     private String description;
     private Integer lawPoint;

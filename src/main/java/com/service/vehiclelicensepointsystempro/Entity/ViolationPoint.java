@@ -18,7 +18,8 @@ import java.util.List;
 public class ViolationPoint {
 
     @Id
-    private String pointId;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long pointId;
 
     private String description;
     private String location;

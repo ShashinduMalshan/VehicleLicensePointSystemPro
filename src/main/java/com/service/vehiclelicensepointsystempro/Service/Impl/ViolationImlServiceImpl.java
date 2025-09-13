@@ -2,12 +2,16 @@ package com.service.vehiclelicensepointsystempro.Service.Impl;
 
 import com.service.vehiclelicensepointsystempro.Dto.ViolationPointDto;
 import com.service.vehiclelicensepointsystempro.Entity.*;
+import com.service.vehiclelicensepointsystempro.Exception.OfficerNotFoundException;
 import com.service.vehiclelicensepointsystempro.Repo.*;
 import com.service.vehiclelicensepointsystempro.Service.ViolationImlService;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -32,6 +36,8 @@ public class ViolationImlServiceImpl implements ViolationImlService {
     @Autowired
     private DriverRepository driverRepository;
 
+
+
     @Override
     public List<ViolationPointDto> getAllViolations() {
 
@@ -55,38 +61,44 @@ public class ViolationImlServiceImpl implements ViolationImlService {
         }).toList();
     }
 
+
     @Override
+    @Transactional
     public void save(ViolationPointDto violationPointDto) {
 
-        RevenueLic revenueLic = revenueLicRepository
-            .findById(violationPointDto.getRevenueLic())
-            .orElseThrow(() -> new RuntimeException("RevenueLic not found"));
+     RevenueLic revenueLic = revenueLicRepository
+        .findById(violationPointDto.getRevenueLic())
+        .orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST, "Revenue License not found"));
 
-        TrafficViolationLaw law = lawRepository
-            .findById(violationPointDto.getLawId())
-            .orElseThrow(() -> new RuntimeException("Law not found"));
+    TrafficViolationLaw law = lawRepository
+        .findById(String.valueOf(violationPointDto.getLawId()))
+        .orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST, "Law not found"));
 
-        PoliceOfficer officer = policeOfficerRepository
-            .findById(violationPointDto.getOfficerId())
-            .orElseThrow(() -> new RuntimeException("Officer not found"));
+    PoliceOfficer officer = policeOfficerRepository
+        .findById(String.valueOf(violationPointDto.getOfficerId()))
+        .orElseThrow(() -> new OfficerNotFoundException("Officer not found "));
 
-        Driver driver = driverRepository
-                .findById(violationPointDto.getDriver())
-                .orElseThrow(() -> new RuntimeException("Driver not found"));
+    Driver driver = driverRepository
+        .findById(violationPointDto.getDriver())
+        .orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST, "Driver not found"));
 
         ViolationPoint violationPoint = ViolationPoint.builder()
-                .pointId(violationPointDto.getPointId())
                 .description(violationPointDto.getDescription())
                 .location(violationPointDto.getLocation())
                 .violationDate(LocalDate.now())
                 .violationTime(LocalTime.now())
                 .driver(driver)
-                .officer(officer)          // ✅ correct
-                .revenueLic(revenueLic)    // ✅ correct
-                .law(law)                  // ✅ correct
+                .officer(officer)
+                .revenueLic(revenueLic)
+                .law(law)                 
                 .build();
 
         violationRepository.save(violationPoint);
+
+
+
     }
+
+
 
 }

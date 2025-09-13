@@ -13,8 +13,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDate;
-import java.time.LocalTime;
+
 import java.util.List;
 
 @CrossOrigin(origins = "http://localhost:63342")  // allow frontend origin
@@ -39,10 +38,11 @@ public class ViolationsController {
     }
 
     @PostMapping("/violations")
-public ResponseEntity<?> addViolation(@RequestBody ViolationPointDto dto) {
+//  @PreAuthorize("hasRole('Admin')")
+    public ResponseEntity<?> addViolation(@RequestBody ViolationPointDto dto) {
     try {
         violationService.save(dto);
-        return ResponseEntity.ok("saved");
+        return ResponseEntity.ok("Violation logged successfully");
     } catch (Exception e) {
         e.printStackTrace(); // <-- see console log
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)

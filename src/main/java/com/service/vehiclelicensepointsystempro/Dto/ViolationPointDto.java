@@ -12,13 +12,13 @@ import java.time.LocalTime;
 @NoArgsConstructor
 public class ViolationPointDto {
 
-    private String pointId;
+    private Long pointId;
     private String description;
     private String location;
     private LocalTime violationTime;
     private LocalDate violationDate;
-    private String officerId;
+    private Long officerId;
     private String driver;
     private String revenueLic;
-    private String lawId;
+    private Long lawId;
 }

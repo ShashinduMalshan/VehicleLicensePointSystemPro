@@ -154,7 +154,7 @@
 
 
         $('#log-violation').on('click', function (e) {
-
+            console.log("log-violation");
             const officerId = $('#officerId').val().trim();
             const revenueNumber = $('#revenueNumber').val().trim();
             const driverLicense = $('#driverLicense').val().trim();
@@ -171,6 +171,36 @@
             description : description
         };
 
+              $.ajax({
+                url: 'http://localhost:8080/api/v1/violation/violations',
+                method: 'POST',
+                headers: {
+                    "Authorization": "Bearer " + token
+                },
+                data: JSON.stringify(violationData),
+                contentType: 'application/json',
+                success: function (response) {
+                    alert(response +' !');
+                },
+
+                error: function (xhr) {
+                // This prints the full backend response
+                    console.error("Error response:", xhr);
+                    let msg = "Failed to save violation.";
+
+                    // If backend returns a JSON with a message
+                    if (xhr.responseJSON && xhr.responseJSON.message) {
+                        msg = xhr.responseJSON.message;
+                    } else if (xhr.responseText) {
+                        msg = xhr.responseText; // fallback
+                    }
+
+                    alert(msg);
+                }
+              })
+
+
         // Print to console for testing
-        console.log(violationData)
+
+
         });

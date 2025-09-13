@@ -16,7 +16,8 @@ import java.util.List;
 public class PoliceOfficer {
 
     @Id
-    private String officerId;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long officerId;
 
     private String name;
     private String dutyLocation;

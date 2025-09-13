@@ -17,7 +17,8 @@ import java.util.List;
 public class SuspendLic {
 
     @Id
-    private String suspendId;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long suspendId;
 
     private String driverName;
     private String timeDuration;

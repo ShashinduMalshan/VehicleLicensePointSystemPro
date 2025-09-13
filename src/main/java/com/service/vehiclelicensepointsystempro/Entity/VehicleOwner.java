@@ -17,7 +17,8 @@ import java.util.List;
 public class VehicleOwner {
 
     @Id
-    private String ownerId;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long ownerId;
 
     private String name;
     private String email;
