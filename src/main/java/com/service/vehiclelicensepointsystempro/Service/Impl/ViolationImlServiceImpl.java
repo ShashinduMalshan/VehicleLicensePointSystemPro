@@ -96,6 +96,10 @@ public class ViolationImlServiceImpl implements ViolationImlService {
         violationRepository.save(violationPoint);
 
 
+        // Update driver total point
+        driver.setTotalPoint(driver.getTotalPoint()  + law.getLawPoint());
+        driverRepository.save(driver);
+
 
     }
 
