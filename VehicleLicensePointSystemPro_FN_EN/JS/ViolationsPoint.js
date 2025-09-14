@@ -185,17 +185,14 @@
 
                 error: function (xhr) {
                 // This prints the full backend response
-                    console.error("Error response:", xhr);
-                    let msg = "Failed to save violation.";
 
-                    // If backend returns a JSON with a message
-                    if (xhr.responseJSON && xhr.responseJSON.message) {
-                        msg = xhr.responseJSON.message;
-                    } else if (xhr.responseText) {
-                        msg = xhr.responseText; // fallback
-                    }
-
-                    alert(msg);
+                if (xhr.status === 401) {
+                    alert("Your session has expired. Please log in again.");
+                    localStorage.removeItem("authToken");
+                    window.location.href = '../Pages/sing_in_And_Sing_up.html';
+                } else {
+                    alert("Failed to load driver list.");
+                }
                 }
               })
 
@@ -204,3 +201,239 @@
 
 
         });
+
+    $(document).ready(function () {
+    const $revenueNumberInput = $('#revenueNumber');
+    const $driverLicenseInput = $('#driverLicense');
+    const $scanModal = $('#scanModal');
+    const $scanModalTitle = $('#scanModalTitle');
+    const $closeScanBtn = $('#closeScan');
+    const $processImageBtn = $('#processImage');
+    const $capturePhotoBtn = $('#capturePhoto');
+    const $previewImage = $('#preview');
+    const $video = $('#video');
+    const $scanStatus = $('#scanStatus');
+    const $revenueImageUpload = $('#revenueImageUpload');
+    const $driverImageUpload = $('#driverImageUpload');
+    const $scanRevenueBtn = $('#scanRevenueBtn');
+    const $scanDriverLicenseBtn = $('#scanDriverLicenseBtn');
+    let worker = null;
+    let stream = null;
+    let currentInput = null;
+
+    // HTTPS check
+    if (location.protocol !== 'https:' && location.hostname !== 'localhost') {
+        $scanStatus.text('Error: Processing requires HTTPS or http://localhost. Please use a local server with HTTPS.')
+                   .addClass('error');
+        $processImageBtn.prop('disabled', true);
+        console.error('Non-secure context detected:', location.protocol, location.hostname);
+        return;
+    }
+
+    // Initialize Tesseract
+    async function initTesseract() {
+        try {
+            console.log('Initializing Tesseract worker...');
+            worker = await Tesseract.createWorker('eng', 1, {
+                logger: m => {
+                    if (m.status === 'recognizing text') {
+                        $scanStatus.text(`Processing... ${Math.round(m.progress * 100)}%`);
+                    }
+                }
+            });
+            console.log('Tesseract worker initialized.');
+        } catch (err) {
+            console.error('Tesseract initialization failed:', err);
+            $scanStatus.text('Error: Could not initialize OCR. Please try again.').addClass('error');
+            $processImageBtn.prop('disabled', true);
+        }
+    }
+
+    // Start camera
+    async function startCamera() {
+        $scanModal.removeClass('hidden');
+        $scanStatus.text('Accessing camera...');
+        $video.removeClass('hidden');
+        $capturePhotoBtn.removeClass('hidden');
+        $processImageBtn.addClass('hidden');
+        $previewImage.addClass('hidden');
+
+        try {
+            stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: 'environment' } });
+            $video[0].srcObject = stream;
+            $scanStatus.text('Camera ready. Click Capture to take a photo.');
+        } catch (err) {
+            console.error('Camera access failed:', err);
+            $scanStatus.text('Error: Could not access camera. Please try again.').addClass('error');
+            $capturePhotoBtn.addClass('hidden');
+            $processImageBtn.removeClass('hidden').prop('disabled', true);
+        }
+    }
+
+    // Handle scan buttons
+    $scanRevenueBtn.on('click', function () {
+        currentInput = $revenueNumberInput;
+        $scanModalTitle.text('Process Revenue License');
+        if (confirm('Would you like to take a photo? Click OK to use camera, or Cancel to upload an image.')) {
+            startCamera();
+        } else {
+            $revenueImageUpload.click();
+        }
+    });
+
+    $scanDriverLicenseBtn.on('click', function () {
+        currentInput = $driverLicenseInput;
+        $scanModalTitle.text('Process Driver License');
+        if (confirm('Would you like to take a photo? Click OK to use camera, or Cancel to upload an image.')) {
+            startCamera();
+        } else {
+            $driverImageUpload.click();
+        }
+    });
+
+    // Capture photo
+    $capturePhotoBtn.on('click', function () {
+        const canvas = document.createElement('canvas');
+        canvas.width = $video[0].videoWidth;
+        canvas.height = $video[0].videoHeight;
+        const context = canvas.getContext('2d');
+        context.drawImage($video[0], 0, 0);
+        $previewImage.attr('src', canvas.toDataURL('image/png')).removeClass('hidden');
+        $video.addClass('hidden');
+        $capturePhotoBtn.addClass('hidden');
+        $processImageBtn.removeClass('hidden').prop('disabled', false);
+        $scanStatus.text('Image captured. Click Process to extract license number.');
+        if (stream) {
+            stream.getTracks().forEach(track => track.stop());
+            stream = null;
+        }
+    });
+
+    // Image upload
+    $revenueImageUpload.add($driverImageUpload).on('change', function (e) {
+        const file = e.target.files[0];
+        if (!file) return;
+
+        $scanModal.removeClass('hidden');
+        $scanStatus.text('Loading image...');
+        $video.addClass('hidden');
+        $capturePhotoBtn.addClass('hidden');
+        $processImageBtn.removeClass('hidden');
+
+        const img = new Image();
+        img.src = URL.createObjectURL(file);
+        img.onload = function () {
+            $previewImage.attr('src', img.src).removeClass('hidden');
+            $scanStatus.text('Image loaded. Click Process to extract license number.');
+            $processImageBtn.prop('disabled', false);
+        };
+        img.onerror = function () {
+            $scanStatus.text('Error: Could not load the image. Please try again.').addClass('error');
+            $processImageBtn.prop('disabled', true);
+        };
+    });
+
+    // Process image
+    $processImageBtn.on('click', async function () {
+        $scanStatus.text('Processing image...');
+        $processImageBtn.prop('disabled', true);
+
+        const img = new Image();
+        img.src = $previewImage.attr('src');
+
+        img.onload = async function () {
+            const canvas = document.createElement('canvas');
+            canvas.width = img.width;
+            canvas.height = img.height;
+            canvas.getContext('2d').drawImage(img, 0, 0);
+
+            $scanStatus.text('Performing OCR...');
+            try {
+                await initTesseract();
+                if (!worker) return;
+
+                const { data: { text } } = await worker.recognize(canvas, {
+                    rectangle: {
+                        top: 50,
+                        left: img.width * 0.3,
+                        width: img.width * 0.4,
+                        height: img.height * 0.2
+                    }
+                });
+                console.log('OCR text:', text);
+
+                const licenseNumber = extractLicenseNumber(text);
+                if (licenseNumber) {
+                    currentInput.val(licenseNumber);
+                    $scanStatus.text('Scan successful! License number extracted: ' + licenseNumber)
+                               .addClass('success').removeClass('error');
+                } else {
+                    $scanStatus.text('Could not find a license number. Please try again.')
+                               .addClass('error').removeClass('success');
+                }
+
+                await worker.terminate();
+            } catch (err) {
+                console.error('OCR failed:', err);
+                $scanStatus.text('OCR failed: ' + err.message + '. Please try again.')
+                           .addClass('error').removeClass('success');
+            }
+
+            setTimeout(function () {
+                $scanModal.addClass('hidden');
+                $previewImage.addClass('hidden');
+                $video.addClass('hidden');
+                $scanStatus.removeClass('error success');
+                $processImageBtn.prop('disabled', false);
+                $revenueImageUpload.val('');
+                $driverImageUpload.val('');
+                if (stream) {
+                    stream.getTracks().forEach(track => track.stop());
+                    stream = null;
+                }
+            }, 3000);
+        };
+    });
+
+    // Close scan
+    $closeScanBtn.on('click', function () {
+        console.log('Closing scan modal...');
+        if (worker) {
+            worker.terminate();
+            console.log('Tesseract worker terminated.');
+        }
+        if (stream) {
+            stream.getTracks().forEach(track => track.stop());
+            stream = null;
+        }
+        $scanModal.addClass('hidden');
+        $previewImage.addClass('hidden');
+        $video.addClass('hidden');
+        $scanStatus.removeClass('error success');
+        $processImageBtn.prop('disabled', true);
+        $capturePhotoBtn.addClass('hidden');
+        $processImageBtn.removeClass('hidden');
+        $revenueImageUpload.val('');
+        $driverImageUpload.val('');
+    });
+
+    // Extract license helper
+    function extractLicenseNumber(text) {
+        const regexPatterns = [
+            /[A-Z][0-9]{6,7}/,
+            /[A-Z]{1,2}[0-9]{5,7}/,
+            /[A-Z]{2}\d{2}\s?\d{4}\s?\d{5}/,
+            /[A-Z0-9]{7,8}/,
+            /\b\d{3}-\d{3}-\d{3}\b/
+        ];
+        for (const regex of regexPatterns) {
+            const match = text.match(regex);
+            if (match) {
+                console.log('Matched license number:', match[0]);
+                return match[0].replace(/\s/g, '');
+            }
+        }
+        return null;
+    }
+});
+

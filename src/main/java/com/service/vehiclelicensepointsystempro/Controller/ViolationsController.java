@@ -41,8 +41,8 @@ public class ViolationsController {
 //  @PreAuthorize("hasRole('Admin')")
     public ResponseEntity<?> addViolation(@RequestBody ViolationPointDto dto) {
     try {
-        violationService.save(dto);
-        return ResponseEntity.ok("Violation logged successfully");
+
+        return violationService.save(dto);
     } catch (Exception e) {
         e.printStackTrace(); // <-- see console log
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)

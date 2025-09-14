@@ -9,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
@@ -64,7 +65,7 @@ public class ViolationImlServiceImpl implements ViolationImlService {
 
     @Override
     @Transactional
-    public void save(ViolationPointDto violationPointDto) {
+    public ResponseEntity<String> save(ViolationPointDto violationPointDto) {
 
      RevenueLic revenueLic = revenueLicRepository
         .findById(violationPointDto.getRevenueLic())
@@ -97,10 +98,19 @@ public class ViolationImlServiceImpl implements ViolationImlService {
 
 
         // Update driver total point
+
         driver.setTotalPoint(driver.getTotalPoint()  + law.getLawPoint());
+        if (driver.getTotalPoint() > 150) {
+            if (!driver.getStatus().equals("suspended")){
+                driver.setStatus("suspended");
+            }else {
+                return ResponseEntity.ok("Driver is already suspended");
+            }
+        }
         driverRepository.save(driver);
 
 
+        return ResponseEntity.ok("Violation logged successfully");
     }
 
 

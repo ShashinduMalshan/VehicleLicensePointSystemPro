@@ -57,9 +57,14 @@ window.PageFunctions = window.PageFunctions || {};
             },
 
 
-            error: function (error) {
-                console.error("Error loading driver data:", error);
-                alert("Failed to load driver list.");
+            error: function (xhr) {
+                if (xhr.status === 401) {
+                alert("Your session has expired. Please log in again.");
+                localStorage.removeItem("authToken");
+                window.location.href = '../Pages/sing_in_And_Sing_up.html';
+                } else {
+                    alert("Failed to load driver list.");
+                }
             }
         });
     }
