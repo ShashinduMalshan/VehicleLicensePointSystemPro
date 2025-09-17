@@ -36,9 +36,9 @@ private final UserService userService;
 
     }
 
-    @PostMapping("changePassword")
+    @PutMapping("changePass")
     public ResponseEntity<ApiResponse> changePassword(@RequestBody ChangePassDto changePassDto){
-
+        System.out.println("working");
         return userService.changePassword(changePassDto);
 
     }

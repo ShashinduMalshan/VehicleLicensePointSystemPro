@@ -111,4 +111,53 @@ $('#add-admin-form').on('submit', function (e) {
     $('#admin-name, #admin-email').val('');
 });
 
+$('#submitPassword').on('click', function (e) {
+   console.log("submitPassword");
+
+   const currentPassword = $('#current-password').val();
+    const newPassword = $('#new-password').val();
+    const confirmPassword = $('#confirm-password').val();
+
+    console.log(currentPassword, newPassword, confirmPassword);
+
+    if (!currentPassword || !newPassword || !confirmPassword) {
+        $modalError.text("All fields are required").removeClass("hidden");
+        return; // stop execution if any field is empty
+    }
+
+    if (newPassword !== confirmPassword) {
+        $modalError.text("New password and confirm password do not match").removeClass("hidden");
+        return;
+    }
+
+    let pass ={
+         username: userName,
+         oldPassword: currentPassword,
+         newPassword: newPassword
+    }
+
+    // if everything is valid → call AJAX
+    $.ajax({
+        url: "http://localhost:8080/api/v1/user/changePass",
+        method: "PUT",
+        headers: {
+            "Authorization": "Bearer " + token
+        },
+        contentType: 'application/json',
+        data: JSON.stringify(pass),
+        success: function (response) {
+            if (response.status === 200) {
+                alert("Password updated successfully");
+                window.location.href = '../Pages/sing_in_And_Sing_up.html';
+            }
+        },
+        error: function (xhr) {
+            if (xhr.status === 401) {
+                console.log(xhr.status === 401)
+                $modalError.text("Invalid password").removeClass("hidden");
+            }
+        }
+    });
+
+});
 
