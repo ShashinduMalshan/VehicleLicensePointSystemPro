@@ -1,6 +1,13 @@
+const authToken = localStorage.getItem("authToken");
+const payloadBase64 = authToken.split('.')[1];           // take the middle part
+const decoded = JSON.parse(atob(payloadBase64));     // decode Base64 → JSON
 
 
 $(document).ready(function() {
+
+    $("#sidebar-profile-name").text(decoded.sub);
+    $(".text-xs.text-blue-200").text(decoded.role);
+
   // Mobile sidebar toggle
   const $mobileSidebar = $('#mobile-sidebar');
   const $mobileOverlay = $('#mobile-overlay');

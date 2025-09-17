@@ -38,7 +38,7 @@ public class OAuth2Controller {
                     .orElseThrow(() -> new RuntimeException("User not found for email: " + email));
 
             // generate token
-            String jwtToken = jwtUtil.generateToken(user.getUsername(), user.getRole().name());
+            String jwtToken = jwtUtil.generateToken(user.getUsername(), user.getRole().name(), user.getUserEmail());
             System.out.println(user.getUsername());
             return ResponseEntity.ok(
                     new ApiResponse(

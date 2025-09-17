@@ -29,7 +29,7 @@ public class AuthService {
             throw new BadCredentialsException("Invalid credentials");
         }
         // generate token with username and role
-        String token = jwtUtil.generateToken(authDTO.getUsername(), user.getRole().name());
+        String token = jwtUtil.generateToken(authDTO.getUsername(), user.getRole().name(), user.getUserEmail());
         return new AuthResponse(token);
     }
 
@@ -37,8 +37,9 @@ public class AuthService {
     public String generateToken(User user) {
         String username = user.getUsername();
         String role = user.getRole() != null ? user.getRole().name() : null;
+        String userEmail = user.getUserEmail() != null ? user.getUserEmail() : null;
         if (role != null) {
-            return jwtUtil.generateToken(username, role);
+            return jwtUtil.generateToken(username, role , userEmail);
         }
         return jwtUtil.generateToken(username);
     }

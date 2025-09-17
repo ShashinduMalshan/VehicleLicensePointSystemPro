@@ -93,14 +93,16 @@
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-6 w-6"><path stroke-linecap="round" stroke-linejoin="round" d="M9.594 3.94c.09-.542.56-1.007 1.11-.95.542.057 1.007.56 1.065 1.11L12 10.5M12 10.5l-2.094 2.094c-.21.21-.47.364-.746.466-1.143.426-2.016 1.29-2.485 2.485C6.364 16.03 6.21 16.29 6 16.5m6-6l2.094 2.094c.21.21.47.364.746.466 1.143.426 2.016 1.29 2.485 2.485.099.276.254.536.466.746L18 16.5m-6-6-2.094-2.094c-.21-.21-.47-.364-.746-.466-1.143-.426-2.016-1.29-2.485-2.485C6.364 7.97 6.21 7.71 6 7.5m6 3 2.094-2.094c.21-.21.47-.364.746-.466 1.143.426 2.016-1.29 2.485 2.485.099-.276.254-.536.466-.746L18 7.5m-6 9v3.406c0 .818.662 1.48 1.48 1.48h.04c.818 0 1.48-.662 1.48-1.48V16.5" /></svg>
             <span class="ml-3">Settings</span>
           </button>
-          <div class="flex items-center mt-4 p-2 bg-[#084a9e] rounded-lg">
-            <img class="h-10 w-10 rounded-full object-cover" src="https://i.pravatar.cc/150?u=admin" alt="User avatar" />
-            <div class="ml-3">
-              <p class="text-sm font-semibold text-white">Kamal Perera</p>
-              <p class="text-xs text-blue-200">Administrator</p>
+           <button onclick="navigateTo('profile')" class="w-full text-left">
+            <div class="flex items-center mt-4 p-2 bg-[#084a9e] rounded-lg hover:bg-[#0a58ca] transition-colors">
+              <img id="sidebar-profile-image" class="h-10 w-10 rounded-full object-cover" src="https://i.pravatar.cc/150?u=admin" alt="User avatar" />
+              <div class="ml-3">
+                <p id="sidebar-profile-name" class="text-sm font-semibold text-white"></p>
+                <p class="text-xs text-blue-200"></p>
+              </div>
             </div>
+          </button>
           </div>
-        </div>
       </aside>
 
       <!-- Main Content -->
@@ -354,7 +356,146 @@
                     <button id="processImage" class="bg-sky-500 text-white font-semibold px-4 py-2 rounded-md" disabled>Process</button>
                 </div>
             </div>
-        </div>        </main>
+        </div>
+
+              <!-- Profile Page -->
+          <div id="page-profile" class="hidden">
+            <div class="container mx-auto">
+                <h1 class="text-2xl lg:text-3xl font-bold text-slate-800 mb-8">Profile Settings</h1>
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                    <!-- Profile Information -->
+                    <div class="lg:col-span-1">
+                        <div class="bg-white p-6 rounded-lg shadow-md h-full">
+                            <h3 class="text-lg font-semibold text-slate-800 mb-6">Profile Information</h3>
+                            <div id="profile-info-form">
+                                <div class="flex flex-col items-center space-y-4">
+                                    <div class="relative group">
+                                        <img id="profile-image-preview" class="h-24 w-24 rounded-full object-cover" src="https://i.pravatar.cc/150?u=admin" alt="User avatar" />
+                                        <label for="profile-image-input" class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center rounded-full text-white opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                                <path stroke-linecap="round" stroke-linejoin="round" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" />
+                                                <path stroke-linecap="round" stroke-linejoin="round" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z" />
+                                            </svg>
+                                            <span class="ml-2 text-sm">Change</span>
+                                        </label>
+                                        <input type="file" id="profile-image-input" class="hidden" accept="image/*">
+                                    </div>
+                                    <div class="w-full">
+                                        <label for="profile-name" class="block text-sm font-medium text-slate-600">Full Name</label>
+                                        <input type="text" id="profile-name" class="mt-1 block w-full px-3 py-2 bg-white border border-slate-300 rounded-md text-sm shadow-sm placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500" value="Kamal Perera" required>
+                                    </div>
+                                     <div class="w-full">
+                                        <label for="profile-email" class="block text-sm font-medium text-slate-600">Email</label>
+                                        <input type="email" id="profile-email" class="mt-1 block w-full px-3 py-2 bg-slate-100 border border-slate-300 rounded-md text-sm shadow-sm placeholder-slate-400 focus:outline-none" value="kamal.perera@example.com" readonly>
+                                    </div>
+                                    <button id="submit-userName" class="w-full bg-[#0a58ca] hover:bg-[#084a9e] text-white font-bold py-2 px-4 rounded-lg transition-colors mt-4">Save Changes</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Change Password -->
+                    <div class="lg:col-span-2">
+                        <div class="bg-white p-6 rounded-lg shadow-md h-full">
+                            <h3 class="text-lg font-semibold text-slate-800 mb-6">Change Password</h3>
+                            <form class="space-y-4">
+                                <div>
+                                    <label for="current-password" class="block text-sm font-medium text-slate-600">Current Password</label>
+                                    <input type="password" id="current-password" class="mt-1 block w-full px-3 py-2 bg-white border border-slate-300 rounded-md text-sm shadow-sm placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500" required>
+                                </div>
+                                <div>
+                                    <label for="new-password" class="block text-sm font-medium text-slate-600">New Password</label>
+                                    <input type="password" id="new-password" class="mt-1 block w-full px-3 py-2 bg-white border border-slate-300 rounded-md text-sm shadow-sm placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500" required>
+                                </div>
+                                <div>
+                                    <label for="confirm-password" class="block text-sm font-medium text-slate-600">Confirm New Password</label>
+                                    <input type="password" id="confirm-password" class="mt-1 block w-full px-3 py-2 bg-white border border-slate-300 rounded-md text-sm shadow-sm placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500" required>
+                                </div>
+                                <button id="submitPassword" class="w-full sm:w-auto bg-[#0a58ca] hover:bg-[#084a9e] text-white font-bold py-2 px-4 rounded-lg transition-colors">Update Password</button>
+                            </form>
+                        </div>
+                    </div>
+                     <!-- Manage Administrators -->
+                    <div class="lg:col-span-3 mt-8">
+                        <div class="bg-white p-6 rounded-lg shadow-md">
+                            <h3 class="text-lg font-semibold text-slate-800 mb-6">Manage Administrators</h3>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                                <!-- Add Admin Form -->
+                                <div>
+                                    <h4 class="text-md font-semibold text-slate-700 mb-4">Add New Administrator</h4>
+                                    <div id="add-admin-form" class="space-y-4">
+                                        <div>
+                                            <label for="admin-name" class="block text-sm font-medium text-slate-600">Full Name</label>
+                                            <input type="text" id="admin-name" class="mt-1 block w-full px-3 py-2 bg-white border border-slate-300 rounded-md text-sm shadow-sm placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500" placeholder="e.g., Jane Doe" required>
+                                        </div>
+                                        <div>
+                                            <label for="admin-email" class="block text-sm font-medium text-slate-600">Email Address</label>
+                                            <input type="email" id="admin-email" class="mt-1 block w-full px-3 py-2 bg-white border border-slate-300 rounded-md text-sm shadow-sm placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500" placeholder="e.g., jane.doe@example.com" required>
+                                        </div>
+                                        <button type="submit" class="w-full sm:w-auto bg-[#0a58ca] hover:bg-[#084a9e] text-white font-bold py-2 px-4 rounded-lg transition-colors">Add Administrator</button>
+                                    </div>
+                                </div>
+                                <!-- Current Admins List -->
+                                <div>
+                                    <h4 class="text-md font-semibold text-slate-700 mb-4">Current Administrators</h4>
+                                    <ul id="admin-list" class="space-y-4">
+                                        <li class="flex items-center justify-between p-3 bg-slate-50 rounded-lg">
+                                            <div class="flex items-center">
+                                                <img class="h-10 w-10 rounded-full object-cover" src="https://i.pravatar.cc/150?u=admin" alt="Kamal Perera avatar">
+                                                <div class="ml-3">
+                                                    <p class="text-sm font-semibold text-slate-800">Kamal Perera</p>
+                                                    <p class="text-xs text-slate-500">kamal.perera@example.com</p>
+                                                </div>
+                                            </div>
+                                            <span class="text-sm font-medium text-slate-500">Owner</span>
+                                        </li>
+                                        <li class="flex items-center justify-between p-3 bg-slate-50 rounded-lg">
+                                            <div class="flex items-center">
+                                                <img class="h-10 w-10 rounded-full object-cover" src="https://i.pravatar.cc/150?u=jane" alt="Jane Doe avatar">
+                                                <div class="ml-3">
+                                                    <p class="text-sm font-semibold text-slate-800">Jane Doe</p>
+                                                    <p class="text-xs text-slate-500">jane.doe@example.com</p>
+                                                </div>
+                                            </div>
+                                            <button class="text-sm font-medium text-red-600 hover:text-red-800">Remove</button>
+                                        </li>
+                                        <li class="flex items-center justify-between p-3 bg-slate-50 rounded-lg">
+                                            <div class="flex items-center">
+                                                <img class="h-10 w-10 rounded-full object-cover" src="https://i.pravatar.cc/150?u=john" alt="John Smith avatar">
+                                                <div class="ml-3">
+                                                    <p class="text-sm font-semibold text-slate-800">John Smith</p>
+                                                    <p class="text-xs text-slate-500">john.smith@example.com</p>
+                                                </div>
+                                            </div>
+                                            <button class="text-sm font-medium text-red-600 hover:text-red-800">Remove</button>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+          </div>
+        <!-- Password Confirmation Modal -->
+        <div id="password-confirm-modal" class="fixed inset-0 bg-black/60 z-50 flex items-center justify-center p-4 hidden">
+            <div class="bg-white rounded-lg shadow-xl w-full max-w-sm">
+                <div class="p-6">
+                    <h3 class="text-lg font-semibold text-slate-800">Confirm Changes</h3>
+                    <p class="text-sm text-slate-500 mt-2">To save your changes, please enter your current password.</p>
+                    <div class="mt-4">
+                        <label for="modal-current-password" class="block text-sm font-medium text-slate-600 sr-only">Current Password</label>
+                        <input type="password" id="modal-current-password" class="mt-1 block w-full px-3 py-2 bg-white border border-slate-300 rounded-md text-sm shadow-sm placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500" placeholder="Current Password" required>
+                        <p id="modal-error" class="text-xs text-red-500 mt-1 hidden"></p>
+                    </div>
+                </div>
+                <div class="bg-slate-50 px-6 py-3 flex justify-end space-x-3 rounded-b-lg">
+                    <button id="modal-cancel-button" type="button" class="px-4 py-2 text-sm font-medium text-slate-700 bg-white border border-slate-300 rounded-md hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#0a58ca]">Cancel</button>
+                    <button id="modal-confirm-button" type="button" class="px-4 py-2 text-sm font-medium text-white bg-[#0a58ca] border border-transparent rounded-md shadow-sm hover:bg-[#084a9e] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#084a9e]">Confirm</button>
+                </div>
+            </div>
+        </div>
+        </main>
       </div>
     </div>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -362,26 +503,8 @@
     <script src="../JS/DashBord.js"></script>
     <script src="../JS/Driver.js"></script>
     <script src="../JS/ViolationsPoint.js"></script>
-<script>
-document.getElementById('scanBtn').addEventListener('click', () => {
-  const scannerEl = document.getElementById('scanner');
-  scannerEl.style.display = 'block';
-  const scanner = new Html5Qrcode("scanner");
+    <script src="../JS/Profile.js"></script>
 
-  Html5Qrcode.getCameras().then(cameras => {
-    if (cameras && cameras.length) {
-      scanner.start(
-        cameras[0].id,
-        { fps: 10, qrbox: 250 },
-        decodedText => {
-          document.getElementById('driverLicense').value = decodedText;
-          scanner.stop();
-          scannerEl.style.display = 'none';
-        }
-      ).catch(err => console.error(err));
-    }
-  }).catch(err => console.error(err));
-});
-</script>
+
   </body>
 </html>

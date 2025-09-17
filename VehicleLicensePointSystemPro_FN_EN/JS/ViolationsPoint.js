@@ -48,7 +48,6 @@
 
 
             error: function (error) {
-                console.error("Error loading violation data:", error);
                 alert("Failed to load violation list.");
             }
         });
@@ -143,10 +142,8 @@
             },
                 success: function(data) {
                     renderLawList(data);
-                    console.log(data)
                 },
                 error: function(err) {
-                    console.error('Error loading laws:', err);
                     $lawList.html('<p class="text-red-500">Failed to load laws.</p>');
                 }
             });
@@ -154,7 +151,6 @@
 
 
         $('#log-violation').on('click', function (e) {
-            console.log("log-violation");
             const officerId = $('#officerId').val().trim();
             const revenueNumber = $('#revenueNumber').val().trim();
             const driverLicense = $('#driverLicense').val().trim();
@@ -197,7 +193,6 @@
               })
 
 
-        // Print to console for testing
 
 
         });
