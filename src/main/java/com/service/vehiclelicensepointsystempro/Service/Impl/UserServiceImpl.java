@@ -1,15 +1,20 @@
 package com.service.vehiclelicensepointsystempro.Service.Impl;
 
-import com.service.vehiclelicensepointsystempro.Dto.ApiResponse;
-import com.service.vehiclelicensepointsystempro.Dto.ChangePassDto;
+import com.service.vehiclelicensepointsystempro.Dto.*;
+import com.service.vehiclelicensepointsystempro.Entity.Role;
 import com.service.vehiclelicensepointsystempro.Entity.User;
+import com.service.vehiclelicensepointsystempro.Repo.PoliceOfficerRepository;
 import com.service.vehiclelicensepointsystempro.Repo.UserRepository;
 import com.service.vehiclelicensepointsystempro.Service.UserService;
 import lombok.RequiredArgsConstructor;
+import org.modelmapper.ModelMapper;
+import org.modelmapper.TypeToken;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 
 @Service
@@ -18,7 +23,9 @@ public class UserServiceImpl implements UserService {
 
 
     private final UserRepository userRepository;
+    private final PoliceOfficerRepository policeOfficerRepository;
     private final PasswordEncoder passwordEncoder;
+    private final ModelMapper modelMapper;
 
 
     @Override
@@ -63,6 +70,32 @@ public class UserServiceImpl implements UserService {
 
     }
 
+    @Override
+    public List<AdminDto> getAllAdmins(){
+        List<User> byRole = userRepository.findByRole(Role.Admin);
+        return modelMapper.map(byRole,new TypeToken<List<AdminDto>>(){}.getType());
+
+    }
+
+    @Override
+    public List<AdminDto> getAllOfficers(){
+        List<User> byRole = userRepository.findByRole(Role.Officer);
+        return modelMapper.map(byRole,new TypeToken<List<OfficerDto>>(){}.getType());
+
+    }
+
+    @Override
+    public ResponseEntity<ApiResponse> addAdmin(OfficerDto officerDto) {
+
+
+        User user = userRepository.findByUsername(officerDto.getUsername())
+                .orElseThrow( () -> new RuntimeException("User not found"));
+        user.setRole(Role.Admin);
+        userRepository.save(user);
+
+        return ResponseEntity.ok(new ApiResponse(200,"success","Role Change Successes Fully"));
+
+    }
 
 
 

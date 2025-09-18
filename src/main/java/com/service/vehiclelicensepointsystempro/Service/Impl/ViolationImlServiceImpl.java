@@ -76,7 +76,7 @@ public class ViolationImlServiceImpl implements ViolationImlService {
         .orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST, "Law not found"));
 
     PoliceOfficer officer = policeOfficerRepository
-        .findById(String.valueOf(violationPointDto.getOfficerId()))
+        .findById(violationPointDto.getOfficerId())
         .orElseThrow(() -> new OfficerNotFoundException("Officer not found "));
 
     Driver driver = driverRepository

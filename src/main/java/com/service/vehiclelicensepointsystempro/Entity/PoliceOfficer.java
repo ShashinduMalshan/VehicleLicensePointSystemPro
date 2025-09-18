@@ -20,6 +20,7 @@ public class PoliceOfficer {
     private Long officerId;
 
     private String name;
+    private String email;
     private String dutyLocation;
 
     @OneToMany(mappedBy = "officer")
