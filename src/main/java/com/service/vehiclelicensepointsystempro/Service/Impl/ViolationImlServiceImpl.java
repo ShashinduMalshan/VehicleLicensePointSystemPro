@@ -4,7 +4,10 @@ import com.service.vehiclelicensepointsystempro.Dto.ViolationPointDto;
 import com.service.vehiclelicensepointsystempro.Entity.*;
 import com.service.vehiclelicensepointsystempro.Exception.OfficerNotFoundException;
 import com.service.vehiclelicensepointsystempro.Repo.*;
+import com.service.vehiclelicensepointsystempro.Service.EmailNotificationService;
+import com.service.vehiclelicensepointsystempro.Service.SuspendService;
 import com.service.vehiclelicensepointsystempro.Service.ViolationImlService;
+import jakarta.mail.MessagingException;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +20,7 @@ import org.springframework.web.server.ResponseStatusException;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -36,6 +40,17 @@ public class ViolationImlServiceImpl implements ViolationImlService {
 
     @Autowired
     private DriverRepository driverRepository;
+
+     @Autowired
+     private SuspendLicRepository suspendLicRepository;
+
+     @Autowired
+     private SuspendService suspendService;
+
+     @Autowired
+     private final EmailNotificationService emailNotificationService;
+
+
 
 
 
@@ -65,7 +80,7 @@ public class ViolationImlServiceImpl implements ViolationImlService {
 
     @Override
     @Transactional
-    public ResponseEntity<String> save(ViolationPointDto violationPointDto) {
+    public ResponseEntity<String> save(ViolationPointDto violationPointDto) throws MessagingException {
 
      RevenueLic revenueLic = revenueLicRepository
         .findById(violationPointDto.getRevenueLic())
@@ -83,6 +98,10 @@ public class ViolationImlServiceImpl implements ViolationImlService {
         .findById(violationPointDto.getDriver())
         .orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST, "Driver not found"));
 
+    Optional<SuspendLic> suspendLic = suspendLicRepository
+            .findByDriver(driver);
+
+
         ViolationPoint violationPoint = ViolationPoint.builder()
                 .description(violationPointDto.getDescription())
                 .location(violationPointDto.getLocation())
@@ -97,10 +116,33 @@ public class ViolationImlServiceImpl implements ViolationImlService {
         violationRepository.save(violationPoint);
 
 
+
+
+
+
         // Update driver total point
 
         driver.setTotalPoint(driver.getTotalPoint()  + law.getLawPoint());
         if (driver.getTotalPoint() > 150) {
+
+              if (suspendLic.isEmpty()){
+                 SuspendLic suspend = SuspendLic.builder()
+                                .driverName(driver.getName())
+                                .timeDuration(String.valueOf(LocalTime.now().plusHours(1)))
+                                .points(driver.getTotalPoint())
+                                .driver(driver)
+                                .build();
+                ResponseEntity<String> stringResponseEntity = suspendService.saveSuspendedDriver(suspend);
+                System.out.println("ResponseEntity<String> "+stringResponseEntity);
+                        // notify by email
+                        emailNotificationService.sendSuspensionHtmlEmail(
+                                driver.getEmail(),
+                                driver.getName(),
+                                "Exceeded allowed points"
+                        );
+
+            }
+
             if (!driver.getStatus().equals("suspended")){
                 driver.setStatus("suspended");
             }else {
@@ -108,6 +150,8 @@ public class ViolationImlServiceImpl implements ViolationImlService {
             }
         }
         driverRepository.save(driver);
+
+
 
 
         return ResponseEntity.ok("Violation logged successfully");
