@@ -1,251 +1,53 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vehicle License Point System - Drivers</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-  </head>
-  <body class="bg-slate-50 font-sans">
-    <div class="flex h-screen bg-slate-50 font-sans">
-      <!-- Mobile Sidebar -->
-      <aside id="mobile-sidebar" class="fixed inset-y-0 left-0 z-40 w-64 bg-[#0a58ca] text-white transform -translate-x-full transition-transform duration-300 ease-in-out md:hidden" aria-hidden="true">
-        <div class="flex items-center justify-between h-20 border-b border-[#084a9e] px-4">
-          <div class="text-3xl font-bold text-white tracking-wider"><span class="text-sky-300">V</span>LPS</div>
-          <button id="mobile-close-button" class="p-2 rounded-md hover:bg-[#084a9e] focus:outline-none focus:ring-2 focus:ring-white" aria-label="Close menu">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-6 w-6">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
-            </svg>
-          </button>
-        </div>
-        <nav class="flex-1 px-4 py-6 space-y-2 overflow-y-auto">
-          <a href="index.html" class="nav-link flex items-center w-full px-4 py-2.5 text-sm font-medium rounded-lg transition-colors duration-200 relative text-left hover:bg-[#084a9e]">
-            <span class="hidden absolute left-0 top-0 bottom-0 w-1 bg-sky-300 rounded-r-full"></span>
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-6 w-6"><path stroke-linecap="round" stroke-linejoin="round" d="m2.25 12 8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h7.5"></path></svg>
-            <span class="ml-3">Overview</span>
-          </a>
-          <a href="driver.html" class="nav-link flex items-center w-full px-4 py-2.5 text-sm font-medium rounded-lg transition-colors duration-200 relative text-left bg-[#084a9e]">
-            <span class="absolute left-0 top-0 bottom-0 w-1 bg-sky-300 rounded-r-full"></span>
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-6 w-6"><path stroke-linecap="round" stroke-linejoin="round" d="M18 18.72a9.094 9.094 0 0 0 3.741-.479 3 3 0 0 0-4.682-2.72m-7.5-2.226A3 3 0 0 1 15 13.489m-7.5 0a3 3 0 0 0-3.741 2.73m0-2.73-3.741-2.73a3 3 0 0 1 2.73-3.741L15 13.49m-7.5 0a3 3 0 0 1-2.73 3.741M15 13.49l-2.73 3.741a3 3 0 0 1-3.741-2.73L9 10.75M15 13.49l2.73-3.741a3 3 0 0 0-2.73-3.741L9 10.75"></path></svg>
-            <span class="ml-3">Drivers</span>
-          </a>
-          <a href="violations.html" class="nav-link flex items-center w-full px-4 py-2.5 text-sm font-medium rounded-lg transition-colors duration-200 relative text-left hover:bg-[#084a9e]">
-            <span class="hidden absolute left-0 top-0 bottom-0 w-1 bg-sky-300 rounded-r-full"></span>
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-6 w-6"><path stroke-linecap="round" stroke-linejoin="round" d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z"></path></svg>
-            <span class="ml-3">Violations</span>
-          </a>
-          <a href="#" class="flex items-center w-full px-4 py-2.5 text-sm font-medium rounded-lg transition-colors duration-200 relative text-left text-blue-100 hover:bg-[#084a9e] hover:text-white">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-6 w-6">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 15.75V18m-7.5-6.75h.008v.008H8.25v-.008Zm0 3h.008v.008H8.25v-.008Zm0 3h.008v.008H8.25v-.008Zm3-6h.008v.008h-.008v-.008Zm0 3h.008v.008h-.008v-.008Zm0 3h.008v.008h-.008v-.008Zm3-6h.008v.008h-.008v-.008Zm0 3h.008v.008h-.008v-.008ZM21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
-            </svg>
-            <span class="ml-3">Points System</span>
-          </a>
-          <a href="#" class="flex items-center w-full px-4 py-2.5 text-sm font-medium rounded-lg transition-colors duration-200 relative text-left text-blue-100 hover:bg-[#084a9e] hover:text-white">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-6 w-6">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m5.231 13.5h-8.01a1.5 1.5 0 0 1-1.5-1.5v-12a1.5 1.5 0 0 1 1.5-1.5h12a1.5 1.5 0 0 1 1.5 1.5v5.231m-3.75 3.75 3.75 3.75M12 18.75h3.75a3.375 3.375 0 0 0 3.375-3.375V12.125" />
-              <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 12h.008v.008H8.25V12Zm3.75 0h.008v.008h-.008V12Zm3.75 0h.008v.008h-.008V12Z" />
-            </svg>
-            <span class="ml-3">Reports</span>
-          </a>
-          <a href="#" class="flex items-center w-full px-4 py-2.5 text-sm font-medium rounded-lg transition-colors duration-200 relative text-left text-blue-100 hover:bg-[#084a9e] hover:text-white">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-6 w-6">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M14.857 17.082a23.848 23.848 0 0 0 5.454-1.31A8.967 8.967 0 0 1 18 9.75V9A6 6 0 0 0 6 9v.75a8.967 8.967 0 0 1-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 0 1-5.714 0m5.714 0a3 3 0 1 1-5.714 0" />
-            </svg>
-            <span class="ml-3">Notifications</span>
-          </a>
-        </nav>
-        <div class="p-4 border-t border-[#084a9e]">
-          <a href="#" class="flex items-center w-full px-4 py-2.5 text-sm font-medium rounded-lg transition-colors duration-200 relative text-left text-blue-100 hover:bg-[#084a9e] hover:text-white">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-6 w-6"><path stroke-linecap="round" stroke-linejoin="round" d="M9.594 3.94c.09-.542.56-1.007 1.11-.95.542.057 1.007.56 1.065 1.11L12 10.5M12 10.5l-2.094 2.094c-.21.21-.47.364-.746.466-1.143.426-2.016 1.29-2.485 2.485C6.364 16.03 6.21 16.29 6 16.5m6-6l2.094 2.094c.21.21.47.364.746.466 1.143.426 2.016 1.29 2.485 2.485.099.276.254.536.466.746L18 16.5m-6-6-2.094-2.094c-.21-.21-.47-.364-.746-.466-1.143-.426-2.016-1.29-2.485-2.485C6.364 7.97 6.21 7.71 6 7.5m6 3 2.094-2.094c.21-.21.47-.364.746-.466 1.143.426 2.016-1.29 2.485 2.485.099-.276.254-.536.466-.746L18 7.5m-6 9v3.406c0 .818.662 1.48 1.48 1.48h.04c.818 0 1.48-.662 1.48-1.48V16.5" /></svg>
-            <span class="ml-3">Settings</span>
-          </a>
-          <div class="flex items-center mt-4 p-2 bg-[#084a9e] rounded-lg">
-            <img class="h-10 w-10 rounded-full object-cover" src="https://i.pravatar.cc/150?u=admin" alt="User avatar" />
-            <div class="ml-3">
-              <p class="text-sm font-semibold text-white">Kamal Perera</p>
-              <p class="text-xs text-blue-200">Administrator</p>
-            </div>
-          </div>
-        </div>
-      </aside>
+     {
+                'd1':
+                    { id: 'd1',
+                    name: 'Colombo',
+                    risk: 'dangerous',
+                    violations: 1250,
+                    highPoints: 89,
+                    suspended: 12,
+                    patrols: 25,
+                    peakViolationTime: '5 PM - 7 PM',
+                    commonViolations: [
+                        { type: 'Red Light',
+                        percentage: 40 },
+                        { type: 'Speeding',
+                            percentage: 35 },
+                        { type: 'Parking',
+                            percentage: 15 },
+                        { type: 'Other',
+                            percentage: 10 }
+                    ],
+                    riskDistribution:
+                        {
+                            low: 20,
+                            medium: 35,
+                            high: 45
+                        }
+                },
 
-      <!-- Main Content -->
-      <div class="flex-1 flex flex-col overflow-hidden">
-        <!-- Mobile top bar -->
-        <header class="md:hidden flex items-center justify-between bg-white px-4 py-3 border-b border-slate-200">
-          <button id="mobile-menu-button" aria-controls="mobile-sidebar" aria-expanded="false" class="p-2 rounded-md text-slate-700 hover:bg-slate-100 focus:outline-none focus:ring-2 focus:ring-[#0a58ca]" title="Open menu">
-            <svg id="hamburger-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-6 w-6">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
-            </svg>
-            <span class="sr-only">Open menu</span>
-          </button>
-          <div class="text-xl font-bold text-slate-800"><span class="text-[#0a58ca]">V</span>LPS</div>
-          <div class="w-8"></div><!-- Spacer -->
-        </header>
-        <main class="flex-1 overflow-x-hidden overflow-y-auto bg-slate-50 p-4 sm:p-6 lg:p-8">
-          <!-- Drivers Page -->
-          <div class="container mx-auto">
-            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8">
-              <div>
-                <h1 class="text-2xl lg:text-3xl font-bold text-slate-800">Manage Drivers</h1>
-                <p class="text-sm text-slate-500 mt-1">Search, view, and add new drivers to the system.</p>
-              </div>
-              <div class="flex items-center space-x-4 mt-4 sm:mt-0 w-full sm:w-auto">
-                <div class="relative w-full sm:w-64">
-                  <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-5 w-5 text-slate-400">
-                      <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
-                    </svg>
-                  </div>
-                  <input type="text" placeholder="Search by name, license..." class="w-full pl-10 pr-4 py-2 text-sm text-slate-700 bg-white border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#0a58ca]" />
-                </div>
-                <button class="bg-[#0a58ca] text-white px-4 py-2 rounded-lg hover:bg-[#084a9e] transition-colors">Add Driver</button>
-              </div>
-            </div>
-
-            <!-- Stat Cards -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-              <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
-                <div class="flex items-center justify-between">
-                  <div>
-                    <p class="text-sm text-slate-500">Total Drivers</p>
-                    <p class="text-3xl font-bold text-slate-800 mt-1">32,256</p>
-                  </div>
-                  <div class="flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-[#e7f0fa]">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-6 w-6 text-[#0a58ca]">
-                      <path stroke-linecap="round" stroke-linejoin="round" d="M15 19.128a9.38 9.38 0 0 0 2.625.372 9.337 9.337 0 0 0 4.121-2.253 9.597 9.597 0 0 0-4.121-5.502 9.42 9.42 0 0 0-2.625-.372M15 19.128v-3.848m0 3.848a9.337 9.337 0 0 1-4.121 2.253 9.597 9.597 0 0 1-4.121-5.502 9.42 9.42 0 0 1-2.625-.372m-5.462 2.253a9.38 9.38 0 0 1 2.625-.372 9.337 9.337 0 0 1 4.121 2.253 9.597 9.597 0 0 1 4.121-5.502 9.42 9.42 0 0 1 2.625-.372m-14.86 5.502a9.38 9.38 0 0 0 2.625.372 9.337 9.337 0 0 0 4.121-2.253 9.597 9.597 0 0 0-4.121-5.502 9.42 9.42 0 0 0-2.625-.372M4.5 19.128v-3.848" />
-                      <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.75a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Zm4.5 0a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Zm-8.25 3a2.25 2.25 0 1 0 0 4.5 2.25 2.25 0 0 0 0-4.5Zm4.5 0a2.25 2.25 0 1 0 0 4.5 2.25 2.25 0 0 0 0-4.5Z" />
-                    </svg>
-                  </div>
-                </div>
-                <div class="flex items-center mt-4 text-xs">
-                  <span class="flex items-center font-semibold text-green-600"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="h-4 w-4 mr-1"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25" /></svg>+5.4%</span>
-                  <span class="text-slate-500 ml-2">vs. last month</span>
-                </div>
-              </div>
-              <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
-                <div class="flex items-center justify-between">
-                  <div>
-                    <p class="text-sm text-slate-500">Active Licenses</p>
-                    <p class="text-3xl font-bold text-slate-800 mt-1">30,124</p>
-                  </div>
-                  <div class="flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-green-100">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-6 w-6 text-green-500">
-                      <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 6a7.5 7.5 0 1 0 7.5 7.5h-7.5V6Z" />
-                    </svg>
-                  </div>
-                </div>
-                <div class="flex items-center mt-4 text-xs">
-                  <span class="flex items-center font-semibold text-green-600"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="h-4 w-4 mr-1"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25" /></svg>+2.1%</span>
-                  <span class="text-slate-500 ml-2">vs. last month</span>
-                </div>
-              </div>
-              <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
-                <div class="flex items-center justify-between">
-                  <div>
-                    <p class="text-sm text-slate-500">Suspended Licenses</p>
-                    <p class="text-3xl font-bold text-slate-800 mt-1">1,052</p>
-                  </div>
-                  <div class="flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-red-100">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-6 w-6 text-red-500">
-                      <path stroke-linecap="round" stroke-linejoin="round" d="M18.364 18.364A9 9 0 0 0 5.636 5.636m12.728 12.728A9 9 0 0 1 5.636 5.636m12.728 12.728L5.636 5.636" />
-                    </svg>
-                  </div>
-                </div>
-                <div class="flex items-center mt-4 text-xs">
-                  <span class="flex items-center font-semibold text-red-600"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="h-4 w-4 mr-1"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 4.5l-15 15m0 0H8.25m11.25 0v-11.25" /></svg>+0.8%</span>
-                  <span class="text-slate-500 ml-2">vs. last month</span>
-                </div>
-              </div>
-              <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
-                <div class="flex items-center justify-between">
-                  <div>
-                    <p class="text-sm text-slate-500">Avg. Points</p>
-                    <p class="text-3xl font-bold text-slate-800 mt-1">2.8</p>
-                  </div>
-                  <div class="flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-yellow-100">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-6 w-6 text-yellow-500">
-                      <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 15.75V18m-7.5-6.75h.008v.008H8.25v-.008Zm0 3h.008v.008H8.25v-.008Zm0 3h.008v.008H8.25v-.008Zm3-6h.008v.008h-.008v-.008Zm0 3h.008v.008h-.008v-.008Zm0 3h.008v.008h-.008v-.008Zm3-6h.008v.008h-.008v-.008Zm0 3h.008v.008h-.008v-.008ZM21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
-                    </svg>
-                  </div>
-                </div>
-                <div class="flex items-center mt-4 text-xs">
-                  <span class="flex items-center font-semibold text-red-600"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="h-4 w-4 mr-1"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 4.5l-15 15m0 0H8.25m11.25 0v-11.25" /></svg>-0.2</span>
-                  <span class="text-slate-500 ml-2">vs. last month</span>
-                </div>
-              </div>
-            </div>
-
-            <!-- Drivers Table -->
-            <div class="bg-white p-4 sm:p-6 rounded-lg shadow-md">
-              <div class="flex justify-between items-center mb-4">
-                <h3 class="text-lg font-semibold text-slate-800">Driver List</h3>
-                <a href="#" class="text-sm font-medium text-[#0a58ca] hover:text-[#084a9e]">Export Data</a>
-              </div>
-              <div class="overflow-x-auto">
-                <table class="w-full text-sm text-left text-slate-600">
-                  <thead class="text-xs text-slate-700 uppercase bg-slate-100">
-                    <tr>
-                      <th scope="col" class="px-6 py-3">Driver Name</th>
-                      <th scope="col" class="px-6 py-3 hidden sm:table-cell">License Number</th>
-                      <th scope="col" class="px-6 py-3">Points</th>
-                      <th scope="col" class="px-6 py-3 hidden md:table-cell">Last Violation</th>
-                      <th scope="col" class="px-6 py-3">Status</th>
-                      <th scope="col" class="px-6 py-3">Actions</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr class="border-b border-slate-200 hover:bg-slate-50">
-                      <td class="px-6 py-4 font-medium text-slate-900 whitespace-nowrap">Alex Johnson</td>
-                      <td class="px-6 py-4 hidden sm:table-cell">DL123456</td>
-                      <td class="px-6 py-4">3</td>
-                      <td class="px-6 py-4 hidden md:table-cell">2024-07-21</td>
-                      <td class="px-6 py-4"><span class="flex items-center"><span class="h-2 w-2 rounded-full mr-2 bg-green-500"></span>Active</span></td>
-                      <td class="px-6 py-4"><a href="#" class="text-[#0a58ca] hover:text-[#084a9e]">View</a></td>
-                    </tr>
-                    <tr class="border-b border-slate-200 hover:bg-slate-50">
-                      <td class="px-6 py-4 font-medium text-slate-900 whitespace-nowrap">Maria Garcia</td>
-                      <td class="px-6 py-4 hidden sm:table-cell">DL789012</td>
-                      <td class="px-6 py-4">5</td>
-                      <td class="px-6 py-4 hidden md:table-cell">2024-07-20</td>
-                      <td class="px-6 py-4"><span class="flex items-center"><span class="h-2 w-2 rounded-full mr-2 bg-yellow-500"></span>Warning</span></td>
-                      <td class="px-6 py-4"><a href="#" class="text-[#0a58ca] hover:text-[#084a9e]">View</a></td>
-                    </tr>
-                    <tr class="border-b border-slate-200 hover:bg-slate-50">
-                      <td class="px-6 py-4 font-medium text-slate-900 whitespace-nowrap">James Smith</td>
-                      <td class="px-6 py-4 hidden sm:table-cell">DL345678</td>
-                      <td class="px-6 py-4">7</td>
-                      <td class="px-6 py-4 hidden md:table-cell">2024-07-19</td>
-                      <td class="px-6 py-4"><span class="flex items-center"><span class="h-2 w-2 rounded-full mr-2 bg-red-500"></span>Suspended</span></td>
-                      <td class="px-6 py-4"><a href="#" class="text-[#0a58ca] hover:text-[#084a9e]">View</a></td>
-                    </tr>
-                    <tr class="border-b border-slate-200 hover:bg-slate-50">
-                      <td class="px-6 py-4 font-medium text-slate-900 whitespace-nowrap">Patricia Williams</td>
-                      <td class="px-6 py-4 hidden sm:table-cell">DL901234</td>
-                      <td class="px-6 py-4">2</td>
-                      <td class="px-6 py-4 hidden md:table-cell">2024-07-18</td>
-                      <td class="px-6 py-4"><span class="flex items-center"><span class="h-2 w-2 rounded-full mr-2 bg-green-500"></span>Active</span></td>
-                      <td class="px-6 py-4"><a href="#" class="text-[#0a58ca] hover:text-[#084a9e]">View</a></td>
-                    </tr>
-                    <tr class="border-b border-slate-200 hover:bg-slate-50">
-                      <td class="px-6 py-4 font-medium text-slate-900 whitespace-nowrap">Robert Brown</td>
-                      <td class="px-6 py-4 hidden sm:table-cell">DL567890</td>
-                      <td class="px-6 py-4">4</td>
-                      <td class="px-6 py-4 hidden md:table-cell">2024-07-17</td>
-                      <td class="px-6 py-4"><span class="flex items-center"><span class="h-2 w-2 rounded-full mr-2 bg-yellow-500"></span>Warning</span></td>
-                      <td class="px-6 py-4"><a href="#" class="text-[#0a58ca] hover:text-[#084a9e]">View</a></td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          </div>
-        </main>
-      </div>
-    </div>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="../JS/DashBord.js"></script>
-    <script src="../JS/Driver.js"></script>
-  </body>
-</html>
+                'd2': { id: 'd2', name: 'Gampaha', risk: 'normal', violations: 980, highPoints: 65, suspended: 8, patrols: 18, peakViolationTime: '4 PM - 6 PM', commonViolations: [{ type: 'Speeding', percentage: 50 }, { type: 'Parking', percentage: 20 }, { type: 'Red Light', percentage: 20 }, { type: 'Other', percentage: 10 }], riskDistribution: { low: 40, medium: 45, high: 15 }},
+                'd3': { id: 'd3', name: 'Kaḷutara', risk: 'normal', violations: 750, highPoints: 42, suspended: 5, patrols: 15, peakViolationTime: '7 AM - 9 AM', commonViolations: [{ type: 'Speeding', percentage: 45 }, { type: 'Illegal U-Turn', percentage: 25 }, { type: 'Parking', percentage: 20 }, { type: 'Other', percentage: 10 }], riskDistribution: { low: 55, medium: 35, high: 10 }},
+                'd4': { id: 'd4', name: 'Mahanuvara', risk: 'average', violations: 820, highPoints: 55, suspended: 7, patrols: 16, peakViolationTime: '1 PM - 3 PM', commonViolations: [{ type: 'Parking', percentage: 40 }, { type: 'Speeding', percentage: 30 }, { type: 'Other', percentage: 15 }, { type: 'Red Light', percentage: 15 }], riskDistribution: { low: 60, medium: 30, high: 10 }},
+                'd5': { id: 'd5', name: 'Matale', risk: 'average', violations: 450, highPoints: 21, suspended: 2, patrols: 10, peakViolationTime: '12 PM - 2 PM', commonViolations: [{ type: 'Speeding', percentage: 60 }, { type: 'Parking', percentage: 20 }, { type: 'Other', percentage: 20 }], riskDistribution: { low: 75, medium: 20, high: 5 }},
+                'd6': { id: 'd6', name: 'Nuwara Eliya', risk: 'average', violations: 320, highPoints: 15, suspended: 1, patrols: 8, peakViolationTime: '11 AM - 1 PM', commonViolations: [{ type: 'Parking', percentage: 50 }, { type: 'Speeding', percentage: 30 }, { type: 'Other', percentage: 20 }], riskDistribution: { low: 80, medium: 15, high: 5 }},
+                'd7': { id: 'd7', name: 'Galle', risk: 'normal', violations: 880, highPoints: 61, suspended: 9, patrols: 17, peakViolationTime: '4 PM - 6 PM', commonViolations: [{ type: 'Speeding', percentage: 40 }, { type: 'Red Light', percentage: 30 }, { type: 'Parking', percentage: 20 }, { type: 'Other', percentage: 10 }], riskDistribution: { low: 45, medium: 40, high: 15 }},
+                'd8': { id: 'd8', name: 'Matara', risk: 'average', violations: 670, highPoints: 38, suspended: 4, patrols: 14, peakViolationTime: '3 PM - 5 PM', commonViolations: [{ type: 'Speeding', percentage: 55 }, { type: 'Parking', percentage: 25 }, { type: 'Other', percentage: 20 }], riskDistribution: { low: 65, medium: 25, high: 10 }},
+                'd9': { id: 'd9', name: 'Hambantota', risk: 'average', violations: 510, highPoints: 29, suspended: 3, patrols: 12, peakViolationTime: '9 AM - 11 AM', commonViolations: [{ type: 'Speeding', percentage: 70 }, { type: 'Other', percentage: 30 }], riskDistribution: { low: 70, medium: 25, high: 5 }},
+                'd10': { id: 'd10', name: 'Jaffna', risk: 'average', violations: 480, highPoints: 25, suspended: 2, patrols: 11, peakViolationTime: '10 AM - 12 PM', commonViolations: [{ type: 'Parking', percentage: 40 }, { type: 'Speeding', percentage: 40 }, { type: 'Other', percentage: 20 }], riskDistribution: { low: 75, medium: 20, high: 5 }},
+                'd11': { id: 'd11', name: 'Kilinochchi', risk: 'average', violations: 150, highPoints: 8, suspended: 0, patrols: 5, peakViolationTime: '1 PM - 3 PM', commonViolations: [{ type: 'Speeding', percentage: 80 }, { type: 'Other', percentage: 20 }], riskDistribution: { low: 90, medium: 10, high: 0 }},
+                'd12': { id: 'd12', name: 'Mannar', risk: 'average', violations: 180, highPoints: 10, suspended: 1, patrols: 6, peakViolationTime: '12 PM - 2 PM', commonViolations: [{ type: 'Speeding', percentage: 75 }, { type: 'Parking', percentage: 15 }, { type: 'Other', percentage: 10 }], riskDistribution: { low: 85, medium: 10, high: 5 }},
+                'd13': { id: 'd13', name: 'Vavuniya', risk: 'average', violations: 210, highPoints: 12, suspended: 1, patrols: 7, peakViolationTime: '2 PM - 4 PM', commonViolations: [{ type: 'Speeding', percentage: 65 }, { type: 'Other', percentage: 35 }], riskDistribution: { low: 80, medium: 18, high: 2 }},
+                'd14': { id: 'd14', name: 'Mullaitivu', risk: 'average', violations: 130, highPoints: 6, suspended: 0, patrols: 4, peakViolationTime: '11 AM - 1 PM', commonViolations: [{ type: 'Speeding', percentage: 90 }, { type: 'Other', percentage: 10 }], riskDistribution: { low: 92, medium: 8, high: 0 }},
+                'd15': { id: 'd15', name: 'Batticaloa', risk: 'average', violations: 380, highPoints: 19, suspended: 2, patrols: 9, peakViolationTime: '4 PM - 6 PM', commonViolations: [{ type: 'Parking', percentage: 35 }, { type: 'Speeding', percentage: 35 }, { type: 'Red Light', percentage: 15 }, { type: 'Other', percentage: 15 }], riskDistribution: { low: 78, medium: 17, high: 5 }},
+                'd16': { id: 'd16', name: 'Ampara', risk: 'average', violations: 420, highPoints: 22, suspended: 3, patrols: 10, peakViolationTime: '9 AM - 11 AM', commonViolations: [{ type: 'Speeding', percentage: 60 }, { type: 'Other', percentage: 40 }], riskDistribution: { low: 70, medium: 22, high: 8 }},
+                'd17': { id: 'd17', name: 'Trincomalee', risk: 'average', violations: 350, highPoints: 18, suspended: 1, patrols: 9, peakViolationTime: '1 PM - 3 PM', commonViolations: [{ type: 'Speeding', percentage: 50 }, { type: 'Parking', percentage: 30 }, { type: 'Other', percentage: 20 }], riskDistribution: { low: 80, medium: 15, high: 5 }},
+                'd18': { id: 'd18', name: 'Kurunegala', risk: 'normal', violations: 1050, highPoints: 72, suspended: 10, patrols: 20, peakViolationTime: '8 AM - 10 AM', commonViolations: [{ type: 'Speeding', percentage: 45 }, { type: 'Red Light', percentage: 25 }, { type: 'Parking', percentage: 20 }, { type: 'Other', percentage: 10 }], riskDistribution: { low: 35, medium: 45, high: 20 }},
+                'd19': { id: 'd19', name: 'Puttalam', risk: 'average', violations: 550, highPoints: 33, suspended: 4, patrols: 13, peakViolationTime: '7 AM - 9 AM', commonViolations: [{ type: 'Speeding', percentage: 65 }, { type: 'Other', percentage: 20 }, { type: 'Parking', percentage: 15 }], riskDistribution: { low: 68, medium: 25, high: 7 }},
+                'd20': { id: 'd20', name: 'Anuradhapura', risk: 'average', violations: 620, highPoints: 35, suspended: 5, patrols: 14, peakViolationTime: '10 AM - 12 PM', commonViolations: [{ type: 'Speeding', percentage: 50 }, { type: 'Parking', percentage: 25 }, { type: 'Other', percentage: 25 }], riskDistribution: { low: 72, medium: 20, high: 8 }},
+                'd21': { id: 'd21', name: 'Polonnaruwa', risk: 'average', violations: 390, highPoints: 20, suspended: 2, patrols: 10, peakViolationTime: '11 AM - 1 PM', commonViolations: [{ type: 'Speeding', percentage: 70 }, { type: 'Other', percentage: 30 }], riskDistribution: { low: 75, medium: 20, high: 5 }},
+                'd22': { id: 'd22', name: 'Badulla', risk: 'average', violations: 580, highPoints: 31, suspended: 4, patrols: 13, peakViolationTime: '1 PM - 3 PM', commonViolations: [{ type: 'Parking', percentage: 45 }, { type: 'Speeding', percentage: 35 }, { type: 'Other', percentage: 20 }], riskDistribution: { low: 65, medium: 28, high: 7 }},
+                'd23': { id: 'd23', name: 'Moneragala', risk: 'average', violations: 410, highPoints: 23, suspended: 2, patrols: 10, peakViolationTime: '9 AM - 11 AM', commonViolations: [{ type: 'Speeding', percentage: 75 }, { type: 'Other', percentage: 25 }], riskDistribution: { low: 77, medium: 18, high: 5 }},
+                'd24': { id: 'd24', name: 'Ratnapura', risk: 'normal', violations: 790, highPoints: 48, suspended: 6, patrols: 16, peakViolationTime: '8 AM - 10 AM', commonViolations: [{ type: 'Speeding', percentage: 50 }, { type: 'Illegal Overtake', percentage: 25 }, { type: 'Parking', percentage: 15 }, { type: 'Other', percentage: 10 }], riskDistribution: { low: 50, medium: 40, high: 10 }},
+                'd25': { id: 'd25', name: 'Kegalle', risk: 'average', violations: 680, highPoints: 40, suspended: 5, patrols: 15, peakViolationTime: '3 PM - 5 PM', commonViolations: [{ type: 'Speeding', percentage: 60 }, { type: 'Parking', percentage: 20 }, { type: 'Other', percentage: 20 }], riskDistribution: { low: 60, medium: 30, high: 10 }}
+            }

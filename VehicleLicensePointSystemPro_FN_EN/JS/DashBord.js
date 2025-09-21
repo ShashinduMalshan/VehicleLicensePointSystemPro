@@ -62,6 +62,8 @@ $(document).ready(function() {
          initializeTrainingPage();
     }else if (page === 'notification') {
          initializeNotificationsPage();
+    }else if (page === 'report') {
+         fetchDistrictReports();
     }
   }
 

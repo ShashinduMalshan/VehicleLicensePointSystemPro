@@ -35,34 +35,115 @@ const riskLevels = {
                 d24: "m 113.12712,590.95075 1.82,-0.76 0.97,-1.95 0.51,1.34 0.82,0.06 0.53,4.25 1.58,-0.89 1.96,1.2 3.63,5.49 2.69,0.85 0.56,2.95 2,0.06 0.48,-0.85 2.74,-0.6 1.63,1.43 1.98,3.82 2.38,1.25 1.64,-0.9 -0.14,-1.45 1.9,-1.6 4.47,-0.94 0.7,0.95 1.17,-0.07 2.26,-1.96 4.27,2.88 0.56,1.13 1.21,-0.45 0.4,-1.21 1.79,1.26 0.24,1.17 1.92,0.59 1.35,-0.75 3.85,1.19 3.74,-0.17 0,0 -0.78,3.19 0.69,1.08 1.04,-0.18 0.32,0.61 -2.76,2.39 2.49,3.63 2.15,0.35 3.19,1.78 3.41,-1.53 5.72,2.36 8.53,0.91 4.1,1.22 3.71,0.43 1.11,-0.68 0.36,-1.49 6.65,0.57 2.46,0.84 5.09,-1.7 2.68,1.03 5.96,-4.04 2.99,0.88 4.08001,-3.63 0,0 0.62,1.32 -0.79001,2.59 0.86001,2.14 -0.29001,1.26 3.12,-1.21 1.55,3.26 3.99001,-0.18 0.69,1 0.09,1.03 -1.62,1.26 0.92,2.16 -2.49,0.14 -6.18,3.04 0.08,1.18 2.68,1.65 0.84,4.02 3.6,0.61 1.98,1.83 1.26,-1.63 0.59,0.73 2.86,-0.35 1.26,-0.45 0.75,-1.95 3.45,-0.57 1.52,-2.05 -0.07,-1.23 2.62,1.45 0,0 -3.09,3.17 -1.82,4.28 -0.01,2.34 -2.64,1.53 -1.07,2.67 -1.94,1.52 0.60001,0.9 -0.39,2.47 -1.42,0.22 0.58,2.2 -1.29001,0.51 0.18,1.09 -1.24,2.73 0.56,2.16 -2.01,3.61 -2.86,3.1 -2.33,5.3 3.06,6.85 -0.75,1.37 0.21,1.55 -0.83999,0.23 1.31999,1.31 -0.97,1.41 1.3,4.02 -1.13,1.06 1.7,3.14 1.21,0.52 0.45,1.92 1.42,0.87 0.58,2.57 6.38,1.55 1.2,1.09 -0.12,1.31 1.39,0.97 -0.55,2.12 2.69,5.28 0,0 2.44,2.21 0.59,2.73 1.27,0.14 0.25,2.57 2.06,3.84 -2.62,2.18 -1.74,-2.44 -4.17,0.4 -3.59,-2.22 -2.13,0.55 -2.58,-4.1 -2.27,-1.06 -6.71,1.32 -5.37,-0.33 -5.45,-2.53 -2.26,-0.3 -5.51,-3.11 -4.15,-0.85 -1.58,-1.15 -6.84,0.09 0,0 -0.07,-2.56 1.1,-0.62 -0.87,-1.03 -1.28,-0.07 -1.46,-1.99 1.23,-0.52 -0.41,-2.82 -6.03,0.46 -4.08,1.13 -0.93,-2.78 2.21,-2.3 -0.38,-2.03 0.9,-1.13 -0.25,-1.91 -4.4,-0.26 -3.67,1.39 -2.71,-0.74 -2.1,0.97 -1.07,-1.34 -0.88,0.31 -0.12,1.11 -2.18,0.18 -0.02,2.8 -7.75,1.35 0,0 -0.86,-2.52 -3.82,0.38 -1.38,-1.56 -2.81,-0.35 -2.17,-1.4 -1.81,1.07 -2.51,-0.61 -7.49,-6.75 0,0 -1.51,-3.83 -14.04,-19.33 0.11,-0.84 -2.21,-3.47 2.96,-1.83 0.87,0.2 -2.1,-5.15 -4.22,-4.38 -4.42,-0.86 -1.03,-1 -1.22,-2.44 0.5,-1.7 -0.44,-2.18 -1.52,-2.44 -2.98,-1.74 -1.06,-2.1 -1.28,-0.49 -1.14,-3.84 -2.16,-3.32 0.02,-0.79 1.26,0.27 0.08,-0.63 -2.72999,-5.55 -0.04,-4.53 -1.92,-2.58 -0.89,-2.48 0.34,-1.11 0,0 3.79,-0.02 0.84,-0.76 -0.07,-2.9 -1.51,-3.84 -0.96,-1.06 -2.61,-0.62 0.89,-1.71 0.43,-3.8 1.42,-1.26 0.02,-1.35 1.08,-0.97 0.97,0.12 -0.27,-0.95 z",
                 d25: "m 109.79713,522.44075 1.78,0.03 2.25,-3.33 10.57,-7.45 1.97999,-0.84 2.09,0.4 5.88,-1.23 0.77,-1.34 1.26,-0.36 3,1.24 1.75,-3.77 -0.93,-1.99 2.16,-2.22 -0.73,-2.72 -1.39,-1.91 0.43,-0.65 1.5,0.38 7.64,-2.34 1.47,1.76 1.52,0.11 0.91,0.87 -0.08,1.11 1.46,1.75 -0.3,1.95 1.06,0.35 0,0 0.89,5.03 0.96,1.21 1.75,1.52 3.03,1.18 0.52,1.37 4.8,4.32 -0.13,2.47 -0.96,0.59 0.72,1.23 4.92,1.12 1.31,2.58 1.67,0.87 0.75,1.28 -0.02,2.88 -1.97,1.48 0.13,0.98 6.41,5.94 0.62,1.88 -0.31,0.53 -2.66,0.14 -0.83,0.88 1.08,2.27 -1.03,-0.24 -0.75,1.02 -0.73,-1.06 -2.39,0.57 -0.81,3.1 -0.76,-0.17 -0.4,1.31 -3.71,0.66 -0.75,-0.56 -1.63,1.04 -2.93,0.05 -2.02,1.68 1.7,2.52 2.12,7.23 1.29,0.04 -1.48,1.55 -0.57,2.07 0.5,3.81 0,0 0.18,0.81 0.76,0.02 -0.15,1.44 -3.45,3.6 -2.55,0.24 -0.91,1.11 -0.14,1.39 2.35,2.23 0.31,1.86 -1.6,1.95 -0.02,6.69 -0.63,0.13 -0.28,1.68 4.38,1.51 1.07,1.2 4.03,0.34 3.62,2.33 -0.62,3.06 1.05,1.26 0.05,1.65 1.81,0.91 0.42,1.07 -1.54,2.39 -1.58,0.79 0,0 -3.74,0.17 -3.85,-1.19 -1.35,0.75 -1.92,-0.59 -0.24,-1.17 -1.79,-1.26 -0.4,1.21 -1.21,0.45 -0.56,-1.13 -4.27,-2.88 -2.26,1.96 -1.17,0.07 -0.7,-0.95 -4.47,0.94 -1.9,1.6 0.14,1.45 -1.64,0.9 -2.38,-1.25 -1.98,-3.82 -1.63,-1.43 -2.74,0.6 -0.48,0.85 -2,-0.06 -0.55999,-2.95 -2.69,-0.85 -3.63,-5.49 -1.96,-1.2 -1.58001,0.89 -0.53,-4.25 -0.81999,-0.06 -0.51,-1.34 -0.97,1.95 -1.82,0.76 0,0 -0.42,-4.01 2.37,0.32 0.75,-1.2 -0.05,-1.6 -1.05,-1.45 0.08,-3.21 -2.17,-1.17 -1.52,0.61 -2.06,-0.45 -1.07,0.74 -1.03,-0.72 0,0 0.6,-3.41 -1.68,-3.05 -2,-9.84 1.9,-2.45 2.35,-6.07 1.72,0.08 1.07,-2.92 1.74,-1.25 0.13,-1.68 -1.26,-0.98 -5.69,0.16 -2.41,2.04 -1.7,-4.92 0.07,-5.42 -1.73,-2.55 2.34,0.95 1.08,-1.92 4.37,-0.22 0.45,-5.48 -0.54,-2.71 3.02,-2.19 z"
             },
-            details: {
-                'd1': { id: 'd1', name: 'Colombo', risk: 'dangerous', violations: 1250, highPoints: 89, suspended: 12, patrols: 25, peakViolationTime: '5 PM - 7 PM', commonViolations: [{ type: 'Red Light', percentage: 40 }, { type: 'Speeding', percentage: 35 }, { type: 'Parking', percentage: 15 }, { type: 'Other', percentage: 10 }], riskDistribution: { low: 20, medium: 35, high: 45 }},
-                'd2': { id: 'd2', name: 'Gampaha', risk: 'normal', violations: 980, highPoints: 65, suspended: 8, patrols: 18, peakViolationTime: '4 PM - 6 PM', commonViolations: [{ type: 'Speeding', percentage: 50 }, { type: 'Parking', percentage: 20 }, { type: 'Red Light', percentage: 20 }, { type: 'Other', percentage: 10 }], riskDistribution: { low: 40, medium: 45, high: 15 }},
-                'd3': { id: 'd3', name: 'Kaḷutara', risk: 'normal', violations: 750, highPoints: 42, suspended: 5, patrols: 15, peakViolationTime: '7 AM - 9 AM', commonViolations: [{ type: 'Speeding', percentage: 45 }, { type: 'Illegal U-Turn', percentage: 25 }, { type: 'Parking', percentage: 20 }, { type: 'Other', percentage: 10 }], riskDistribution: { low: 55, medium: 35, high: 10 }},
-                'd4': { id: 'd4', name: 'Mahanuvara', risk: 'average', violations: 820, highPoints: 55, suspended: 7, patrols: 16, peakViolationTime: '1 PM - 3 PM', commonViolations: [{ type: 'Parking', percentage: 40 }, { type: 'Speeding', percentage: 30 }, { type: 'Other', percentage: 15 }, { type: 'Red Light', percentage: 15 }], riskDistribution: { low: 60, medium: 30, high: 10 }},
-                'd5': { id: 'd5', name: 'Matale', risk: 'average', violations: 450, highPoints: 21, suspended: 2, patrols: 10, peakViolationTime: '12 PM - 2 PM', commonViolations: [{ type: 'Speeding', percentage: 60 }, { type: 'Parking', percentage: 20 }, { type: 'Other', percentage: 20 }], riskDistribution: { low: 75, medium: 20, high: 5 }},
-                'd6': { id: 'd6', name: 'Nuwara Eliya', risk: 'average', violations: 320, highPoints: 15, suspended: 1, patrols: 8, peakViolationTime: '11 AM - 1 PM', commonViolations: [{ type: 'Parking', percentage: 50 }, { type: 'Speeding', percentage: 30 }, { type: 'Other', percentage: 20 }], riskDistribution: { low: 80, medium: 15, high: 5 }},
-                'd7': { id: 'd7', name: 'Galle', risk: 'normal', violations: 880, highPoints: 61, suspended: 9, patrols: 17, peakViolationTime: '4 PM - 6 PM', commonViolations: [{ type: 'Speeding', percentage: 40 }, { type: 'Red Light', percentage: 30 }, { type: 'Parking', percentage: 20 }, { type: 'Other', percentage: 10 }], riskDistribution: { low: 45, medium: 40, high: 15 }},
-                'd8': { id: 'd8', name: 'Matara', risk: 'average', violations: 670, highPoints: 38, suspended: 4, patrols: 14, peakViolationTime: '3 PM - 5 PM', commonViolations: [{ type: 'Speeding', percentage: 55 }, { type: 'Parking', percentage: 25 }, { type: 'Other', percentage: 20 }], riskDistribution: { low: 65, medium: 25, high: 10 }},
-                'd9': { id: 'd9', name: 'Hambantota', risk: 'average', violations: 510, highPoints: 29, suspended: 3, patrols: 12, peakViolationTime: '9 AM - 11 AM', commonViolations: [{ type: 'Speeding', percentage: 70 }, { type: 'Other', percentage: 30 }], riskDistribution: { low: 70, medium: 25, high: 5 }},
-                'd10': { id: 'd10', name: 'Jaffna', risk: 'average', violations: 480, highPoints: 25, suspended: 2, patrols: 11, peakViolationTime: '10 AM - 12 PM', commonViolations: [{ type: 'Parking', percentage: 40 }, { type: 'Speeding', percentage: 40 }, { type: 'Other', percentage: 20 }], riskDistribution: { low: 75, medium: 20, high: 5 }},
-                'd11': { id: 'd11', name: 'Kilinochchi', risk: 'average', violations: 150, highPoints: 8, suspended: 0, patrols: 5, peakViolationTime: '1 PM - 3 PM', commonViolations: [{ type: 'Speeding', percentage: 80 }, { type: 'Other', percentage: 20 }], riskDistribution: { low: 90, medium: 10, high: 0 }},
-                'd12': { id: 'd12', name: 'Mannar', risk: 'average', violations: 180, highPoints: 10, suspended: 1, patrols: 6, peakViolationTime: '12 PM - 2 PM', commonViolations: [{ type: 'Speeding', percentage: 75 }, { type: 'Parking', percentage: 15 }, { type: 'Other', percentage: 10 }], riskDistribution: { low: 85, medium: 10, high: 5 }},
-                'd13': { id: 'd13', name: 'Vavuniya', risk: 'average', violations: 210, highPoints: 12, suspended: 1, patrols: 7, peakViolationTime: '2 PM - 4 PM', commonViolations: [{ type: 'Speeding', percentage: 65 }, { type: 'Other', percentage: 35 }], riskDistribution: { low: 80, medium: 18, high: 2 }},
-                'd14': { id: 'd14', name: 'Mullaitivu', risk: 'average', violations: 130, highPoints: 6, suspended: 0, patrols: 4, peakViolationTime: '11 AM - 1 PM', commonViolations: [{ type: 'Speeding', percentage: 90 }, { type: 'Other', percentage: 10 }], riskDistribution: { low: 92, medium: 8, high: 0 }},
-                'd15': { id: 'd15', name: 'Batticaloa', risk: 'average', violations: 380, highPoints: 19, suspended: 2, patrols: 9, peakViolationTime: '4 PM - 6 PM', commonViolations: [{ type: 'Parking', percentage: 35 }, { type: 'Speeding', percentage: 35 }, { type: 'Red Light', percentage: 15 }, { type: 'Other', percentage: 15 }], riskDistribution: { low: 78, medium: 17, high: 5 }},
-                'd16': { id: 'd16', name: 'Ampara', risk: 'average', violations: 420, highPoints: 22, suspended: 3, patrols: 10, peakViolationTime: '9 AM - 11 AM', commonViolations: [{ type: 'Speeding', percentage: 60 }, { type: 'Other', percentage: 40 }], riskDistribution: { low: 70, medium: 22, high: 8 }},
-                'd17': { id: 'd17', name: 'Trincomalee', risk: 'average', violations: 350, highPoints: 18, suspended: 1, patrols: 9, peakViolationTime: '1 PM - 3 PM', commonViolations: [{ type: 'Speeding', percentage: 50 }, { type: 'Parking', percentage: 30 }, { type: 'Other', percentage: 20 }], riskDistribution: { low: 80, medium: 15, high: 5 }},
-                'd18': { id: 'd18', name: 'Kurunegala', risk: 'normal', violations: 1050, highPoints: 72, suspended: 10, patrols: 20, peakViolationTime: '8 AM - 10 AM', commonViolations: [{ type: 'Speeding', percentage: 45 }, { type: 'Red Light', percentage: 25 }, { type: 'Parking', percentage: 20 }, { type: 'Other', percentage: 10 }], riskDistribution: { low: 35, medium: 45, high: 20 }},
-                'd19': { id: 'd19', name: 'Puttalam', risk: 'average', violations: 550, highPoints: 33, suspended: 4, patrols: 13, peakViolationTime: '7 AM - 9 AM', commonViolations: [{ type: 'Speeding', percentage: 65 }, { type: 'Other', percentage: 20 }, { type: 'Parking', percentage: 15 }], riskDistribution: { low: 68, medium: 25, high: 7 }},
-                'd20': { id: 'd20', name: 'Anuradhapura', risk: 'average', violations: 620, highPoints: 35, suspended: 5, patrols: 14, peakViolationTime: '10 AM - 12 PM', commonViolations: [{ type: 'Speeding', percentage: 50 }, { type: 'Parking', percentage: 25 }, { type: 'Other', percentage: 25 }], riskDistribution: { low: 72, medium: 20, high: 8 }},
-                'd21': { id: 'd21', name: 'Polonnaruwa', risk: 'average', violations: 390, highPoints: 20, suspended: 2, patrols: 10, peakViolationTime: '11 AM - 1 PM', commonViolations: [{ type: 'Speeding', percentage: 70 }, { type: 'Other', percentage: 30 }], riskDistribution: { low: 75, medium: 20, high: 5 }},
-                'd22': { id: 'd22', name: 'Badulla', risk: 'average', violations: 580, highPoints: 31, suspended: 4, patrols: 13, peakViolationTime: '1 PM - 3 PM', commonViolations: [{ type: 'Parking', percentage: 45 }, { type: 'Speeding', percentage: 35 }, { type: 'Other', percentage: 20 }], riskDistribution: { low: 65, medium: 28, high: 7 }},
-                'd23': { id: 'd23', name: 'Moneragala', risk: 'average', violations: 410, highPoints: 23, suspended: 2, patrols: 10, peakViolationTime: '9 AM - 11 AM', commonViolations: [{ type: 'Speeding', percentage: 75 }, { type: 'Other', percentage: 25 }], riskDistribution: { low: 77, medium: 18, high: 5 }},
-                'd24': { id: 'd24', name: 'Ratnapura', risk: 'normal', violations: 790, highPoints: 48, suspended: 6, patrols: 16, peakViolationTime: '8 AM - 10 AM', commonViolations: [{ type: 'Speeding', percentage: 50 }, { type: 'Illegal Overtake', percentage: 25 }, { type: 'Parking', percentage: 15 }, { type: 'Other', percentage: 10 }], riskDistribution: { low: 50, medium: 40, high: 10 }},
-                'd25': { id: 'd25', name: 'Kegalle', risk: 'average', violations: 680, highPoints: 40, suspended: 5, patrols: 15, peakViolationTime: '3 PM - 5 PM', commonViolations: [{ type: 'Speeding', percentage: 60 }, { type: 'Parking', percentage: 20 }, { type: 'Other', percentage: 20 }], riskDistribution: { low: 60, medium: 30, high: 10 }}
-            }
+            details:{}
+            //     {
+            //     'd1':
+            //         { id: 'd1',
+            //         name: 'Colombo',
+            //         risk: 'dangerous',
+            //         violations: 1250,
+            //         highPoints: 89,
+            //         suspended: 12,
+            //         patrols: 25,
+            //         peakViolationTime: '5 PM - 7 PM',
+            //         commonViolations: [
+            //             { type: 'Red Light',
+            //             percentage: 40 },
+            //             { type: 'Speeding',
+            //                 percentage: 35 },
+            //             { type: 'Parking',
+            //                 percentage: 15 },
+            //             { type: 'Other',
+            //                 percentage: 10 }
+            //         ],
+            //         riskDistribution:
+            //             {
+            //                 low: 20,
+            //                 medium: 35,
+            //                 high: 45
+            //             }
+            //     },
+            //
+            //     'd2': { id: 'd2', name: 'Gampaha', risk: 'normal', violations: 980, highPoints: 65, suspended: 8, patrols: 18, peakViolationTime: '4 PM - 6 PM', commonViolations: [{ type: 'Speeding', percentage: 50 }, { type: 'Parking', percentage: 20 }, { type: 'Red Light', percentage: 20 }, { type: 'Other', percentage: 10 }], riskDistribution: { low: 40, medium: 45, high: 15 }},
+            //     'd3': { id: 'd3', name: 'Kaḷutara', risk: 'normal', violations: 750, highPoints: 42, suspended: 5, patrols: 15, peakViolationTime: '7 AM - 9 AM', commonViolations: [{ type: 'Speeding', percentage: 45 }, { type: 'Illegal U-Turn', percentage: 25 }, { type: 'Parking', percentage: 20 }, { type: 'Other', percentage: 10 }], riskDistribution: { low: 55, medium: 35, high: 10 }},
+            //     'd4': { id: 'd4', name: 'Mahanuvara', risk: 'average', violations: 820, highPoints: 55, suspended: 7, patrols: 16, peakViolationTime: '1 PM - 3 PM', commonViolations: [{ type: 'Parking', percentage: 40 }, { type: 'Speeding', percentage: 30 }, { type: 'Other', percentage: 15 }, { type: 'Red Light', percentage: 15 }], riskDistribution: { low: 60, medium: 30, high: 10 }},
+            //     'd5': { id: 'd5', name: 'Matale', risk: 'average', violations: 450, highPoints: 21, suspended: 2, patrols: 10, peakViolationTime: '12 PM - 2 PM', commonViolations: [{ type: 'Speeding', percentage: 60 }, { type: 'Parking', percentage: 20 }, { type: 'Other', percentage: 20 }], riskDistribution: { low: 75, medium: 20, high: 5 }},
+            //     'd6': { id: 'd6', name: 'Nuwara Eliya', risk: 'average', violations: 320, highPoints: 15, suspended: 1, patrols: 8, peakViolationTime: '11 AM - 1 PM', commonViolations: [{ type: 'Parking', percentage: 50 }, { type: 'Speeding', percentage: 30 }, { type: 'Other', percentage: 20 }], riskDistribution: { low: 80, medium: 15, high: 5 }},
+            //     'd7': { id: 'd7', name: 'Galle', risk: 'normal', violations: 880, highPoints: 61, suspended: 9, patrols: 17, peakViolationTime: '4 PM - 6 PM', commonViolations: [{ type: 'Speeding', percentage: 40 }, { type: 'Red Light', percentage: 30 }, { type: 'Parking', percentage: 20 }, { type: 'Other', percentage: 10 }], riskDistribution: { low: 45, medium: 40, high: 15 }},
+            //     'd8': { id: 'd8', name: 'Matara', risk: 'average', violations: 670, highPoints: 38, suspended: 4, patrols: 14, peakViolationTime: '3 PM - 5 PM', commonViolations: [{ type: 'Speeding', percentage: 55 }, { type: 'Parking', percentage: 25 }, { type: 'Other', percentage: 20 }], riskDistribution: { low: 65, medium: 25, high: 10 }},
+            //     'd9': { id: 'd9', name: 'Hambantota', risk: 'average', violations: 510, highPoints: 29, suspended: 3, patrols: 12, peakViolationTime: '9 AM - 11 AM', commonViolations: [{ type: 'Speeding', percentage: 70 }, { type: 'Other', percentage: 30 }], riskDistribution: { low: 70, medium: 25, high: 5 }},
+            //     'd10': { id: 'd10', name: 'Jaffna', risk: 'average', violations: 480, highPoints: 25, suspended: 2, patrols: 11, peakViolationTime: '10 AM - 12 PM', commonViolations: [{ type: 'Parking', percentage: 40 }, { type: 'Speeding', percentage: 40 }, { type: 'Other', percentage: 20 }], riskDistribution: { low: 75, medium: 20, high: 5 }},
+            //     'd11': { id: 'd11', name: 'Kilinochchi', risk: 'average', violations: 150, highPoints: 8, suspended: 0, patrols: 5, peakViolationTime: '1 PM - 3 PM', commonViolations: [{ type: 'Speeding', percentage: 80 }, { type: 'Other', percentage: 20 }], riskDistribution: { low: 90, medium: 10, high: 0 }},
+            //     'd12': { id: 'd12', name: 'Mannar', risk: 'average', violations: 180, highPoints: 10, suspended: 1, patrols: 6, peakViolationTime: '12 PM - 2 PM', commonViolations: [{ type: 'Speeding', percentage: 75 }, { type: 'Parking', percentage: 15 }, { type: 'Other', percentage: 10 }], riskDistribution: { low: 85, medium: 10, high: 5 }},
+            //     'd13': { id: 'd13', name: 'Vavuniya', risk: 'average', violations: 210, highPoints: 12, suspended: 1, patrols: 7, peakViolationTime: '2 PM - 4 PM', commonViolations: [{ type: 'Speeding', percentage: 65 }, { type: 'Other', percentage: 35 }], riskDistribution: { low: 80, medium: 18, high: 2 }},
+            //     'd14': { id: 'd14', name: 'Mullaitivu', risk: 'average', violations: 130, highPoints: 6, suspended: 0, patrols: 4, peakViolationTime: '11 AM - 1 PM', commonViolations: [{ type: 'Speeding', percentage: 90 }, { type: 'Other', percentage: 10 }], riskDistribution: { low: 92, medium: 8, high: 0 }},
+            //     'd15': { id: 'd15', name: 'Batticaloa', risk: 'average', violations: 380, highPoints: 19, suspended: 2, patrols: 9, peakViolationTime: '4 PM - 6 PM', commonViolations: [{ type: 'Parking', percentage: 35 }, { type: 'Speeding', percentage: 35 }, { type: 'Red Light', percentage: 15 }, { type: 'Other', percentage: 15 }], riskDistribution: { low: 78, medium: 17, high: 5 }},
+            //     'd16': { id: 'd16', name: 'Ampara', risk: 'average', violations: 420, highPoints: 22, suspended: 3, patrols: 10, peakViolationTime: '9 AM - 11 AM', commonViolations: [{ type: 'Speeding', percentage: 60 }, { type: 'Other', percentage: 40 }], riskDistribution: { low: 70, medium: 22, high: 8 }},
+            //     'd17': { id: 'd17', name: 'Trincomalee', risk: 'average', violations: 350, highPoints: 18, suspended: 1, patrols: 9, peakViolationTime: '1 PM - 3 PM', commonViolations: [{ type: 'Speeding', percentage: 50 }, { type: 'Parking', percentage: 30 }, { type: 'Other', percentage: 20 }], riskDistribution: { low: 80, medium: 15, high: 5 }},
+            //     'd18': { id: 'd18', name: 'Kurunegala', risk: 'normal', violations: 1050, highPoints: 72, suspended: 10, patrols: 20, peakViolationTime: '8 AM - 10 AM', commonViolations: [{ type: 'Speeding', percentage: 45 }, { type: 'Red Light', percentage: 25 }, { type: 'Parking', percentage: 20 }, { type: 'Other', percentage: 10 }], riskDistribution: { low: 35, medium: 45, high: 20 }},
+            //     'd19': { id: 'd19', name: 'Puttalam', risk: 'average', violations: 550, highPoints: 33, suspended: 4, patrols: 13, peakViolationTime: '7 AM - 9 AM', commonViolations: [{ type: 'Speeding', percentage: 65 }, { type: 'Other', percentage: 20 }, { type: 'Parking', percentage: 15 }], riskDistribution: { low: 68, medium: 25, high: 7 }},
+            //     'd20': { id: 'd20', name: 'Anuradhapura', risk: 'average', violations: 620, highPoints: 35, suspended: 5, patrols: 14, peakViolationTime: '10 AM - 12 PM', commonViolations: [{ type: 'Speeding', percentage: 50 }, { type: 'Parking', percentage: 25 }, { type: 'Other', percentage: 25 }], riskDistribution: { low: 72, medium: 20, high: 8 }},
+            //     'd21': { id: 'd21', name: 'Polonnaruwa', risk: 'average', violations: 390, highPoints: 20, suspended: 2, patrols: 10, peakViolationTime: '11 AM - 1 PM', commonViolations: [{ type: 'Speeding', percentage: 70 }, { type: 'Other', percentage: 30 }], riskDistribution: { low: 75, medium: 20, high: 5 }},
+            //     'd22': { id: 'd22', name: 'Badulla', risk: 'average', violations: 580, highPoints: 31, suspended: 4, patrols: 13, peakViolationTime: '1 PM - 3 PM', commonViolations: [{ type: 'Parking', percentage: 45 }, { type: 'Speeding', percentage: 35 }, { type: 'Other', percentage: 20 }], riskDistribution: { low: 65, medium: 28, high: 7 }},
+            //     'd23': { id: 'd23', name: 'Moneragala', risk: 'average', violations: 410, highPoints: 23, suspended: 2, patrols: 10, peakViolationTime: '9 AM - 11 AM', commonViolations: [{ type: 'Speeding', percentage: 75 }, { type: 'Other', percentage: 25 }], riskDistribution: { low: 77, medium: 18, high: 5 }},
+            //     'd24': { id: 'd24', name: 'Ratnapura', risk: 'normal', violations: 790, highPoints: 48, suspended: 6, patrols: 16, peakViolationTime: '8 AM - 10 AM', commonViolations: [{ type: 'Speeding', percentage: 50 }, { type: 'Illegal Overtake', percentage: 25 }, { type: 'Parking', percentage: 15 }, { type: 'Other', percentage: 10 }], riskDistribution: { low: 50, medium: 40, high: 10 }},
+            //     'd25': { id: 'd25', name: 'Kegalle', risk: 'average', violations: 680, highPoints: 40, suspended: 5, patrols: 15, peakViolationTime: '3 PM - 5 PM', commonViolations: [{ type: 'Speeding', percentage: 60 }, { type: 'Parking', percentage: 20 }, { type: 'Other', percentage: 20 }], riskDistribution: { low: 60, medium: 30, high: 10 }}
+            // }
         };
+
+
+
+
+
+    function fetchDistrictReports() {
+    $.ajax({
+        url: "http://localhost:8080/api/v1/reports/districts",
+        method: "GET",
+        headers: {
+            "Authorization": "Bearer " + token
+        },
+        dataType: "json",
+        success: function (data) {
+
+            districtData.details = {};
+
+
+            data.forEach((district) => {
+
+                districtData.details[district.id] = {
+                    id: district.id,
+                    name: district.name,
+                    risk: district.risk ? district.risk.toLowerCase() : "average",
+                    violations: district.violations,
+                    highPoints: district.highPoints,
+                    suspended: district.suspended,
+                    patrols: district.patrols,
+                    peakViolationTime: district.peakViolationTime,
+                    commonViolations: district.commonViolations,
+                    riskDistribution: district.riskDistribution
+                };
+            });
+
+            // Initialize map after data is ready
+            InitializeMap();
+        },
+        error: function (xhr, status, error) {
+            console.error("Error loading district reports:", error);
+            alert("Could not load district data from server.");
+        }
+    });
+}
+
+
+
+
+
+
+
+
+
+
+
 
         // --- STATE VARIABLES ---
         let selectedDistrict = null;
@@ -75,6 +156,7 @@ const riskLevels = {
         const detailsPanelPlaceholder = document.getElementById('details-panel-placeholder');
         const printButton = document.getElementById('print-button');
 
+
         // --- UI UPDATE FUNCTIONS ---
 
         function updateDetailsPanel(district) {
@@ -85,7 +167,7 @@ const riskLevels = {
             }
             detailsPanelPlaceholder.style.display = 'none';
 
-            const riskInfo = riskLevels[district.risk];
+            const riskInfo = riskLevels[district.risk?.toLowerCase()] || riskLevels["average"];
             const commonViolationColors = ['bg-blue-500', 'bg-sky-500', 'bg-cyan-500', 'bg-teal-500'];
             const riskDistributionColors = { low: 'bg-green-500', medium: 'bg-yellow-500', high: 'bg-red-500' };
 
@@ -135,7 +217,7 @@ const riskLevels = {
                     <div class="mt-6"><div class="flex items-center gap-2"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 text-gray-400"><path stroke-linecap="round" stroke-linejoin="round" d="M10.5 6a7.5 7.5 0 107.5 7.5h-7.5V6z"></path><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 10.5H21A7.5 7.5 0 0013.5 3v7.5z"></path></svg><h3 class="text-sm font-semibold text-gray-600">Common Violations</h3></div><div class="mt-2 bg-gray-50 p-4 rounded-md border border-gray-200"><ul class="space-y-2 mt-1">${commonViolationsHTML}</ul></div></div>
                     <div class="mt-6"><div class="flex items-center gap-2"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 text-gray-400"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.286zm0 13.036h.008v.008H12v-.008z"></path></svg><h3 class="text-sm font-semibold text-gray-600">Driver Risk Distribution</h3></div><div class="mt-2 bg-gray-50 p-4 rounded-md border border-gray-200"><div class="space-y-3 mt-2">${riskDistributionHTML}</div></div></div>
 
-                    <div class="mt-6">
+                    <div class="mt-6 hidden" >
                         <h3 class="text-sm font-semibold text-gray-600 mb-3">Update Risk Status</h3>
                         <div class="grid grid-cols-3 gap-2">
                             <button id="btn-dangerous" class="px-3 py-2 text-sm font-semibold rounded-md transition ${district.risk === 'dangerous' ? 'bg-red-600 text-white shadow' : 'bg-gray-100 text-gray-700 hover:bg-red-100'}">Dangerous</button>
@@ -186,18 +268,23 @@ const riskLevels = {
 
         // --- INITIALIZATION ---
 
-        document.addEventListener('DOMContentLoaded', () => {
-            const rsr = Raphael(mapContainer, mapContainer.clientWidth, mapContainer.clientHeight);
+       function InitializeMap() {
+            const rsr = Raphael($('#map-container')[0], $('#map-container').width(), $('#map-container').height());
             rsr.setViewBox(0, 0, 450, 800, true);
 
-            for (const id in districtData.paths) {
-                const pathData = districtData.paths[id];
+            $.each(districtData.paths, function(id, pathData) {
                 const districtInfo = districtData.details[id];
-                const path = rsr.path(pathData);
+                if (!districtInfo) {
+                    console.warn("No district info for", id);
+                    return;
+                }
 
+                const riskInfo = riskLevels[districtInfo.risk] || riskLevels["average"];
+
+                const path = rsr.path(pathData);
                 path.attr({
                     title: districtInfo.name,
-                    fill: riskLevels[districtInfo.risk].color,
+                    fill: riskInfo.color,
                     stroke: '#FFF',
                     'stroke-width': 1,
                     'stroke-opacity': '1',
@@ -209,23 +296,27 @@ const riskLevels = {
                     function () { this.animate({ 'fill-opacity': 0.7 }, 200); },
                     function () { this.animate({ 'fill-opacity': 1 }, 200); }
                 );
+
                 path.click(function() {
-                    selectDistrict(this.data('id'), this);
+                    selectDistrict(path.data('id'), path);
                 });
 
                 raphaelDistricts.push(path);
-            }
+            });
 
             const resizeObserver = new ResizeObserver(() => {
-                rsr.setSize(mapContainer.clientWidth, mapContainer.clientHeight);
+                rsr.setSize($('#map-container').width(), $('#map-container').height());
             });
-            resizeObserver.observe(mapContainer);
+            resizeObserver.observe($('#map-container')[0]);
 
-            printButton.addEventListener('click', () => window.print());
+            $('#print-button').on('click', function() {
+                window.print();
+            });
 
-            // Select Colombo by default
+            // Select Colombo (d1) by default
             const colomboPath = raphaelDistricts.find(p => p.data('id') === 'd1');
             if (colomboPath) {
-              selectDistrict('d1', colomboPath);
-            }
-        });
+                selectDistrict('d1', colomboPath);
+    }
+}
+
