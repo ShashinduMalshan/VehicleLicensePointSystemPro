@@ -7,6 +7,10 @@ import com.service.vehiclelicensepointsystempro.Service.DriverService;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,13 +20,14 @@ import java.util.List;
 public class DriverServiceImpl implements DriverService {
 
     private final DriverRepository driverRepository;
-    private final ModelMapper modelMApper;
+    private final ModelMapper modelMapper;
 
     @Override
-    public List<DriverDto> getAllDrivers() {
-             List<Driver> all = driverRepository.findAll();
-            return modelMApper.map(all,new TypeToken<List<DriverDto>>(){}.getType());
+    public Page<DriverDto> getAllDrivers(int page, int size) {
+        Pageable pageable = PageRequest.of(page, size, Sort.by("drivingLicNum").ascending());
+        Page<Driver> driverPage = driverRepository.findAll(pageable);
 
+        // Convert Entity → DTO using ModelMapper + Builder
+        return driverPage.map(driver -> modelMapper.map(driver, DriverDto.class));
     }
-
 }

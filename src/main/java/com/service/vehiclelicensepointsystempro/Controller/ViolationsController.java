@@ -5,6 +5,7 @@ import com.service.vehiclelicensepointsystempro.Dto.ViolationPointDto;
 import com.service.vehiclelicensepointsystempro.Service.Impl.LawServiceImpl;
 import com.service.vehiclelicensepointsystempro.Service.Impl.ViolationImlServiceImpl;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -22,12 +23,13 @@ public class ViolationsController {
     public final LawServiceImpl lawService;
 
     @GetMapping("/all")
-//  @PreAuthorize("hasRole('Admin')")
-    private List<ViolationPointDto> getAllViolations(){
-        return violationService.getAllViolations();
+    public Page<ViolationPointDto> getAllViolations(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "15") int size) {
+        return violationService.getAllViolations(page, size);
+    }
 
-
-    }@GetMapping("/laws")
+    @GetMapping("/laws")
 //  @PreAuthorize("hasRole('Admin')")
     private List<LawDto> getAllTrafficLaw(){
         return lawService.getAllTrafficLaw();
@@ -40,7 +42,7 @@ public class ViolationsController {
 
         return violationService.save(dto);
     } catch (Exception e) {
-        e.printStackTrace(); // <-- see console log
+        e.printStackTrace();
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                              .body(e.getMessage());
     }

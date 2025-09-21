@@ -4,214 +4,1656 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vehicle License Point System - Overview</title>
+    <title>Vehicle License Point System</title>
     <script src="https://cdn.tailwindcss.com"></script>
-  </head>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+
+</head>
   <body class="bg-slate-50 font-sans">
     <div class="flex h-screen bg-slate-50 font-sans">
       <!-- Mobile Sidebar -->
-      <aside id="mobile-sidebar" class="fixed inset-y-0 left-0 z-40 w-64 bg-[#0a58ca] text-white transform -translate-x-full transition-transform duration-300 ease-in-out md:hidden" aria-hidden="true">
-        <div class="flex items-center justify-between h-20 border-b border-[#084a9e] px-4">
-          <div class="text-3xl font-bold text-white tracking-wider"><span class="text-sky-300">V</span>LPS</div>
-          <button id="mobile-close-button" class="p-2 rounded-md hover:bg-[#084a9e] focus:outline-none focus:ring-2 focus:ring-white" aria-label="Close menu">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-6 w-6">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
-            </svg>
-          </button>
-        </div>
-        <nav class="flex-1 px-4 py-6 space-y-2 overflow-y-auto">
-          <a href="index.html" class="nav-link flex items-center w-full px-4 py-2.5 text-sm font-medium rounded-lg transition-colors duration-200 relative text-left bg-[#084a9e]">
-            <span class="absolute left-0 top-0 bottom-0 w-1 bg-sky-300 rounded-r-full"></span>
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-6 w-6"><path stroke-linecap="round" stroke-linejoin="round" d="m2.25 12 8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h7.5"></path></svg>
-            <span class="ml-3">Overview</span>
-          </a>
-          <a href="driver.html" class="nav-link flex items-center w-full px-4 py-2.5 text-sm font-medium rounded-lg transition-colors duration-200 relative text-left hover:bg-[#084a9e]">
-            <span class="hidden absolute left-0 top-0 bottom-0 w-1 bg-sky-300 rounded-r-full"></span>
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-6 w-6"><path stroke-linecap="round" stroke-linejoin="round" d="M18 18.72a9.094 9.094 0 0 0 3.741-.479 3 3 0 0 0-4.682-2.72m-7.5-2.226A3 3 0 0 1 15 13.489m-7.5 0a3 3 0 0 0-3.741 2.73m0-2.73-3.741-2.73a3 3 0 0 1 2.73-3.741L15 13.49m-7.5 0a3 3 0 0 1-2.73 3.741M15 13.49l-2.73 3.741a3 3 0 0 1-3.741-2.73L9 10.75M15 13.49l2.73-3.741a3 3 0 0 0-2.73-3.741L9 10.75"></path></svg>
-            <span class="ml-3">Drivers</span>
-          </a>
-          <a href="violations.html" class="nav-link flex items-center w-full px-4 py-2.5 text-sm font-medium rounded-lg transition-colors duration-200 relative text-left hover:bg-[#084a9e]">
-            <span class="hidden absolute left-0 top-0 bottom-0 w-1 bg-sky-300 rounded-r-full"></span>
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-6 w-6"><path stroke-linecap="round" stroke-linejoin="round" d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z"></path></svg>
-            <span class="ml-3">Violations</span>
-          </a>
-        </nav>
-      </aside>
-      <div id="mobile-overlay" class="fixed inset-0 bg-black/60 z-30 md:hidden transition-opacity opacity-0 pointer-events-none"></div>
+      <aside id="mobile-sidebar" class="fixed inset-y-0 left-0 z-40 w-64 bg-[#0a58ca] text-white transform -translate-x-full transition-transform duration-300 ease-in-out md:hidden flex flex-col" aria-hidden="true">
+              <div class="flex items-center justify-between h-20 border-b border-[#084a9e] px-4 flex-shrink-0">
+                <div class="text-3xl font-bold text-white tracking-wider"><span class="text-sky-300">V</span>LPS</div>
+                <button id="mobile-close-button" class="p-2 rounded-md hover:bg-[#084a9e] focus:outline-none focus:ring-2 focus:ring-white" aria-label="Close menu">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-6 w-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+                  </svg>
+                </button>
+              </div>
+              <nav class="flex-1 px-4 py-6 space-y-2 overflow-y-auto">
+                <button id="mnav-overview" onclick="navigateTo('overview');window.__closeMobile&&window.__closeMobile()" class="nav-link flex items-center w-full px-4 py-2.5 text-sm font-medium rounded-lg transition-colors duration-200 relative text-left">
+                  <span class="absolute left-0 top-0 bottom-0 w-1 bg-sky-300 rounded-r-full"></span>
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-6 w-6"><path stroke-linecap="round" stroke-linejoin="round" d="m2.25 12 8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h7.5"></path></svg>
+                  <span class="ml-3">Overview</span>
+                </button>
+                <button id="mnav-drivers" onclick="navigateTo('drivers');window.__closeMobile&&window.__closeMobile()" class="nav-link flex items-center w-full px-4 py-2.5 text-sm font-medium rounded-lg transition-colors duration-200 relative text-left">
+                  <span class="hidden absolute left-0 top-0 bottom-0 w-1 bg-sky-300 rounded-r-full"></span>
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-6 w-6"><path stroke-linecap="round" stroke-linejoin="round" d="M18 18.72a9.094 9.094 0 0 0 3.741-.479 3 3 0 0 0-4.682-2.72m-7.5-2.226A3 3 0 0 1 15 13.489m-7.5 0a3 3 0 0 0-3.741 2.73m0-2.73-3.741-2.73a3 3 0 0 1 2.73-3.741L15 13.49m-7.5 0a3 3 0 0 1-2.73 3.741M15 13.49l-2.73 3.741a3 3 0 0 1-3.741-2.73L9 10.75M15 13.49l2.73-3.741a3 3 0 0 0-2.73-3.741L9 10.75"></path></svg>
+                  <span class="ml-3">Drivers</span>
+                </button>
+                <button id="mnav-violations" onclick="navigateTo('violations');window.__closeMobile&&window.__closeMobile()" class="nav-link flex items-center w-full px-4 py-2.5 text-sm font-medium rounded-lg transition-colors duration-200 relative text-left">
+                  <span class="hidden absolute left-0 top-0 bottom-0 w-1 bg-sky-300 rounded-r-full"></span>
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-6 w-6"><path stroke-linecap="round" stroke-linejoin="round" d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z"></path></svg>
+                  <span class="ml-3">Violations</span>
+                </button>
+                <button id="mnav-suspended" onclick="navigateTo('suspended');window.__closeMobile&&window.__closeMobile()" class="nav-link flex items-center w-full px-4 py-2.5 text-sm font-medium rounded-lg transition-colors duration-200 relative text-left">
+                  <span class="hidden absolute left-0 top-0 bottom-0 w-1 bg-sky-300 rounded-r-full"></span>
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-6 w-6"><path stroke-linecap="round" stroke-linejoin="round" d="M15 9h3.75M15 12h3.75M15 15h3.75M4.5 19.5h15a2.25 2.25 0 0 0 2.25-2.25V6.75A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25v10.5A2.25 2.25 0 0 0 4.5 19.5Z" /><path stroke-linecap="round" stroke-linejoin="round" d="M6.75 12a1.125 1.125 0 1 0 0-2.25 1.125 1.125 0 0 0 0 2.25Z" /><path stroke-linecap="round" stroke-linejoin="round" d="M9.75 14.25a3 3 0 0 0-3-3H4.5v3h2.25Z" /></svg>
+                  <span class="ml-3">Suspended Licenses</span>
+                </button>
+                <button id="mnav-notifications" onclick="navigateTo('notifications');window.__closeMobile&&window.__closeMobile()" class="nav-link flex items-center w-full px-4 py-2.5 text-sm font-medium rounded-lg transition-colors duration-200 relative text-left">
+                    <span class="hidden absolute left-0 top-0 bottom-0 w-1 bg-sky-300 rounded-r-full"></span>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-6 w-6"><path stroke-linecap="round" stroke-linejoin="round" d="M14.857 17.082a23.848 23.848 0 0 0 5.454-1.31A8.967 8.967 0 0 1 18 9.75V9A6 6 0 0 0 6 9v.75a8.967 8.967 0 0 1-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 0 1-5.714 0m5.714 0a3 3 0 1 1-5.714 0" /></svg>
+                    <span class="ml-3">Notifications</span>
+                </button>
+                <button id="mnav-training" onclick="navigateTo('training');window.__closeMobile&&window.__closeMobile()" class="nav-link flex items-center w-full px-4 py-2.5 text-sm font-medium rounded-lg transition-colors duration-200 relative text-left">
+                    <span class="hidden absolute left-0 top-0 bottom-0 w-1 bg-sky-300 rounded-r-full"></span>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-6 w-6"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 0 0 6 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 0 1 6 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 0 1 6-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0 0 18 18a8.967 8.967 0 0 0-6 2.292m0-14.25v14.25" /></svg>
+                    <span class="ml-3">Training Programs</span>
+                </button>
+              </nav>
+              <div class="p-4 border-t border-[#084a9e]">
+                <button onclick="navigateTo('profile');window.__closeMobile&&window.__closeMobile()" class="w-full text-left">
+                  <div class="flex items-center p-2 rounded-lg hover:bg-[#084a9e] transition-colors">
+                    <img class="h-10 w-10 rounded-full object-cover" src="https://i.pravatar.cc/150?u=admin" alt="User avatar" />
+                    <div class="ml-3">
+                      <p class="text-sm font-semibold text-white">Kamal Perera</p>
+                      <p class="text-xs text-blue-200">Administrator</p>
+                    </div>
+                  </div>
+                </button>
+              </div>
+            </aside>
+            <div id="mobile-overlay" class="fixed inset-0 bg-black/60 z-30 md:hidden transition-opacity opacity-0 pointer-events-none"></div>
 
-      <!-- Desktop Sidebar -->
-      <aside class="hidden md:flex flex-col w-64 bg-[#0a58ca] text-white">
+            <!-- Desktop Sidebar -->
+            <aside class="hidden md:flex flex-col w-64 bg-[#0a58ca] text-white">
         <div class="flex items-center justify-center h-20 border-b border-[#084a9e]">
           <div class="text-3xl font-bold text-white tracking-wider">
             <span class="text-sky-300">V</span>LPS
           </div>
         </div>
         <nav class="flex-1 px-4 py-6 space-y-2">
-          <a href="index.html" class="nav-link flex items-center w-full px-4 py-2.5 text-sm font-medium rounded-lg transition-colors duration-200 relative text-left bg-[#084a9e]">
+          <button id="nav-overview" onclick="navigateTo('overview')" class="nav-link flex items-center w-full px-4 py-2.5 text-sm font-medium rounded-lg transition-colors duration-200 relative text-left">
             <span class="absolute left-0 top-0 bottom-0 w-1 bg-sky-300 rounded-r-full"></span>
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-6 w-6"><path stroke-linecap="round" stroke-linejoin="round" d="m2.25 12 8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h7.5" /></svg>
             <span class="ml-3">Overview</span>
-          </a>
-          <a href="driver.html" class="nav-link flex items-center w-full px-4 py-2.5 text-sm font-medium rounded-lg transition-colors duration-200 relative text-left hover:bg-[#084a9e]">
+          </button>
+          <button id="nav-drivers" onclick="navigateTo('drivers')" class="nav-link flex items-center w-full px-4 py-2.5 text-sm font-medium rounded-lg transition-colors duration-200 relative text-left">
             <span class="hidden absolute left-0 top-0 bottom-0 w-1 bg-sky-300 rounded-r-full"></span>
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-6 w-6"><path stroke-linecap="round" stroke-linejoin="round" d="M18 18.72a9.094 9.094 0 0 0 3.741-.479 3 3 0 0 0-4.682-2.72m-7.5-2.226A3 3 0 0 1 15 13.489m-7.5 0a3 3 0 0 0-3.741 2.73m0-2.73-3.741-2.73a3 3 0 0 1 2.73-3.741L15 13.49m-7.5 0a3 3 0 0 1-2.73 3.741M15 13.49l-2.73 3.741a3 3 0 0 1-3.741-2.73L9 10.75M15 13.49l2.73-3.741a3 3 0 0 0-2.73-3.741L9 10.75" /></svg>
             <span class="ml-3">Drivers</span>
-          </a>
-          <a href="violations.html" class="nav-link flex items-center w-full px-4 py-2.5 text-sm font-medium rounded-lg transition-colors duration-200 relative text-left hover:bg-[#084a9e]">
+          </button>
+          <button id="nav-violations" onclick="navigateTo('violations')" class="nav-link flex items-center w-full px-4 py-2.5 text-sm font-medium rounded-lg transition-colors duration-200 relative text-left">
             <span class="hidden absolute left-0 top-0 bottom-0 w-1 bg-sky-300 rounded-r-full"></span>
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-6 w-6"><path stroke-linecap="round" stroke-linejoin="round" d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z" /></svg>
             <span class="ml-3">Violations</span>
-          </a>
-          <a href="#" class="flex items-center w-full px-4 py-2.5 text-sm font-medium rounded-lg transition-colors duration-200 relative text-left text-blue-100 hover:bg-[#084a9e] hover:text-white">
+          </button>
+          <button id="nav-suspended" onclick="navigateTo('suspended')" class="nav-link flex items-center w-full px-4 py-2.5 text-sm font-medium rounded-lg transition-colors duration-200 relative text-left">
+            <span class="hidden absolute left-0 top-0 bottom-0 w-1 bg-sky-300 rounded-r-full"></span>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-6 w-6"><path stroke-linecap="round" stroke-linejoin="round" d="M15 9h3.75M15 12h3.75M15 15h3.75M4.5 19.5h15a2.25 2.25 0 0 0 2.25-2.25V6.75A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25v10.5A2.25 2.25 0 0 0 4.5 19.5Z" /><path stroke-linecap="round" stroke-linejoin="round" d="M6.75 12a1.125 1.125 0 1 0 0-2.25 1.125 1.125 0 0 0 0 2.25Z" /><path stroke-linecap="round" stroke-linejoin="round" d="M9.75 14.25a3 3 0 0 0-3-3H4.5v3h2.25Z" /></svg>
+            <span class="ml-3">Suspended Licenses</span>
+          </button>
+           <button class="flex items-center w-full px-4 py-2.5 text-sm font-medium rounded-lg transition-colors duration-200 relative text-left text-blue-100 hover:bg-[#084a9e] hover:text-white">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-6 w-6">
               <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 15.75V18m-7.5-6.75h.008v.008H8.25v-.008Zm0 3h.008v.008H8.25v-.008Zm0 3h.008v.008H8.25v-.008Zm3-6h.008v.008h-.008v-.008Zm0 3h.008v.008h-.008v-.008Zm0 3h.008v.008h-.008v-.008Zm3-6h.008v.008h-.008v-.008Zm0 3h.008v.008h-.008v-.008ZM21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
             </svg>
             <span class="ml-3">Points System</span>
-          </a>
-          <a href="#" class="flex items-center w-full px-4 py-2.5 text-sm font-medium rounded-lg transition-colors duration-200 relative text-left text-blue-100 hover:bg-[#084a9e] hover:text-white">
+          </button>
+          <button class="flex items-center w-full px-4 py-2.5 text-sm font-medium rounded-lg transition-colors duration-200 relative text-left text-blue-100 hover:bg-[#084a9e] hover:text-white">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-6 w-6">
               <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m5.231 13.5h-8.01a1.5 1.5 0 0 1-1.5-1.5v-12a1.5 1.5 0 0 1 1.5-1.5h12a1.5 1.5 0 0 1 1.5 1.5v5.231m-3.75 3.75 3.75 3.75M12 18.75h3.75a3.375 3.375 0 0 0 3.375-3.375V12.125" />
               <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 12h.008v.008H8.25V12Zm3.75 0h.008v.008h-.008V12Zm3.75 0h.008v.008h-.008V12Z" />
             </svg>
             <span class="ml-3">Reports</span>
-          </a>
-          <a href="#" class="flex items-center w-full px-4 py-2.5 text-sm font-medium rounded-lg transition-colors duration-200 relative text-left text-blue-100 hover:bg-[#084a9e] hover:text-white">
+          </button>
+          <button id="nav-notifications" onclick="navigateTo('notifications')" class="nav-link flex items-center w-full px-4 py-2.5 text-sm font-medium rounded-lg transition-colors duration-200 relative text-left">
+            <span class="hidden absolute left-0 top-0 bottom-0 w-1 bg-sky-300 rounded-r-full"></span>
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-6 w-6">
               <path stroke-linecap="round" stroke-linejoin="round" d="M14.857 17.082a23.848 23.848 0 0 0 5.454-1.31A8.967 8.967 0 0 1 18 9.75V9A6 6 0 0 0 6 9v.75a8.967 8.967 0 0 1-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 0 1-5.714 0m5.714 0a3 3 0 1 1-5.714 0" />
             </svg>
             <span class="ml-3">Notifications</span>
-          </a>
+          </button>
+          <button id="nav-training" onclick="navigateTo('training')" class="nav-link flex items-center w-full px-4 py-2.5 text-sm font-medium rounded-lg transition-colors duration-200 relative text-left">
+            <span class="hidden absolute left-0 top-0 bottom-0 w-1 bg-sky-300 rounded-r-full"></span>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-6 w-6"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 0 0 6 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 0 1 6 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 0 1 6-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0 0 18 18a8.967 8.967 0 0 0-6 2.292m0-14.25v14.25" /></svg>
+            <span class="ml-3">Training Programs</span>
+          </button>
         </nav>
         <div class="p-4 border-t border-[#084a9e]">
-          <a href="#" class="flex items-center w-full px-4 py-2.5 text-sm font-medium rounded-lg transition-colors duration-200 relative text-left text-blue-100 hover:bg-[#084a9e] hover:text-white">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-6 w-6"><path stroke-linecap="round" stroke-linejoin="round" d="M9.594 3.94c.09-.542.56-1.007 1.11-.95.542.057 1.007.56 1.065 1.11L12 10.5M12 10.5l-2.094 2.094c-.21.21-.47.364-.746.466-1.143.426-2.016 1.29-2.485 2.485C6.364 16.03 6.21 16.29 6 16.5m6-6l2.094 2.094c.21.21.47.364.746.466 1.143.426 2.016 1.29 2.485 2.485.099.276.254.536.466.746L18 16.5m-6-6-2.094-2.094c-.21-.21-.47-.364-.746-.466-1.143-.426-2.016-1.29-2.485-2.485C6.364 7.97 6.21 7.71 6 7.5m6 3 2.094-2.094c.21-.21.47-.364.746-.466 1.143.426 2.016-1.29 2.485 2.485.099-.276.254-.536.466-.746L18 7.5m-6 9v3.406c0 .818.662 1.48 1.48 1.48h.04c.818 0 1.48-.662 1.48-1.48V16.5" /></svg>
+          <button class="flex items-center w-full px-4 py-2.5 text-sm font-medium rounded-lg transition-colors duration-200 relative text-left text-blue-100 hover:bg-[#084a9e] hover:text-white">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-6 w-6"><path stroke-linecap="round" stroke-linejoin="round" d="M9.594 3.94c.09-.542.56-1.007 1.11-.95.542.057 1.007.56 1.065 1.11L12 10.5M12 10.5l-2.094 2.094c-.21.21-.47.364-.746.466-1.143.426-2.016 1.29-2.485 2.485C6.364 16.03 6.21 16.29 6 16.5m6-6l2.094 2.094c.21.21.47.364.746.466 1.143.426 2.016 1.29 2.485 2.485.099.276.254.536.466.746L18 16.5m-6-6-2.094-2.094c-.21-.21-.47-.364-.746-.466-1.143-.426-2.016-1.29-2.485-2.485C6.364 7.97 6.21 7.71 6 7.5m6 3 2.094-2.094c.21-.21.47.364.746-.466 1.143.426 2.016-1.29 2.485 2.485.099-.276.254-.536.466-.746L18 7.5m-6 9v3.406c0 .818.662 1.48 1.48 1.48h.04c.818 0 1.48-.662 1.48-1.48V16.5" /></svg>
             <span class="ml-3">Settings</span>
-          </a>
-          <div class="flex items-center mt-4 p-2 bg-[#084a9e] rounded-lg">
-            <img class="h-10 w-10 rounded-full object-cover" src="https://i.pravatar.cc/150?u=admin" alt="User avatar" />
-            <div class="ml-3">
-              <p class="text-sm font-semibold text-white">Kamal Perera</p>
-              <p class="text-xs text-blue-200">Administrator</p>
+          </button>
+          <button onclick="navigateTo('profile')" class="w-full text-left">
+            <div class="flex items-center mt-4 p-2 bg-[#084a9e] rounded-lg hover:bg-[#0a58ca] transition-colors">
+              <img id="sidebar-profile-image" class="h-10 w-10 rounded-full object-cover" src="https://i.pravatar.cc/150?u=admin" alt="User avatar" />
+              <div class="ml-3">
+                <p id="sidebar-profile-name" class="text-sm font-semibold text-white">Kamal Perera</p>
+                <p class="text-xs text-blue-200">Administrator</p>
+              </div>
             </div>
-          </div>
+          </button>
         </div>
       </aside>
 
       <!-- Main Content -->
       <div class="flex-1 flex flex-col overflow-hidden">
-        <!-- Mobile top bar -->
-        <header class="md:hidden flex items-center justify-between bg-white px-4 py-3 border-b border-slate-200">
-          <button id="mobile-menu-button" aria-controls="mobile-sidebar" aria-expanded="false" class="p-2 rounded-md text-slate-700 hover:bg-slate-100 focus:outline-none focus:ring-2 focus:ring-[#0a58ca]" title="Open menu">
-            <svg id="hamburger-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-6 w-6">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
-            </svg>
-            <span class="sr-only">Open menu</span>
-          </button>
-          <div class="text-xl font-bold text-slate-800"><span class="text-[#0a58ca]">V</span>LPS</div>
-          <div class="w-8"></div><!-- Spacer -->
-        </header>
+              <!-- Mobile top bar -->
+              <header class="md:hidden flex items-center justify-between bg-white px-4 py-3 border-b border-slate-200">
+                <button id="mobile-menu-button" aria-controls="mobile-sidebar" aria-expanded="false" class="p-2 rounded-md text-slate-700 hover:bg-slate-100 focus:outline-none focus:ring-2 focus:ring-[#0a58ca]" title="Open menu">
+                  <svg id="hamburger-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-6 w-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+                  </svg>
+                  <span class="sr-only">Open menu</span>
+                </button>
+                <div class="text-xl font-bold text-slate-800"><span class="text-[#0a58ca]">V</span>LPS</div>
+                <div class="w-8"></div><!-- Spacer -->
+              </header>
         <main class="flex-1 overflow-x-hidden overflow-y-auto bg-slate-50 p-4 sm:p-6 lg:p-8">
           <!-- Overview Page -->
-          <div class="container mx-auto">
-            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8">
-              <div>
-                <h1 class="text-2xl lg:text-3xl font-bold text-slate-800">Welcome back, Kamal!</h1>
-                <p class="text-sm text-slate-500 mt-1">Here's what's happening with the system today.</p>
-              </div>
-              <div class="relative mt-4 sm:mt-0 w-full sm:w-auto">
-                <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-5 w-5 text-slate-400"><path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" /></svg></div>
-                <input type="text" placeholder="Search drivers, violations..." class="w-full sm:w-64 pl-10 pr-4 py-2 text-sm text-slate-700 bg-white border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#0a58ca]" />
-              </div>
-            </div>
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-              <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300"><div class="flex items-center justify-between"><div><p class="text-sm text-slate-500">Total Drivers</p><p class="text-3xl font-bold text-slate-800 mt-1">32,256</p></div><div class="flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-[#e7f0fa]"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-6 w-6 text-[#0a58ca]"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19.128a9.38 9.38 0 0 0 2.625.372 9.337 9.337 0 0 0 4.121-2.253 9.597 9.597 0 0 0-4.121-5.502 9.42 9.42 0 0 0-2.625-.372M15 19.128v-3.848m0 3.848a9.337 9.337 0 0 1-4.121 2.253 9.597 9.597 0 0 1-4.121-5.502 9.42 9.42 0 0 1-2.625-.372m-5.462 2.253a9.38 9.38 0 0 1 2.625-.372 9.337 9.337 0 0 1 4.121 2.253 9.597 9.597 0 0 1 4.121-5.502 9.42 9.42 0 0 1 2.625-.372m-14.86 5.502a9.38 9.38 0 0 0 2.625.372 9.337 9.337 0 0 0 4.121-2.253 9.597 9.597 0 0 0-4.121-5.502 9.42 9.42 0 0 0-2.625-.372M4.5 19.128v-3.848" /><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.75a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Zm4.5 0a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Zm-8.25 3a2.25 2.25 0 1 0 0 4.5 2.25 2.25 0 0 0 0-4.5Zm4.5 0a2.25 2.25 0 1 0 0 4.5 2.25 2.25 0 0 0 0-4.5Z" /></svg></div></div><div class="flex items-center mt-4 text-xs"><span class="flex items-center font-semibold text-green-600"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="h-4 w-4 mr-1"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25" /></svg>+5.4%</span><span class="text-slate-500 ml-2">vs. last month</span></div></div>
-              <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300"><div class="flex items-center justify-between"><div><p class="text-sm text-slate-500">Active Violations</p><p class="text-3xl font-bold text-slate-800 mt-1">1,394</p></div><div class="flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-green-100"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-6 w-6 text-green-500"><path stroke-linecap="round" stroke-linejoin="round" d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z" /></svg></div></div><div class="flex items-center mt-4 text-xs"><span class="flex items-center font-semibold text-green-600"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="h-4 w-4 mr-1"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25" /></svg>+12.1%</span><span class="text-slate-500 ml-2">vs. last month</span></div></div>
-              <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300"><div class="flex items-center justify-between"><div><p class="text-sm text-slate-500">Avg. Points / Driver</p><p class="text-3xl font-bold text-slate-800 mt-1">2.8</p></div><div class="flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-yellow-100"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-6 w-6 text-yellow-500"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 15.75V18m-7.5-6.75h.008v.008H8.25v-.008Zm0 3h.008v.008H8.25v-.008Zm0 3h.008v.008H8.25v-.008Zm3-6h.008v.008h-.008v-.008Zm0 3h.008v.008h-.008v-.008Zm0 3h.008v.008h-.008v-.008Zm3-6h.008v.008h-.008v-.008Zm0 3h.008v.008h-.008v-.008ZM21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" /></svg></div></div><div class="flex items-center mt-4 text-xs"><span class="flex items-center font-semibold text-red-600"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="h-4 w-4 mr-1"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 4.5l-15 15m0 0h11.25m-11.25 0V8.25" /></svg>-0.2</span><span class="text-slate-500 ml-2">vs. last month</span></div></div>
-              <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300"><div class="flex items-center justify-between"><div><p class="text-sm text-slate-500">Reports Generated</p><p class="text-3xl font-bold text-slate-800 mt-1">438</p></div><div class="flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-red-100"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-6 w-6 text-red-500"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m0 12.75h7.5m-7.5 3h7.5M3 3h18v18H3V3Z" /></svg></div></div><div class="flex items-center mt-4 text-xs"><span class="flex items-center font-semibold text-green-600"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="h-4 w-4 mr-1"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25" /></svg>+15</span><span class="text-slate-500 ml-2">vs. last month</span></div></div>
-            </div>
-
-            <!-- Charts Grid -->
-            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
-              <div class="lg:col-span-2">
-                <div class="bg-white p-6 rounded-lg shadow-md h-full">
-                  <div class="flex justify-between items-center mb-4">
-                    <h3 class="text-lg font-semibold text-slate-800">Violations Over Time</h3>
-                    <button class="text-sm text-slate-500 hover:text-slate-800">Last 12 Months ▼</button>
-                  </div>
-                  <div class="h-64">
-                    <svg class="w-full h-full" viewBox="0 0 400 150" preserveAspectRatio="none">
-                      <defs>
-                        <linearGradient id="area-gradient" x1="0" y1="0" x2="0" y2="1">
-                          <stop offset="0%" stop-color="#0a58ca" stop-opacity="0.2" />
-                          <stop offset="100%" stop-color="#0a58ca" stop-opacity="0" />
-                        </linearGradient>
-                      </defs>
-                      <line x1="0" x2="400" y1="150" y2="150" class="stroke-slate-200" stroke-width="1"></line>
-                      <line x1="0" x2="400" y1="100" y2="100" class="stroke-slate-200" stroke-width="1"></line>
-                      <line x1="0" x2="400" y1="50" y2="50" class="stroke-slate-200" stroke-width="1"></line>
-                      <line x1="0" x2="400" y1="0" y2="0" class="stroke-slate-200" stroke-width="1"></line>
-                      <path d="M 0 100 L 40 110 C 80 80, 120 120, 160 90 S 240 30, 280 60 S 360 80, 400 70 L 400 150 L 0 150 Z" fill="url(#area-gradient)"></path>
-                      <path d="M 0 100 L 40 110 C 80 80, 120 120, 160 90 S 240 30, 280 60 S 360 80, 400 70" fill="none" class="stroke-[#0a58ca]" stroke-width="2.5"></path>
-                      <circle cx="280" cy="60" r="4" class="fill-[#0a58ca]" stroke="white" stroke-width="2"></circle>
-                    </svg>
-                  </div>
+          <div id="page-overview">
+            <div class="container mx-auto">
+              <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8">
+                <div>
+                  <h1 class="text-2xl lg:text-3xl font-bold text-slate-800">Welcome back, Kamal!</h1>
+                  <p class="text-sm text-slate-500 mt-1">Here's what's happening with the system today.</p>
+                </div>
+                <div class="relative mt-4 sm:mt-0 w-full sm:w-auto">
+                  <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-5 w-5 text-slate-400"><path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" /></svg></div>
+                  <input type="text" placeholder="Search drivers, violations..." class="w-full sm:w-64 pl-10 pr-4 py-2 text-sm text-slate-700 bg-white border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#0a58ca]" />
                 </div>
               </div>
-              <div class="lg:col-span-1">
-                <div class="bg-white p-6 rounded-lg shadow-md h-full">
-                  <h3 class="text-lg font-semibold text-slate-800 mb-4">Violations by Type</h3>
-                  <div class="flex justify-center items-center my-6">
-                    <div class="relative w-48 h-48">
-                      <svg class="w-full h-full" viewBox="0 0 100 100">
-                        <circle cx="50" cy="50" r="40" fill="transparent" stroke="#0a58ca" stroke-width="12" stroke-dasharray="113.09733552923255 251.32741228718345" transform="rotate(-90 50 50)"></circle>
-                        <circle cx="50" cy="50" r="40" fill="transparent" stroke="#3b7ddb" stroke-width="12" stroke-dasharray="62.83185307179587 251.32741228718345" transform="rotate(72 50 50)"></circle>
-                        <circle cx="50" cy="50" r="40" fill="transparent" stroke="#6d9ee9" stroke-width="12" stroke-dasharray="45.23903434937226 251.32741228718345" transform="rotate(162 50 50)"></circle>
-                        <circle cx="50" cy="50" r="40" fill="transparent" stroke="#9ebff3" stroke-width="12" stroke-dasharray="30.159239899581504 251.32741228718345" transform="rotate(226.8 50 50)"></circle>
-                        <text x="50" y="52" text-anchor="middle" dy=".3em" font-size="18" font-weight="bold" class="fill-slate-800">1.4k</text>
-                        <text x="50" y="66" text-anchor="middle" font-size="8" class="fill-slate-500">Total</text>
+              <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+                <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300"><div class="flex items-center justify-between"><div><p class="text-sm text-slate-500">Total Drivers</p><p class="text-3xl font-bold text-slate-800 mt-1">32,256</p></div><div class="flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-[#e7f0fa]"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-6 w-6 text-[#0a58ca]"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19.128a9.38 9.38 0 0 0 2.625.372 9.337 9.337 0 0 0 4.121-2.253 9.597 9.597 0 0 0-4.121-5.502 9.42 9.42 0 0 0-2.625-.372M15 19.128v-3.848m0 3.848a9.337 9.337 0 0 1-4.121 2.253 9.597 9.597 0 0 1-4.121-5.502 9.42 9.42 0 0 1-2.625-.372m-5.462 2.253a9.38 9.38 0 0 1 2.625-.372 9.337 9.337 0 0 1 4.121 2.253 9.597 9.597 0 0 1 4.121-5.502 9.42 9.42 0 0 1 2.625-.372m-14.86 5.502a9.38 9.38 0 0 0 2.625.372 9.337 9.337 0 0 0 4.121-2.253 9.597 9.597 0 0 0-4.121-5.502 9.42 9.42 0 0 0-2.625-.372M4.5 19.128v-3.848" /><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.75a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Zm4.5 0a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Zm-8.25 3a2.25 2.25 0 1 0 0 4.5 2.25 2.25 0 0 0 0-4.5Zm4.5 0a2.25 2.25 0 1 0 0 4.5 2.25 2.25 0 0 0 0-4.5Z" /></svg></div></div><div class="flex items-center mt-4 text-xs"><span class="flex items-center font-semibold text-green-600"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="h-4 w-4 mr-1"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25" /></svg>+5.4%</span><span class="text-slate-500 ml-2">vs. last month</span></div></div>
+                <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300"><div class="flex items-center justify-between"><div><p class="text-sm text-slate-500">Active Violations</p><p class="text-3xl font-bold text-slate-800 mt-1">1,394</p></div><div class="flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-green-100"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-6 w-6 text-green-500"><path stroke-linecap="round" stroke-linejoin="round" d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z" /></svg></div></div><div class="flex items-center mt-4 text-xs"><span class="flex items-center font-semibold text-green-600"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="h-4 w-4 mr-1"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25" /></svg>+12.1%</span><span class="text-slate-500 ml-2">vs. last month</span></div></div>
+                <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300"><div class="flex items-center justify-between"><div><p class="text-sm text-slate-500">Avg. Points / Driver</p><p class="text-3xl font-bold text-slate-800 mt-1">2.8</p></div><div class="flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-yellow-100"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-6 w-6 text-yellow-500"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 15.75V18m-7.5-6.75h.008v.008H8.25v-.008Zm0 3h.008v.008H8.25v-.008Zm0 3h.008v.008H8.25v-.008Zm3-6h.008v.008h-.008v-.008Zm0 3h.008v.008h-.008v-.008Zm0 3h.008v.008h-.008v-.008Zm3-6h.008v.008h-.008v-.008Zm0 3h.008v.008h-.008v-.008ZM21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" /></svg></div></div><div class="flex items-center mt-4 text-xs"><span class="flex items-center font-semibold text-red-600"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="h-4 w-4 mr-1"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 4.5l-15 15m0 0h11.25m-11.25 0V8.25" /></svg>-0.2</span><span class="text-slate-500 ml-2">vs. last month</span></div></div>
+                <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300"><div class="flex items-center justify-between"><div><p class="text-sm text-slate-500">Reports Generated</p><p class="text-3xl font-bold text-slate-800 mt-1">438</p></div><div class="flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-red-100"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-6 w-6 text-red-500"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m0 12.75h7.5m-7.5 3h7.5M3 3h18v18H3V3Z" /></svg></div></div><div class="flex items-center mt-4 text-xs"><span class="flex items-center font-semibold text-green-600"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="h-4 w-4 mr-1"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25" /></svg>+15</span><span class="text-slate-500 ml-2">vs. last month</span></div></div>
+              </div>
+
+              <!-- Charts Grid -->
+              <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
+                <div class="lg:col-span-2">
+                  <div class="bg-white p-6 rounded-lg shadow-md h-full">
+                    <div class="flex justify-between items-center mb-4">
+                      <h3 class="text-lg font-semibold text-slate-800">Violations Over Time</h3>
+                      <button class="text-sm text-slate-500 hover:text-slate-800">Last 12 Months ▼</button>
+                    </div>
+                    <div class="h-64">
+                      <svg class="w-full h-full" viewBox="0 0 400 150" preserveAspectRatio="none">
+                        <defs>
+                          <linearGradient id="area-gradient" x1="0" y1="0" x2="0" y2="1">
+                            <stop offset="0%" stop-color="#0a58ca" stop-opacity="0.2" />
+                            <stop offset="100%" stop-color="#0a58ca" stop-opacity="0" />
+                          </linearGradient>
+                        </defs>
+                        <line x1="0" x2="400" y1="150" y2="150" class="stroke-slate-200" stroke-width="1"></line>
+                        <line x1="0" x2="400" y1="100" y2="100" class="stroke-slate-200" stroke-width="1"></line>
+                        <line x1="0" x2="400" y1="50" y2="50" class="stroke-slate-200" stroke-width="1"></line>
+                        <line x1="0" x2="400" y1="0" y2="0" class="stroke-slate-200" stroke-width="1"></line>
+                        <path d="M 0 100 L 40 110 C 80 80, 120 120, 160 90 S 240 30, 280 60 S 360 80, 400 70 L 400 150 L 0 150 Z" fill="url(#area-gradient)"></path>
+                        <path d="M 0 100 L 40 110 C 80 80, 120 120, 160 90 S 240 30, 280 60 S 360 80, 400 70" fill="none" class="stroke-[#0a58ca]" stroke-width="2.5"></path>
+                        <circle cx="280" cy="60" r="4" class="fill-[#0a58ca]" stroke="white" stroke-width="2"></circle>
                       </svg>
                     </div>
                   </div>
-                  <div class="grid grid-cols-2 gap-x-4 gap-y-2 text-sm">
-                    <div class="flex items-center"><span class="h-2 w-2 rounded-full mr-2 bg-[#0a58ca]"></span><span class="text-slate-500">Speeding</span><span class="ml-auto font-medium text-slate-800">45%</span></div>
-                    <div class="flex items-center"><span class="h-2 w-2 rounded-full mr-2" style="background-color: #3b7ddb;"></span><span class="text-slate-500">Parking</span><span class="ml-auto font-medium text-slate-800">25%</span></div>
-                    <div class="flex items-center"><span class="h-2 w-2 rounded-full mr-2" style="background-color: #6d9ee9;"></span><span class="text-slate-500">Red Light</span><span class="ml-auto font-medium text-slate-800">18%</span></div>
-                    <div class="flex items-center"><span class="h-2 w-2 rounded-full mr-2" style="background-color: #9ebff3;"></span><span class="text-slate-500">Other</span><span class="ml-auto font-medium text-slate-800">12%</span></div>
+                </div>
+                <div class="lg:col-span-1">
+                  <div class="bg-white p-6 rounded-lg shadow-md h-full">
+                    <h3 class="text-lg font-semibold text-slate-800 mb-4">Violations by Type</h3>
+                    <div class="flex justify-center items-center my-6">
+                      <div class="relative w-48 h-48">
+                        <svg class="w-full h-full" viewBox="0 0 100 100">
+                          <circle cx="50" cy="50" r="40" fill="transparent" stroke="#0a58ca" stroke-width="12" stroke-dasharray="113.09733552923255 251.32741228718345" transform="rotate(-90 50 50)"></circle>
+                          <circle cx="50" cy="50" r="40" fill="transparent" stroke="#3b7ddb" stroke-width="12" stroke-dasharray="62.83185307179587 251.32741228718345" transform="rotate(72 50 50)"></circle>
+                          <circle cx="50" cy="50" r="40" fill="transparent" stroke="#6d9ee9" stroke-width="12" stroke-dasharray="45.23903434937226 251.32741228718345" transform="rotate(162 50 50)"></circle>
+                          <circle cx="50" cy="50" r="40" fill="transparent" stroke="#9ebff3" stroke-width="12" stroke-dasharray="30.159239899581504 251.32741228718345" transform="rotate(226.8 50 50)"></circle>
+                          <text x="50" y="52" text-anchor="middle" dy=".3em" font-size="18" font-weight="bold" class="fill-slate-800">1.4k</text>
+                          <text x="50" y="66" text-anchor="middle" font-size="8" class="fill-slate-500">Total</text>
+                        </svg>
+                      </div>
+                    </div>
+                    <div class="grid grid-cols-2 gap-x-4 gap-y-2 text-sm">
+                      <div class="flex items-center"><span class="h-2 w-2 rounded-full mr-2 bg-[#0a58ca]"></span><span class="text-slate-500">Speeding</span><span class="ml-auto font-medium text-slate-800">45%</span></div>
+                      <div class="flex items-center"><span class="h-2 w-2 rounded-full mr-2" style="background-color: #3b7ddb;"></span><span class="text-slate-500">Parking</span><span class="ml-auto font-medium text-slate-800">25%</span></div>
+                      <div class="flex items-center"><span class="h-2 w-2 rounded-full mr-2" style="background-color: #6d9ee9;"></span><span class="text-slate-500">Red Light</span><span class="ml-auto font-medium text-slate-800">18%</span></div>
+                      <div class="flex items-center"><span class="h-2 w-2 rounded-full mr-2" style="background-color: #9ebff3;"></span><span class="text-slate-500">Other</span><span class="ml-auto font-medium text-slate-800">12%</span></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="lg:col-span-1">
+                  <div class="bg-white p-6 rounded-lg shadow-md h-full">
+                    <h3 class="text-lg font-semibold text-slate-800 mb-4">New Driver Registrations</h3>
+                    <div class="flex justify-between items-end h-48 pt-4">
+                      <div class="flex flex-col items-center w-1/6 h-full group"><div class="h-full flex items-end w-1/2"><div class="w-full bg-[#0a58ca] rounded-md group-hover:bg-[#084a9e] transition-colors" style="height: 65%;" title="65 new drivers"></div></div><span class="text-xs text-slate-500 mt-2">Jan</span></div>
+                      <div class="flex flex-col items-center w-1/6 h-full group"><div class="h-full flex items-end w-1/2"><div class="w-full bg-[#0a58ca] rounded-md group-hover:bg-[#084a9e] transition-colors" style="height: 59%;" title="59 new drivers"></div></div><span class="text-xs text-slate-500 mt-2">Feb</span></div>
+                      <div class="flex flex-col items-center w-1/6 h-full group"><div class="h-full flex items-end w-1/2"><div class="w-full bg-[#0a58ca] rounded-md group-hover:bg-[#084a9e] transition-colors" style="height: 80%;" title="80 new drivers"></div></div><span class="text-xs text-slate-500 mt-2">Mar</span></div>
+                      <div class="flex flex-col items-center w-1/6 h-full group"><div class="h-full flex items-end w-1/2"><div class="w-full bg-[#0a58ca] rounded-md group-hover:bg-[#084a9e] transition-colors" style="height: 81%;" title="81 new drivers"></div></div><span class="text-xs text-slate-500 mt-2">Apr</span></div>
+                      <div class="flex flex-col items-center w-1/6 h-full group"><div class="h-full flex items-end w-1/2"><div class="w-full bg-[#0a58ca] rounded-md group-hover:bg-[#084a9e] transition-colors" style="height: 56%;" title="56 new drivers"></div></div><span class="text-xs text-slate-500 mt-2">May</span></div>
+                      <div class="flex flex-col items-center w-1/6 h-full group"><div class="h-full flex items-end w-1/2"><div class="w-full bg-[#0a58ca] rounded-md group-hover:bg-[#084a9e] transition-colors" style="height: 55%;" title="55 new drivers"></div></div><span class="text-xs text-slate-500 mt-2">Jun</span></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="lg:col-span-2">
+                  <div class="bg-white p-6 rounded-lg shadow-md h-full">
+                    <h3 class="text-lg font-semibold text-slate-800 mb-4">Driver Risk Distribution</h3>
+                    <div class="space-y-4 mt-6">
+                      <div><div class="flex justify-between items-center mb-1"><span class="text-sm font-medium text-slate-600">Low Risk</span><span class="text-sm font-semibold text-slate-800">72%</span></div><div class="w-full bg-slate-200 rounded-full h-2.5"><div class="bg-green-400 h-2.5 rounded-full" style="width: 72%;"></div></div></div>
+                      <div><div class="flex justify-between items-center mb-1"><span class="text-sm font-medium text-slate-600">Medium Risk</span><span class="text-sm font-semibold text-slate-800">18%</span></div><div class="w-full bg-slate-200 rounded-full h-2.5"><div class="bg-yellow-400 h-2.5 rounded-full" style="width: 18%;"></div></div></div>
+                      <div><div class="flex justify-between items-center mb-1"><span class="text-sm font-medium text-slate-600">High Risk</span><span class="text-sm font-semibold text-slate-800">10%</span></div><div class="w-full bg-slate-200 rounded-full h-2.5"><div class="bg-red-500 h-2.5 rounded-full" style="width: 10%;"></div></div></div>
+                    </div>
                   </div>
                 </div>
               </div>
-              <div class="lg:col-span-1">
-                <div class="bg-white p-6 rounded-lg shadow-md h-full">
-                  <h3 class="text-lg font-semibold text-slate-800 mb-4">New Driver Registrations</h3>
-                  <div class="flex justify-between items-end h-48 pt-4">
-                    <div class="flex flex-col items-center w-1/6 h-full group"><div class="h-full flex items-end w-1/2"><div class="w-full bg-[#0a58ca] rounded-md group-hover:bg-[#084a9e] transition-colors" style="height: 65%;" title="65 new drivers"></div></div><span class="text-xs text-slate-500 mt-2">Jan</span></div>
-                    <div class="flex flex-col items-center w-1/6 h-full group"><div class="h-full flex items-end w-1/2"><div class="w-full bg-[#0a58ca] rounded-md group-hover:bg-[#084a9e] transition-colors" style="height: 59%;" title="59 new drivers"></div></div><span class="text-xs text-slate-500 mt-2">Feb</span></div>
-                    <div class="flex flex-col items-center w-1/6 h-full group"><div class="h-full flex items-end w-1/2"><div class="w-full bg-[#0a58ca] rounded-md group-hover:bg-[#084a9e] transition-colors" style="height: 80%;" title="80 new drivers"></div></div><span class="text-xs text-slate-500 mt-2">Mar</span></div>
-                    <div class="flex flex-col items-center w-1/6 h-full group"><div class="h-full flex items-end w-1/2"><div class="w-full bg-[#0a58ca] rounded-md group-hover:bg-[#084a9e] transition-colors" style="height: 81%;" title="81 new drivers"></div></div><span class="text-xs text-slate-500 mt-2">Apr</span></div>
-                    <div class="flex flex-col items-center w-1/6 h-full group"><div class="h-full flex items-end w-1/2"><div class="w-full bg-[#0a58ca] rounded-md group-hover:bg-[#084a9e] transition-colors" style="height: 56%;" title="56 new drivers"></div></div><span class="text-xs text-slate-500 mt-2">May</span></div>
-                    <div class="flex flex-col items-center w-1/6 h-full group"><div class="h-full flex items-end w-1/2"><div class="w-full bg-[#0a58ca] rounded-md group-hover:bg-[#084a9e] transition-colors" style="height: 55%;" title="55 new drivers"></div></div><span class="text-xs text-slate-500 mt-2">Jun</span></div>
-                  </div>
-                </div>
+
+              <div class="bg-white p-4 sm:p-6 rounded-lg shadow-md"><div class="flex justify-between items-center mb-4"><h3 class="text-lg font-semibold text-slate-800">Recent Violations</h3><button class="text-sm font-medium text-[#0a58ca] hover:text-[#084a9e]">View All</button></div><div class="overflow-x-auto"><table class="w-full text-sm text-left text-slate-600"><thead class="text-xs text-slate-700 uppercase bg-slate-100"><tr><th scope="col" class="px-6 py-3">Driver Name</th><th scope="col" class="px-6 py-3 hidden sm:table-cell">License Plate</th><th scope="col" class="px-6 py-3">Violation Type</th><th scope="col" class="px-6 py-3 hidden md:table-cell">Date</th><th scope="col" class="px-6 py-3">Status</th></tr></thead><tbody><tr class="border-b border-slate-200 hover:bg-slate-50"><td class="px-6 py-4 font-medium text-slate-900 whitespace-nowrap">Alex Johnson</td><td class="px-6 py-4 hidden sm:table-cell">LGU-582</td><td class="px-6 py-4">Speeding</td><td class="px-6 py-4 hidden md:table-cell">2024-07-21</td><td class="px-6 py-4"><span class="flex items-center"><span class="h-2 w-2 rounded-full mr-2 bg-yellow-500"></span>Pending</span></td></tr><tr class="border-b border-slate-200 hover:bg-slate-50"><td class="px-6 py-4 font-medium text-slate-900 whitespace-nowrap">Maria Garcia</td><td class="px-6 py-4 hidden sm:table-cell">KDE-194</td><td class="px-6 py-4">Red Light</td><td class="px-6 py-4 hidden md:table-cell">2024-07-21</td><td class="px-6 py-4"><span class="flex items-center"><span class="h-2 w-2 rounded-full mr-2 bg-green-500"></span>Paid</span></td></tr><tr class="border-b border-slate-200 hover:bg-slate-50"><td class="px-6 py-4 font-medium text-slate-900 whitespace-nowrap">James Smith</td><td class="px-6 py-4 hidden sm:table-cell">NVC-730</td><td class="px-6 py-4">Illegal Parking</td><td class="px-6 py-4 hidden md:table-cell">2024-07-20</td><td class="px-6 py-4"><span class="flex items-center"><span class="h-2 w-2 rounded-full mr-2 bg-green-500"></span>Paid</span></td></tr><tr class="border-b border-slate-200 hover:bg-slate-50"><td class="px-6 py-4 font-medium text-slate-900 whitespace-nowrap">Patricia Williams</td><td class="px-6 py-4 hidden sm:table-cell">PZQ-441</td><td class="px-6 py-4">Speeding</td><td class="px-6 py-4 hidden md:table-cell">2024-07-19</td><td class="px-6 py-4"><span class="flex items-center"><span class="h-2 w-2 rounded-full mr-2 bg-yellow-500"></span>Pending</span></td></tr><tr class="border-b border-slate-200 hover:bg-slate-50"><td class="px-6 py-4 font-medium text-slate-900 whitespace-nowrap">Robert Brown</td><td class="px-6 py-4 hidden sm:table-cell">RTE-902</td><td class="px-6 py-4">Expired Registration</td><td class="px-6 py-4 hidden md:table-cell">2024-07-18</td><td class="px-6 py-4"><span class="flex items-center"><span class="h-2 w-2 rounded-full mr-2 bg-red-500"></span>Overdue</span></td></tr></tbody></table></div></div>
+            </div>
+          </div>
+
+          <!-- Drivers Page -->
+          <div id="page-drivers" class="hidden">
+            <div class="container mx-auto">
+              <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8"><div><h1 class="text-2xl lg:text-3xl font-bold text-slate-800">Manage Drivers</h1><p class="text-sm text-slate-500 mt-1">Search, view, and add new drivers to the system.</p></div><div class="flex items-center space-x-4 mt-4 sm:mt-0 w-full sm:w-auto"><div class="relative w-full sm:w-64"><div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-5 w-5 text-slate-400"><path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" /></svg></div><input type="text" placeholder="Search by name, license..." class="w-full pl-10 pr-4 py-2 text-sm text-slate-700 bg-white border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#0a58ca]" /></div></div></div>
+
+               <!-- Stat Cards -->
+              <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+                <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300"><div class="flex items-center justify-between"><div><p class="text-sm text-slate-500">Total Drivers</p><p class="text-3xl font-bold text-slate-800 mt-1">32,256</p></div><div class="flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-[#e7f0fa]"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-6 w-6 text-[#0a58ca]"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19.128a9.38 9.38 0 0 0 2.625.372 9.337 9.337 0 0 0 4.121-2.253 9.597 9.597 0 0 0-4.121-5.502 9.42 9.42 0 0 0-2.625-.372M15 19.128v-3.848m0 3.848a9.337 9.337 0 0 1-4.121 2.253 9.597 9.597 0 0 1-4.121-5.502 9.42 9.42 0 0 1-2.625-.372m-5.462 2.253a9.38 9.38 0 0 1 2.625-.372 9.337 9.337 0 0 1 4.121 2.253 9.597 9.597 0 0 1 4.121-5.502 9.42 9.42 0 0 1 2.625-.372m-14.86 5.502a9.38 9.38 0 0 0 2.625.372 9.337 9.337 0 0 0 4.121-2.253 9.597 9.597 0 0 0-4.121-5.502 9.42 9.42 0 0 0-2.625-.372M4.5 19.128v-3.848" /><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.75a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Zm4.5 0a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Zm-8.25 3a2.25 2.25 0 1 0 0 4.5 2.25 2.25 0 0 0 0-4.5Zm4.5 0a2.25 2.25 0 1 0 0 4.5 2.25 2.25 0 0 0 0-4.5Z" /></svg></div></div><div class="flex items-center mt-4 text-xs"><span class="flex items-center font-semibold text-green-600"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="h-4 w-4 mr-1"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25" /></svg>+5.4%</span><span class="text-slate-500 ml-2">vs. last month</span></div></div>
+                <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300"><div class="flex items-center justify-between"><div><p class="text-sm text-slate-500">Drivers with High Points</p><p class="text-3xl font-bold text-slate-800 mt-1">412</p></div><div class="flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-yellow-100"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-6 w-6 text-yellow-500"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 3.75h.008v.008H12v-.008Z" /></svg></div></div><div class="flex items-center mt-4 text-xs"><span class="flex items-center font-semibold text-green-600"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="h-4 w-4 mr-1"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25" /></svg>+21</span><span class="text-slate-500 ml-2">vs. last month</span></div></div>
+                <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300"><div class="flex items-center justify-between"><div><p class="text-sm text-slate-500">Suspended Licenses</p><p class="text-3xl font-bold text-slate-800 mt-1">89</p></div><div class="flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-red-100"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-6 w-6 text-red-500"><path stroke-linecap="round" stroke-linejoin="round" d="M15 9h3.75M15 12h3.75M15 15h3.75M4.5 19.5h15a2.25 2.25 0 0 0 2.25-2.25V6.75A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25v10.5A2.25 2.25 0 0 0 4.5 19.5Z" /><path stroke-linecap="round" stroke-linejoin="round" d="M6.75 12a1.125 1.125 0 1 0 0-2.25 1.125 1.125 0 0 0 0 2.25Z" /><path stroke-linecap="round" stroke-linejoin="round" d="M9.75 14.25a3 3 0 0 0-3-3H4.5v3h2.25Z" /></svg></div></div><div class="flex items-center mt-4 text-xs"><span class="flex items-center font-semibold text-green-600"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="h-4 w-4 mr-1"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25" /></svg>+3</span><span class="text-slate-500 ml-2">vs. last month</span></div></div>
+                <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300"><div class="flex items-center justify-between"><div><p class="text-sm text-slate-500">New Drivers (This Month)</p><p class="text-3xl font-bold text-slate-800 mt-1">215</p></div><div class="flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-green-100"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-6 w-6 text-green-500"><path stroke-linecap="round" stroke-linejoin="round" d="M19 7.5v3m0 0v3m0-3h3m-3 0h-3m-2.25-4.125a3.375 3.375 0 1 1-6.75 0 3.375 3.375 0 0 1 6.75 0zM4 19.235v-.11a6.375 6.375 0 0 1 12.75 0v.109A12.318 12.318 0 0 1 10.5 21.75c-2.676 0-5.216-.584-7.499-1.632z" /></svg></div></div><div class="flex items-center mt-4 text-xs"><span class="flex items-center font-semibold text-green-600"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="h-4 w-4 mr-1"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25" /></svg>+15.2%</span><span class="text-slate-500 ml-2">vs. last month</span></div></div>
               </div>
-              <div class="lg:col-span-2">
-                <div class="bg-white p-6 rounded-lg shadow-md h-full">
-                  <h3 class="text-lg font-semibold text-slate-800 mb-4">Driver Risk Distribution</h3>
-                  <div class="space-y-4 mt-6">
-                    <div><div class="flex justify-between items-center mb-1"><span class="text-sm font-medium text-slate-600">Low Risk</span><span class="text-sm font-semibold text-slate-800">72%</span></div><div class="w-full bg-slate-200 rounded-full h-2.5"><div class="bg-green-400 h-2.5 rounded-full" style="width: 72%;"></div></div></div>
-                    <div><div class="flex justify-between items-center mb-1"><span class="text-sm font-medium text-slate-600">Medium Risk</span><span class="text-sm font-semibold text-slate-800">18%</span></div><div class="w-full bg-slate-200 rounded-full h-2.5"><div class="bg-yellow-400 h-2.5 rounded-full" style="width: 18%;"></div></div></div>
-                    <div><div class="flex justify-between items-center mb-1"><span class="text-sm font-medium text-slate-600">High Risk</span><span class="text-sm font-semibold text-slate-800">10%</span></div><div class="w-full bg-slate-200 rounded-full h-2.5"><div class="bg-red-500 h-2.5 rounded-full" style="width: 10%;"></div></div></div>
-                  </div>
+
+              <div class="bg-white p-4 sm:p-6 rounded-lg shadow-md">
+                <div class="overflow-x-auto">
+                    <table class="w-full text-sm text-left text-slate-600">
+                        <thead class="text-xs text-slate-700 uppercase bg-slate-100">
+                            <tr>
+                                <th scope="col" class="px-6 py-3 hidden lg:table-cell">License Number</th>
+                                <th scope="col" class="px-6 py-3">Driver Name</th>
+                                <th scope="col" class="px-6 py-3 hidden md:table-cell">Email</th>
+                                <th scope="col" class="px-6 py-3">Total Points</th>
+                                <th scope="col" class="px-6 py-3">Status</th>
+                                <th scope="col" class="px-6 py-3 text-center">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="driverTbody" class="divide-y divide-slate-200"></tbody>
+                    </table>
+                </div>
+                <div class="flex justify-between items-center mt-4 px-4 py-2">
+                    <span id="driver-page-info" class="text-sm text-slate-600"></span>
+                    <div class="flex space-x-2">
+                        <button id="driver-prev-btn" class="px-3 py-1 text-sm font-medium text-slate-700 bg-white border border-slate-300 rounded-md hover:bg-slate-50 disabled:opacity-50 disabled:cursor-not-allowed">Previous</button>
+                        <button id="driver-next-btn" class="px-3 py-1 text-sm font-medium text-slate-700 bg-white border border-slate-300 rounded-md hover:bg-slate-50 disabled:opacity-50 disabled:cursor-not-allowed">Next</button>
+                    </div>
                 </div>
               </div>
             </div>
-
-            <div class="bg-white p-4 sm:p-6 rounded-lg shadow-md"><div class="flex justify-between items-center mb-4"><h3 class="text-lg font-semibold text-slate-800">Recent Violations</h3><a href="violations.html" class="text-sm font-medium text-[#0a58ca] hover:text-[#084a9e]">View All</a></div><div class="overflow-x-auto"><table class="w-full text-sm text-left text-slate-600"><thead class="text-xs text-slate-700 uppercase bg-slate-100"><tr><th scope="col" class="px-6 py-3">Driver Name</th><th scope="col" class="px-6 py-3 hidden sm:table-cell">License Plate</th><th scope="col" class="px-6 py-3">Violation Type</th><th scope="col" class="px-6 py-3 hidden md:table-cell">Date</th><th scope="col" class="px-6 py-3">Status</th></tr></thead><tbody><tr class="border-b border-slate-200 hover:bg-slate-50"><td class="px-6 py-4 font-medium text-slate-900 whitespace-nowrap">Alex Johnson</td><td class="px-6 py-4 hidden sm:table-cell">LGU-582</td><td class="px-6 py-4">Speeding</td><td class="px-6 py-4 hidden md:table-cell">2024-07-21</td><td class="px-6 py-4"><span class="flex items-center"><span class="h-2 w-2 rounded-full mr-2 bg-yellow-500"></span>Pending</span></td></tr><tr class="border-b border-slate-200 hover:bg-slate-50"><td class="px-6 py-4 font-medium text-slate-900 whitespace-nowrap">Maria Garcia</td><td class="px-6 py-4 hidden sm:table-cell">KDE-194</td><td class="px-6 py-4">Red Light</td><td class="px-6 py-4 hidden md:table-cell">2024-07-21</td><td class="px-6 py-4"><span class="flex items-center"><span class="h-2 w-2 rounded-full mr-2 bg-green-500"></span>Paid</span></td></tr><tr class="border-b border-slate-200 hover:bg-slate-50"><td class="px-6 py-4 font-medium text-slate-900 whitespace-nowrap">James Smith</td><td class="px-6 py-4 hidden sm:table-cell">NVC-730</td><td class="px-6 py-4">Illegal Parking</td><td class="px-6 py-4 hidden md:table-cell">2024-07-20</td><td class="px-6 py-4"><span class="flex items-center"><span class="h-2 w-2 rounded-full mr-2 bg-green-500"></span>Paid</span></td></tr><tr class="border-b border-slate-200 hover:bg-slate-50"><td class="px-6 py-4 font-medium text-slate-900 whitespace-nowrap">Patricia Williams</td><td class="px-6 py-4 hidden sm:table-cell">PZQ-441</td><td class="px-6 py-4">Speeding</td><td class="px-6 py-4 hidden md:table-cell">2024-07-19</td><td class="px-6 py-4"><span class="flex items-center"><span class="h-2 w-2 rounded-full mr-2 bg-yellow-500"></span>Pending</span></td></tr><tr class="border-b border-slate-200 hover:bg-slate-50"><td class="px-6 py-4 font-medium text-slate-900 whitespace-nowrap">Robert Brown</td><td class="px-6 py-4 hidden sm:table-cell">RTE-902</td><td class="px-6 py-4">Expired Registration</td><td class="px-6 py-4 hidden md:table-cell">2024-07-18</td><td class="px-6 py-4"><span class="flex items-center"><span class="h-2 w-2 rounded-full mr-2 bg-red-500"></span>Overdue</span></td></tr></tbody></table></div></div>
           </div>
+
+          <!-- Violations Page -->
+          <div id="page-violations" class="hidden">
+            <div class="container mx-auto">
+              <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8"><div><h1 class="text-2xl lg:text-3xl font-bold text-slate-800">Manage Violations</h1><p class="text-sm text-slate-500 mt-1">Log new violations and view historical records.</p></div></div>
+              <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+                <div class="bg-white p-6 rounded-lg shadow-md"><div class="flex items-center justify-between"><div><p class="text-sm text-slate-500">Pending Violations</p><p class="text-3xl font-bold text-slate-800 mt-1">281</p></div><div class="flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-yellow-100"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-yellow-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg></div></div></div>
+                <div class="bg-white p-6 rounded-lg shadow-md"><div class="flex items-center justify-between"><div><p class="text-sm text-slate-500">Fines Collected</p><p class="text-3xl font-bold text-slate-800 mt-1">RS 1.2M</p></div><div class="flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-green-100"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z" /></svg></div></div></div>
+                <div class="bg-white p-6 rounded-lg shadow-md"><div class="flex items-center justify-between"><div><p class="text-sm text-slate-500">Frequent Offense</p><p class="text-xl font-bold text-slate-800 mt-1">Speeding</p></div><div class="flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-blue-100"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg></div></div></div>
+                <div class="bg-white p-6 rounded-lg shadow-md"><div class="flex items-center justify-between"><div><p class="text-sm text-slate-500">Violations Today</p><p class="text-3xl font-bold text-slate-800 mt-1">42</p></div><div class="flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-indigo-100"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-indigo-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg></div></div></div>
+              </div>
+              <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <div class="lg:col-span-1 bg-white p-6 rounded-lg shadow-md">
+                    <h3 class="text-lg font-semibold text-slate-800 mb-4">Add New Violation</h3>
+                    <form onsubmit="event.preventDefault(); alert('Violation Submitted!');" class="space-y-4">
+                        <div><label for="officerId" class="block text-sm font-medium text-slate-600">Police Officer ID</label><input type="text" id="officerId" class="mt-1 block w-full px-3 py-2 bg-white border border-slate-300 rounded-md text-sm shadow-sm placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500" placeholder="e.g., 9821" required></div>
+                        <div><label for="revenueNumber" class="block text-sm font-medium text-slate-600">Revenue Number</label><div class="relative"><input type="text" id="revenueNumber" class="mt-1 block w-full pl-3 pr-10 py-2 bg-white border border-slate-300 rounded-md text-sm shadow-sm placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500" placeholder="Scan or enter number" required><button type="button" onclick="alert('Camera scan not implemented')" class="absolute inset-y-0 right-0 flex items-center px-3 text-slate-500 hover:text-[#0a58ca]" title="Scan number"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" /><path stroke-linecap="round" stroke-linejoin="round" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z" /></svg></button></div></div>
+                        <div><label for="driverLicense" class="block text-sm font-medium text-slate-600">Driver License Number</label><div class="relative"><input type="text" id="driverLicense" class="mt-1 block w-full pl-3 pr-10 py-2 bg-white border border-slate-300 rounded-md text-sm shadow-sm placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500" placeholder="Scan or enter number" required><button type="button" onclick="alert('Camera scan not implemented')" class="absolute inset-y-0 right-0 flex items-center px-3 text-slate-500 hover:text-[#0a58ca]" title="Scan license"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" /><path stroke-linecap="round" stroke-linejoin="round" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z" /></svg></button></div></div>
+                        <div><label for="lawId" class="block text-sm font-medium text-slate-600">Law ID</label><input type="text" id="lawId" class="mt-1 block w-full px-3 py-2 bg-white border border-slate-300 rounded-md text-sm shadow-sm placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500" placeholder="e.g., 302.1" required></div>
+                        <div><label for="location" class="block text-sm font-medium text-slate-600">Location</label><div class="relative"><input type="text" id="location" class="mt-1 block w-full px-3 py-2 bg-white border border-slate-300 rounded-md text-sm shadow-sm placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500" placeholder="e.g., 40.7128, -74.0060" required><button type="button" onclick="useGPS()" class="absolute inset-y-0 right-0 flex items-center px-3 text-slate-500 hover:text-[#0a58ca]" title="Use current location"><svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd" /></svg></button></div></div>
+                         <div><label for="description" class="block text-sm font-medium text-slate-600">Description</label><textarea id="description" rows="3" class="mt-1 block w-full px-3 py-2 bg-white border border-slate-300 rounded-md text-sm shadow-sm placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500" placeholder="e.g., Speeding in a school zone"></textarea></div>
+                        <button type="submit" class="w-full bg-[#0a58ca] hover:bg-[#084a9e] text-white font-bold py-2 px-4 rounded-lg transition-colors">Log Violation</button>
+                    </form>
+                </div>
+                <div class="lg:col-span-2 bg-white p-4 sm:p-6 rounded-lg shadow-md">
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-sm text-left text-slate-600">
+                            <thead class="text-xs text-slate-700 uppercase bg-slate-100">
+                                <tr>
+                                    <th scope="col" class="px-6 py-3">Driver License</th>
+                                    <th scope="col" class="px-6 py-3 hidden sm:table-cell">Officer ID</th>
+                                    <th scope="col" class="px-6 py-3 hidden md:table-cell">Date</th>
+                                    <th scope="col" class="px-6 py-3">Status</th>
+                                    <th scope="col" class="px-6 py-3 text-center">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="violationsTbody">
+                                <!-- Violation rows will be populated by JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="flex justify-between items-center mt-4 px-4 py-2">
+                        <span id="violation-page-info" class="text-sm text-slate-600"></span>
+                        <div class="flex space-x-2">
+                            <button id="violation-prev-btn" class="px-3 py-1 text-sm font-medium text-slate-700 bg-white border border-slate-300 rounded-md hover:bg-slate-50 disabled:opacity-50 disabled:cursor-not-allowed">Previous</button>
+                            <button id="violation-next-btn" class="px-3 py-1 text-sm font-medium text-slate-700 bg-white border border-slate-300 rounded-md hover:bg-slate-50 disabled:opacity-50 disabled:cursor-not-allowed">Next</button>
+                        </div>
+                    </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Suspended Licenses Page -->
+          <div id="page-suspended" class="hidden">
+            <div class="container mx-auto h-full flex flex-col">
+                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6">
+                    <div>
+                        <h1 class="text-2xl lg:text-3xl font-bold text-slate-800">Suspended License Case Management</h1>
+                        <p class="text-sm text-slate-500 mt-1">Select a case to review details, update status, and log actions.</p>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+                    <div class="md:col-span-1 bg-white p-6 rounded-lg shadow-md">
+                        <h3 class="text-lg font-semibold text-slate-800 mb-4">Suspension Reason Breakdown</h3>
+                        <div class="h-48 flex justify-center items-center">
+                            <canvas id="suspension-reasons-chart"></canvas>
+                        </div>
+                    </div>
+                    <div class="md:col-span-2 grid grid-cols-2 gap-6">
+                        <div class="bg-white p-6 rounded-lg shadow-md flex flex-col justify-center"><div class="flex items-center justify-between"><div><p class="text-sm text-slate-500">Total Suspended Cases</p><p class="text-4xl font-bold text-slate-800 mt-1">89</p></div><div class="flex-shrink-0 flex items-center justify-center h-14 w-14 rounded-full bg-red-100"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-7 w-7 text-red-500"><path stroke-linecap="round" stroke-linejoin="round" d="M18.364 18.364A9 9 0 0 0 5.636 5.636m12.728 12.728A9 9 0 0 1 5.636 5.636m12.728 12.728L5.636 5.636"></path></svg></div></div></div>
+                        <div class="bg-white p-6 rounded-lg shadow-md flex flex-col justify-center"><div class="flex items-center justify-between"><div><p class="text-sm text-slate-500">Reinstated This Month</p><p class="text-4xl font-bold text-slate-800 mt-1">2</p></div><div class="flex-shrink-0 flex items-center justify-center h-14 w-14 rounded-full bg-green-100"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-7 w-7 text-green-500"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"></path></svg></div></div></div>
+                    </div>
+                </div>
+
+                <div class="flex-grow grid grid-cols-1 lg:grid-cols-3 gap-6 min-h-0">
+                    <!-- Left Column: Driver List -->
+                    <div class="lg:col-span-1 bg-white rounded-lg shadow-md flex flex-col">
+                        <div class="p-4 border-b border-slate-200">
+                            <div class="relative">
+                                <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-5 w-5 text-slate-400"><path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z"></path></svg></div>
+                                <input type="text" id="suspended-search-input" placeholder="Search by name or license..." class="w-full pl-10 pr-4 py-2 text-sm text-slate-700 bg-white border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#0a58ca]">
+                            </div>
+                            <select id="suspension-reason-filter" class="mt-2 w-full text-sm text-slate-700 bg-white border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#0a58ca] p-2">
+                                <option value="all">All Suspension Reasons</option>
+                                <option value="High Points">High Points</option>
+                                <option value="DUI">DUI</option>
+                                <option value="Unpaid Fines">Unpaid Fines</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+                        <div id="suspended-driver-list" class="flex-grow overflow-y-auto p-2 space-y-2">
+                            <!-- Driver list items will be populated by JS -->
+                        </div>
+                    </div>
+
+                    <!-- Right Column: Details Pane -->
+                    <div id="suspended-detail-pane" class="lg:col-span-2 bg-white rounded-lg shadow-md flex flex-col min-h-0">
+                        <div id="detail-pane-placeholder" class="flex-grow flex flex-col justify-center items-center text-center p-8">
+                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-16 w-16 text-slate-300 mb-4"><path stroke-linecap="round" stroke-linejoin="round" d="M11.25 11.25l.041-.02a.75.75 0 011.063.852l-.708 2.836a.75.75 0 001.063.853l.041-.021M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 15.75l-2.489-2.489m0 0a3.375 3.375 0 10-4.773-4.773 3.375 3.375 0 004.774 4.774zM21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                             <h3 class="text-lg font-semibold text-slate-600">No Case Selected</h3>
+                             <p class="text-sm text-slate-500 mt-1">Please select a driver from the list on the left to view their case file.</p>
+                        </div>
+                        <div id="detail-pane-content" class="hidden flex-grow flex flex-col min-h-0">
+                           <div class="p-4 border-b border-slate-200 flex items-center space-x-4">
+                               <img id="detail-driver-img" class="h-16 w-16 rounded-full object-cover" src="" alt="Driver photo" />
+                               <div>
+                                   <h3 id="detail-driver-name" class="text-xl font-bold text-slate-800"></h3>
+                                   <p id="detail-driver-license" class="text-sm font-mono text-slate-500"></p>
+                                   <p class="text-sm text-slate-600">Reason: <span id="detail-driver-reason" class="font-semibold"></span></p>
+                               </div>
+                           </div>
+                           <div class="flex-grow p-4 overflow-y-auto grid grid-cols-1 md:grid-cols-2 gap-6">
+                               <!-- Checklist and Timeline -->
+                               <div class="space-y-6">
+                                   <div>
+                                       <h4 class="text-md font-semibold text-slate-700 mb-3">Triggering Violation</h4>
+                                       <div id="detail-violation" class="p-3 bg-red-50 border border-red-200 rounded-lg space-y-2">
+                                           <!-- Content populated by JS -->
+                                       </div>
+                                   </div>
+                                   <div>
+                                       <h4 class="text-md font-semibold text-slate-700 mb-3">Reinstatement Checklist</h4>
+                                       <div id="detail-checklist" class="space-y-2"></div>
+                                   </div>
+                                   <div>
+                                      <h4 class="text-md font-semibold text-slate-700 mb-3">Case Timeline</h4>
+                                      <div id="detail-timeline" class="space-y-3 border-l-2 border-slate-200 pl-4"></div>
+                                   </div>
+                               </div>
+                               <!-- Communications Log -->
+                               <div>
+                                   <h4 class="text-md font-semibold text-slate-700 mb-3">Communication Log</h4>
+                                   <div id="detail-comm-log" class="space-y-3 max-h-64 overflow-y-auto pr-2"></div>
+                                   <form id="add-comm-log-form" class="mt-4 space-y-2">
+                                       <textarea id="comm-log-input" rows="3" class="w-full text-sm p-2 border border-slate-300 rounded-md focus:ring-2 focus:ring-[#0a58ca] focus:outline-none" placeholder="Add a new communication note..."></textarea>
+                                       <button type="submit" class="w-full text-sm bg-[#0a58ca] hover:bg-[#084a9e] text-white font-bold py-2 px-3 rounded-lg transition-colors">Add Log Entry</button>
+                                   </form>
+                               </div>
+                           </div>
+                           <div class="p-4 bg-slate-50 border-t border-slate-200 flex flex-wrap justify-end gap-3">
+                               <button class="text-sm bg-white hover:bg-slate-100 text-slate-700 font-semibold py-2 px-4 border border-slate-300 rounded-lg shadow-sm transition-colors">Send Reinstatement Info</button>
+                               <button class="text-sm bg-white hover:bg-slate-100 text-slate-700 font-semibold py-2 px-4 border border-slate-300 rounded-lg shadow-sm transition-colors">Schedule Hearing</button>
+                               <button id="assign-training-btn" class="text-sm bg-[#0a58ca] hover:bg-[#084a9e] text-white font-bold py-2 px-4 rounded-lg shadow-sm transition-colors">Assign to Training Program</button>
+                           </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Notifications Page -->
+        <div id="page-notifications" class="hidden">
+            <div class="container mx-auto">
+                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8">
+                    <div>
+                        <h1 class="text-2xl lg:text-3xl font-bold text-slate-800">System Notifications</h1>
+                        <p class="text-sm text-slate-500 mt-1">Track all automated communications sent to drivers.</p>
+                    </div>
+                    <div class="flex items-center space-x-2 mt-4 sm:mt-0 w-full sm:w-auto">
+                        <select id="notification-type-filter" class="w-full sm:w-auto text-sm text-slate-700 bg-white border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#0a58ca] p-2">
+                            <option value="all">All Notification Types</option>
+                            <option value="Suspension">Suspension Notice</option>
+                            <option value="Warning">High Points Warning</option>
+                            <option value="Reminder">Fine Payment Reminder</option>
+                        </select>
+                        <select id="notification-sort-filter" class="w-full sm:w-auto text-sm text-slate-700 bg-white border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#0a58ca] p-2">
+                            <option value="newest">Newest First</option>
+                            <option value="oldest">Oldest First</option>
+                        </select>
+                    </div>
+                </div>
+                <div id="notification-list" class="space-y-4">
+                    <!-- Notifications will be populated here by JS -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Training Program Page -->
+        <div id="page-training" class="hidden">
+            <div class="container mx-auto">
+                <h1 class="text-2xl lg:text-3xl font-bold text-slate-800 mb-2">Driver Training Programs</h1>
+                <p class="text-sm text-slate-500 mb-8">Manage drivers assigned to remedial training and track their progress.</p>
+
+                <!-- Stats -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+                    <div class="bg-white p-6 rounded-lg shadow-md"><div class="flex items-center justify-between"><div><p class="text-sm text-slate-500">Drivers in Training</p><p class="text-3xl font-bold text-slate-800 mt-1">14</p></div><div class="flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-blue-100"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.653-.125-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.653.125-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" /></svg></div></div></div>
+                    <div class="bg-white p-6 rounded-lg shadow-md"><div class="flex items-center justify-between"><div><p class="text-sm text-slate-500">Available Programs</p><p class="text-3xl font-bold text-slate-800 mt-1">4</p></div><div class="flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-indigo-100"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-indigo-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25" /></svg></div></div></div>
+                    <div class="bg-white p-6 rounded-lg shadow-md"><div class="flex items-center justify-between"><div><p class="text-sm text-slate-500">Average Completion</p><p class="text-3xl font-bold text-slate-800 mt-1">68%</p></div><div class="flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-green-100"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg></div></div></div>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                    <!-- Drivers in Training -->
+                    <div class="lg:col-span-2 bg-white p-6 rounded-lg shadow-md">
+                        <h3 class="text-lg font-semibold text-slate-800 mb-4">Drivers in Training</h3>
+                        <div id="training-driver-list" class="space-y-4 max-h-[60vh] overflow-y-auto pr-2">
+                            <!-- Driver list populated by JS -->
+                        </div>
+                    </div>
+
+                    <!-- Available Programs -->
+                    <div class="lg:col-span-1 bg-white p-6 rounded-lg shadow-md">
+                        <h3 class="text-lg font-semibold text-slate-800 mb-4">Available Programs</h3>
+                        <div id="available-programs-list" class="space-y-4">
+                            <!-- Programs populated by JS -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+          <!-- Profile Page -->
+          <div id="page-profile" class="hidden">
+            <div class="container mx-auto">
+                <h1 class="text-2xl lg:text-3xl font-bold text-slate-800 mb-8">Profile Settings</h1>
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                    <!-- Profile Information -->
+                    <div class="lg:col-span-1">
+                        <div class="bg-white p-6 rounded-lg shadow-md h-full">
+                            <h3 class="text-lg font-semibold text-slate-800 mb-6">Profile Information</h3>
+                            <form id="profile-info-form" onsubmit="event.preventDefault(); alert('Profile updated!');">
+                                <div class="flex flex-col items-center space-y-4">
+                                    <div class="relative group">
+                                        <img id="profile-image-preview" class="h-24 w-24 rounded-full object-cover" src="https://i.pravatar.cc/150?u=admin" alt="User avatar" />
+                                        <label for="profile-image-input" class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center rounded-full text-white opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                                <path stroke-linecap="round" stroke-linejoin="round" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" />
+                                                <path stroke-linecap="round" stroke-linejoin="round" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z" />
+                                            </svg>
+                                            <span class="ml-2 text-sm">Change</span>
+                                        </label>
+                                        <input type="file" id="profile-image-input" class="hidden" accept="image/*">
+                                    </div>
+                                    <div class="w-full">
+                                        <label for="profile-name" class="block text-sm font-medium text-slate-600">Full Name</label>
+                                        <input type="text" id="profile-name" class="mt-1 block w-full px-3 py-2 bg-white border border-slate-300 rounded-md text-sm shadow-sm placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500" value="Kamal Perera" required>
+                                    </div>
+                                     <div class="w-full">
+                                        <label for="profile-email" class="block text-sm font-medium text-slate-600">Email</label>
+                                        <input type="email" id="profile-email" class="mt-1 block w-full px-3 py-2 bg-slate-100 border border-slate-300 rounded-md text-sm shadow-sm placeholder-slate-400 focus:outline-none" value="kamal.perera@example.com" readonly>
+                                    </div>
+                                    <button type="submit" class="w-full bg-[#0a58ca] hover:bg-[#084a9e] text-white font-bold py-2 px-4 rounded-lg transition-colors mt-4">Save Changes</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                    <!-- Change Password -->
+                    <div class="lg:col-span-2">
+                        <div class="bg-white p-6 rounded-lg shadow-md h-full">
+                            <h3 class="text-lg font-semibold text-slate-800 mb-6">Change Password</h3>
+                            <form onsubmit="event.preventDefault(); alert('Password updated!');" class="space-y-4">
+                                <div>
+                                    <label for="current-password" class="block text-sm font-medium text-slate-600">Current Password</label>
+                                    <input type="password" id="current-password" class="mt-1 block w-full px-3 py-2 bg-white border border-slate-300 rounded-md text-sm shadow-sm placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500" required>
+                                </div>
+                                <div>
+                                    <label for="new-password" class="block text-sm font-medium text-slate-600">New Password</label>
+                                    <input type="password" id="new-password" class="mt-1 block w-full px-3 py-2 bg-white border border-slate-300 rounded-md text-sm shadow-sm placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500" required>
+                                </div>
+                                <div>
+                                    <label for="confirm-password" class="block text-sm font-medium text-slate-600">Confirm New Password</label>
+                                    <input type="password" id="confirm-password" class="mt-1 block w-full px-3 py-2 bg-white border border-slate-300 rounded-md text-sm shadow-sm placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500" required>
+                                </div>
+                                <button type="submit" class="w-full sm:w-auto bg-[#0a58ca] hover:bg-[#084a9e] text-white font-bold py-2 px-4 rounded-lg transition-colors">Update Password</button>
+                            </form>
+                        </div>
+                    </div>
+                     <!-- Manage Administrators -->
+                    <div class="lg:col-span-3 mt-8">
+                        <div class="bg-white p-6 rounded-lg shadow-md">
+                            <h3 class="text-lg font-semibold text-slate-800 mb-6">Manage Administrators</h3>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                                <!-- Add Admin Form -->
+                                <div>
+                                    <h4 class="text-md font-semibold text-slate-700 mb-4">Add New Administrator</h4>
+                                    <form id="add-admin-form" class="space-y-4">
+                                      <div>
+                                          <label for="admin-search" class="block text-sm font-medium text-slate-600">Select Officer</label>
+                                          <div class="relative">
+                                              <input type="text" id="admin-search" class="mt-1 block w-full px-3 py-2 bg-white border border-slate-300 rounded-md text-sm shadow-sm placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500" placeholder="Search officer by name or ID..." autocomplete="off">
+                                              <input type="hidden" id="selected-officer-data">
+                                              <div id="admin-options-container" class="absolute z-10 w-full mt-1 bg-white border border-slate-300 rounded-md shadow-lg hidden max-h-56 overflow-auto">
+                                                  <!-- Options populated by JS -->
+                                              </div>
+                                          </div>
+                                      </div>
+                                      <button type="submit" class="w-full sm:w-auto bg-[#0a58ca] hover:bg-[#084a9e] text-white font-bold py-2 px-4 rounded-lg transition-colors">Add Administrator</button>
+                                    </form>
+                                </div>
+                                <!-- Current Admins List -->
+                                <div>
+                                    <h4 class="text-md font-semibold text-slate-700 mb-4">Current Administrators</h4>
+                                    <ul id="admin-list" class="space-y-4">
+                                        <li class="flex items-center justify-between p-3 bg-slate-50 rounded-lg">
+                                            <div class="flex items-center">
+                                                <img class="h-10 w-10 rounded-full object-cover" src="https://i.pravatar.cc/150?u=admin" alt="Kamal Perera avatar">
+                                                <div class="ml-3">
+                                                    <p class="text-sm font-semibold text-slate-800">Kamal Perera</p>
+                                                    <p class="text-xs text-slate-500">kamal.perera@example.com</p>
+                                                </div>
+                                            </div>
+                                            <span class="text-sm font-medium text-slate-500">Owner</span>
+                                        </li>
+                                        <li class="flex items-center justify-between p-3 bg-slate-50 rounded-lg">
+                                            <div class="flex items-center">
+                                                <img class="h-10 w-10 rounded-full object-cover" src="https://i.pravatar.cc/150?u=jane" alt="Jane Doe avatar">
+                                                <div class="ml-3">
+                                                    <p class="text-sm font-semibold text-slate-800">Jane Doe</p>
+                                                    <p class="text-xs text-slate-500">jane.doe@example.com</p>
+                                                </div>
+                                            </div>
+                                            <button class="text-sm font-medium text-red-600 hover:text-red-800">Remove</button>
+                                        </li>
+                                        <li class="flex items-center justify-between p-3 bg-slate-50 rounded-lg">
+                                            <div class="flex items-center">
+                                                <img class="h-10 w-10 rounded-full object-cover" src="https://i.pravatar.cc/150?u=john" alt="John Smith avatar">
+                                                <div class="ml-3">
+                                                    <p class="text-sm font-semibold text-slate-800">John Smith</p>
+                                                    <p class="text-xs text-slate-500">john.smith@example.com</p>
+                                                </div>
+                                            </div>
+                                            <button class="text-sm font-medium text-red-600 hover:text-red-800">Remove</button>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Account Actions -->
+                    <div class="lg:col-span-3 mt-8">
+                        <div class="bg-white p-6 rounded-lg shadow-md">
+                            <h3 class="text-lg font-semibold text-slate-800 mb-6">Account Actions</h3>
+                            <div class="border-t border-slate-200 pt-6">
+                                <button id="logout-button" class="flex items-center justify-center w-full sm:w-auto px-4 py-2 text-sm font-medium text-red-600 bg-red-50 hover:bg-red-100 border border-red-200 rounded-lg transition-colors">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+                                    </svg>
+                                    <span>Log Out</span>
+                                </button>
+                                <p class="text-xs text-slate-500 mt-2">You will be returned to the login screen.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+          </div>
+
         </main>
       </div>
     </div>
+
+    <!-- Notification Detail Modal -->
+    <div id="notification-modal" class="fixed inset-0 bg-black/60 z-50 hidden items-center justify-center p-4" aria-labelledby="notification-modal-title" role="dialog" aria-modal="true">
+        <div class="bg-white rounded-lg shadow-xl w-full max-w-2xl transform transition-all">
+            <div class="p-6 border-b border-slate-200 flex justify-between items-start">
+                <div>
+                    <h3 id="notification-modal-title" class="text-lg font-bold text-slate-800">Notification Details</h3>
+                    <p id="notification-modal-subtitle" class="text-sm text-slate-500 mt-1"></p>
+                </div>
+                <button id="notification-modal-close-top" type="button" class="p-1 rounded-full text-slate-500 hover:bg-slate-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#0a58ca]">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-6 w-6"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" /></svg>
+                </button>
+            </div>
+            <div class="p-6">
+                <div class="prose prose-sm max-w-none text-slate-600 bg-slate-50 p-4 rounded-md border border-slate-200">
+                    <p><strong>To:</strong> <span id="notification-modal-to"></span></p>
+                    <p><strong>Subject:</strong> <span id="notification-modal-subject"></span></p>
+                    <hr class="my-3">
+                    <div id="notification-modal-body"></div>
+                </div>
+            </div>
+            <div class="bg-slate-50 px-6 py-4 flex justify-end rounded-b-lg">
+                <button id="notification-modal-close-bottom" type="button" class="px-4 py-2 text-sm font-medium text-slate-700 bg-white border border-slate-300 rounded-lg hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#0a58ca]">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Admin Password Confirmation Modal -->
+    <div id="password-confirm-modal" class="fixed inset-0 bg-black/60 z-50 hidden items-center justify-center p-4" aria-labelledby="add-modal-title" role="dialog" aria-modal="true">
+        <div class="bg-white rounded-lg shadow-xl w-full max-w-md transform transition-all">
+            <div class="p-6">
+                <h3 id="add-modal-title" class="text-lg font-bold text-slate-800">Confirm Action</h3>
+                <p id="modal-prompt-message" class="text-sm text-slate-600 mt-2">Please enter your password to confirm.</p>
+                <div class="mt-4">
+                    <label for="modal-password" class="block text-sm font-medium text-slate-600 sr-only">Your Password</label>
+                    <input type="password" id="modal-password" class="mt-1 block w-full px-3 py-2 bg-white border border-slate-300 rounded-md text-sm shadow-sm placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500" placeholder="Your Password" required>
+                    <p id="modal-error-message" class="text-xs text-red-500 mt-1 hidden">Password is incorrect.</p>
+                </div>
+            </div>
+            <div class="bg-slate-50 px-6 py-4 flex justify-end space-x-3 rounded-b-lg">
+                <button id="modal-cancel-button" type="button" class="px-4 py-2 text-sm font-medium text-slate-700 bg-white border border-slate-300 rounded-lg hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#0a58ca]">Cancel</button>
+                <button id="modal-confirm-button" type="button" class="px-4 py-2 text-sm font-medium text-white bg-[#0a58ca] border border-transparent rounded-lg hover:bg-[#084a9e] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#084a9e]">Confirm</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Remove Admin Password Confirmation Modal -->
+    <div id="remove-admin-modal" class="fixed inset-0 bg-black/60 z-50 hidden items-center justify-center p-4" aria-labelledby="remove-modal-title" role="dialog" aria-modal="true">
+        <div class="bg-white rounded-lg shadow-xl w-full max-w-md transform transition-all">
+            <div class="p-6">
+                <h3 id="remove-modal-title" class="text-lg font-bold text-slate-800">Confirm Removal</h3>
+                <p id="remove-modal-prompt-message" class="text-sm text-slate-600 mt-2">Please enter your password to confirm this action.</p>
+                <div class="mt-4">
+                    <label for="remove-modal-password" class="block text-sm font-medium text-slate-600 sr-only">Your Password</label>
+                    <input type="password" id="remove-modal-password" class="mt-1 block w-full px-3 py-2 bg-white border border-slate-300 rounded-md text-sm shadow-sm placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500" placeholder="Your Password" required>
+                    <p id="remove-modal-error-message" class="text-xs text-red-500 mt-1 hidden">Password is incorrect.</p>
+                </div>
+            </div>
+            <div class="bg-slate-50 px-6 py-4 flex justify-end space-x-3 rounded-b-lg">
+                <button id="remove-modal-cancel-button" type="button" class="px-4 py-2 text-sm font-medium text-slate-700 bg-white border border-slate-300 rounded-lg hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#0a58ca]">Cancel</button>
+                <button id="remove-modal-confirm-button" type="button" class="px-4 py-2 text-sm font-medium text-white bg-red-600 border border-transparent rounded-lg hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-700">Confirm Removal</button>
+            </div>
+        </div>
+    </div>
+
+
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="../JS/DashBord.js"></script>
-    <script src="../JS/Driver.js"></script>
+    <script>
+      $(document).ready(function() {
+        // --- GLOBAL VARS ---
+        let allSuspendedDrivers = [];
+        let allNotifications = [];
+        let driversInTraining = [];
+        let availablePrograms = [];
+
+        let allDrivers = [];
+        let driverCurrentPage = 1;
+        const driversPerPage = 8;
+
+        let allViolations = [];
+        let violationCurrentPage = 1;
+        const violationsPerPage = 8;
+
+        let suspendedListenersReady = false;
+        let notificationListenersReady = false;
+        let trainingListenersReady = false;
+        let violationsListenersReady = false;
+
+        let suspensionChart = null;
+        let currentDriverId = null;
+
+        // Mobile sidebar toggle
+        const $mobileSidebar = $('#mobile-sidebar');
+        const $mobileOverlay = $('#mobile-overlay');
+        const $mobileMenuBtn = $('#mobile-menu-button');
+        const $mobileCloseBtn = $('#mobile-close-button');
+
+        function openMobile() {
+            $mobileSidebar.removeClass('-translate-x-full');
+            $mobileOverlay.removeClass('opacity-0 pointer-events-none').addClass('opacity-100');
+            $mobileMenuBtn.attr('aria-expanded', 'true');
+            $('body').addClass('overflow-hidden md:overflow-auto');
+        }
+        function closeMobile() {
+            $mobileSidebar.addClass('-translate-x-full');
+            $mobileOverlay.addClass('pointer-events-none opacity-0').removeClass('opacity-100');
+            $mobileMenuBtn.attr('aria-expanded', 'false');
+            $('body').removeClass('overflow-hidden md:overflow-auto');
+        }
+        window.__closeMobile = closeMobile;
+
+        $mobileMenuBtn.on('click', openMobile);
+        $mobileCloseBtn.on('click', closeMobile);
+        $mobileOverlay.on('click', closeMobile);
+        $(document).on('keydown', function(e){
+            if(e.key === 'Escape') {
+                closeMobile();
+                closeConfirmationModal();
+                closeRemoveModal();
+                closeNotificationModal();
+            }
+        });
+
+        // --- DRIVER PAGE LOGIC ---
+        function loadAllDrivers() {
+            const token = localStorage.getItem("authToken");
+            if (!token) {
+                alert("You are not logged in! Please log in first.");
+                window.location.href = '../Pages/sing_in_And_Sing_up.html';
+                return;
+            }
+
+            $.ajax({
+                url: "http://localhost:8080/api/v1/driver/all",
+                method: "GET",
+                headers: { "Authorization": "Bearer " + token },
+                success: function (response) {
+                    allDrivers = response;
+                    driverCurrentPage = 1;
+                    renderDriversPage(driverCurrentPage);
+                },
+                error: function (error) {
+                    console.error("Error loading driver data:", error);
+                    $('#driverTbody').empty().append('<tr><td colspan="6" class="text-center p-8 text-slate-500">Failed to load driver data.</td></tr>');
+                }
+            });
+        }
+
+        function renderDriversPage(page) {
+            driverCurrentPage = page;
+            const $driverTbody = $('#driverTbody');
+            $driverTbody.empty();
+
+            if (!allDrivers || allDrivers.length === 0) {
+                 $driverTbody.append('<tr><td colspan="6" class="text-center p-8 text-slate-500">No drivers found.</td></tr>');
+                 updateDriverPaginationControls();
+                 return;
+            }
+
+            const start = (page - 1) * driversPerPage;
+            const end = start + driversPerPage;
+            const paginatedDrivers = allDrivers.slice(start, end);
+
+            paginatedDrivers.forEach(function (driver) {
+                let statusBadge = '';
+                switch (driver.status) {
+                    case "Active": statusBadge = `<span class="px-2 py-1 font-semibold leading-tight text-xs rounded-full bg-green-100 text-green-800">Active</span>`; break;
+                    case "Suspended": statusBadge = `<span class="px-2 py-1 font-semibold leading-tight text-xs rounded-full bg-red-100 text-red-800">Suspended</span>`; break;
+                    case "Probation": statusBadge = `<span class="px-2 py-1 font-semibold leading-tight text-xs rounded-full bg-yellow-100 text-yellow-800">Probation</span>`; break;
+                    default: statusBadge = `<span class="px-2 py-1 font-semibold leading-tight text-xs rounded-full bg-gray-100 text-gray-800">${driver.status || 'Unknown'}</span>`;
+                }
+
+                let row = `
+                    <tr class="hover:bg-slate-50">
+                        <td class="px-6 py-4 hidden lg:table-cell">${driver.drivingLicNum}</td>
+                        <td class="px-6 py-4">${driver.name}</td>
+                        <td class="px-6 py-4 hidden md:table-cell">${driver.email}</td>
+                        <td class="px-6 py-4">${driver.totalPoint}</td>
+                        <td class="px-6 py-4">${statusBadge}</td>
+                        <td class="px-6 py-4 text-center">
+                            <button class="font-medium text-[#0a58ca] hover:text-[#084a9e]">View Details</button>
+                        </td>
+                    </tr>`;
+                $driverTbody.append(row);
+            });
+            updateDriverPaginationControls();
+        }
+
+        function updateDriverPaginationControls() {
+            const totalPages = Math.ceil(allDrivers.length / driversPerPage);
+            if(totalPages > 0) {
+              $('#driver-page-info').text(`Page ${driverCurrentPage} of ${totalPages}`);
+            } else {
+              $('#driver-page-info').text('No drivers');
+            }
+            $('#driver-prev-btn').prop('disabled', driverCurrentPage === 1);
+            $('#driver-next-btn').prop('disabled', driverCurrentPage >= totalPages);
+        }
+
+        $('#driver-prev-btn').on('click', function() {
+            if (driverCurrentPage > 1) {
+                renderDriversPage(driverCurrentPage - 1);
+            }
+        });
+
+        $('#driver-next-btn').on('click', function() {
+            const totalPages = Math.ceil(allDrivers.length / driversPerPage);
+            if (driverCurrentPage < totalPages) {
+                renderDriversPage(driverCurrentPage + 1);
+            }
+        });
+
+        // --- VIOLATIONS PAGE LOGIC ---
+        function initializeViolationsPage() {
+            allViolations = [
+                { license: 'LGU-582-49', officerId: '9821', date: '2024-07-21', status: 'Pending' }, { license: 'KDE-194-38', officerId: '7503', date: '2024-07-21', status: 'Paid' }, { license: 'RTE-902-65', officerId: '9821', date: '2024-07-18', status: 'Overdue' }, { license: 'NVC-730-11', officerId: '8112', date: '2024-07-17', status: 'Appealed' }, { license: 'PZQ-441-27', officerId: '7503', date: '2024-07-15', status: 'Paid' }, { license: 'ABC-123-45', officerId: '9821', date: '2024-07-14', status: 'Pending' }, { license: 'DEF-456-78', officerId: '8112', date: '2024-07-12', status: 'Paid' }, { license: 'GHI-789-01', officerId: '7503', date: '2024-07-11', status: 'Overdue' }, { license: 'JKL-012-34', officerId: '9821', date: '2024-07-10', status: 'Pending' }, { license: 'MNO-345-67', officerId: '8112', date: '2024-07-09', status: 'Appealed' }
+            ];
+            violationCurrentPage = 1;
+            renderViolationsPage(violationCurrentPage);
+            setupViolationPageListeners();
+        }
+
+        function renderViolationsPage(page) {
+            violationCurrentPage = page;
+            const $tbody = $('#violationsTbody');
+            $tbody.empty();
+
+            const start = (page - 1) * violationsPerPage;
+            const end = start + violationsPerPage;
+            const paginatedViolations = allViolations.slice(start, end);
+
+            const statusMap = { 'Pending': { bg: 'bg-yellow-100', text: 'text-yellow-800' }, 'Paid': { bg: 'bg-green-100', text: 'text-green-800' }, 'Overdue': { bg: 'bg-red-100', text: 'text-red-800' }, 'Appealed': { bg: 'bg-blue-100', text: 'text-blue-800' } };
+
+            paginatedViolations.forEach(v => {
+                const statusConfig = statusMap[v.status] || { bg: 'bg-gray-100', text: 'text-gray-800' };
+                const rowHtml = `
+                    <tr class="border-b border-slate-200 hover:bg-slate-50">
+                        <td class="px-6 py-4 font-mono">${v.license}</td>
+                        <td class="px-6 py-4 hidden sm:table-cell">${v.officerId}</td>
+                        <td class="px-6 py-4 hidden md:table-cell">${v.date}</td>
+                        <td class="px-6 py-4"><span class="px-2 py-1 font-semibold leading-tight text-xs rounded-full ${statusConfig.bg} ${statusConfig.text}">${v.status}</span></td>
+                        <td class="px-6 py-4 text-center"><button class="font-medium text-[#0a58ca] hover:text-[#084a9e]">Details</button></td>
+                    </tr>`;
+                $tbody.append(rowHtml);
+            });
+            updateViolationPaginationControls();
+        }
+
+        function updateViolationPaginationControls() {
+            const totalPages = Math.ceil(allViolations.length / violationsPerPage);
+            if (totalPages > 0) {
+                $('#violation-page-info').text(`Page ${violationCurrentPage} of ${totalPages}`);
+            } else {
+                $('#violation-page-info').text('No violations');
+            }
+            $('#violation-prev-btn').prop('disabled', violationCurrentPage === 1);
+            $('#violation-next-btn').prop('disabled', violationCurrentPage >= totalPages);
+        }
+
+        function setupViolationPageListeners() {
+            if (violationsListenersReady) return;
+            $('#violation-prev-btn').on('click', function() {
+                if (violationCurrentPage > 1) {
+                    renderViolationsPage(violationCurrentPage - 1);
+                }
+            });
+            $('#violation-next-btn').on('click', function() {
+                const totalPages = Math.ceil(allViolations.length / violationsPerPage);
+                if (violationCurrentPage < totalPages) {
+                    renderViolationsPage(violationCurrentPage + 1);
+                }
+            });
+            violationsListenersReady = true;
+        }
+
+        // --- NOTIFICATIONS PAGE LOGIC ---
+        function initializeNotificationsPage() {
+            // Mock data for notifications
+            const notifications = [
+                { id: 1, type: 'Suspension', driverName: 'John Doe', drivingLicNum: 'B345-67890-12', date: '2024-07-21 09:00', subject: 'Urgent: Your Driver\'s License Has Been Suspended', content: `<p>Dear John Doe,</p><p>This is a formal notification that your driver's license, number <strong>B345-67890-12</strong>, has been suspended effective <strong>July 21, 2024</strong>, due to reaching the maximum allowable demerit points.</p><p>Please cease all driving activities immediately. For information on the reinstatement process, please visit our website or contact our office.</p><p>Sincerely,<br>The Vehicle Licensing Department</p>` },
+                { id: 2, type: 'Warning', driverName: 'Emily Davis', drivingLicNum: 'E567-89012-34', date: '2024-07-20 14:30', subject: 'Warning: High Demerit Point Accumulation', content: `<p>Dear Emily Davis,</p><p>This is a courtesy warning to inform you that you have accumulated <strong>10 demerit points</strong> on your license (<strong>E567-89012-34</strong>). Reaching 12 points will result in an automatic suspension.</p><p>We encourage you to drive safely and be mindful of traffic laws.</p><p>Sincerely,<br>The Vehicle Licensing Department</p>` },
+                { id: 3, type: 'Reminder', driverName: 'Chris Brown', drivingLicNum: 'F901-23456-78', date: '2024-07-19 11:00', subject: 'Reminder: Outstanding Fine Payment Due', content: `<p>Dear Chris Brown,</p><p>This is a reminder that you have an outstanding fine related to violation #V-98765. Failure to pay by the due date may result in further penalties, including license suspension.</p><p>Sincerely,<br>The Vehicle Licensing Department</p>`},
+                { id: 4, type: 'Suspension', driverName: 'Jane Smith', drivingLicNum: 'C987-65432-10', date: '2024-07-18 16:45', subject: 'Urgent: Your Driver\'s License Has Been Suspended', content: `<p>Dear Jane Smith,</p><p>This is a formal notification that your driver's license, number <strong>C987-65432-10</strong>, has been suspended effective <strong>July 18, 2024</strong>, due to a DUI conviction.</p><p>Please cease all driving activities immediately.</p><p>Sincerely,<br>The Vehicle Licensing Department</p>`},
+                { id: 5, type: 'Warning', driverName: 'David Wilson', drivingLicNum: 'G112-35813-21', date: '2024-07-18 10:15', subject: 'Warning: High Demerit Point Accumulation', content: `<p>Dear David Wilson,</p><p>This is a courtesy warning to inform you that you have accumulated <strong>9 demerit points</strong> on your license (<strong>G112-35813-21</strong>). Reaching 12 points will result in an automatic suspension.</p><p>Sincerely,<br>The Vehicle Licensing Department</p>`}
+            ];
+            allNotifications = notifications;
+            renderNotifications();
+            setupNotificationPageListeners();
+        }
+
+        function renderNotifications() {
+            const $list = $('#notification-list');
+            const typeFilter = $('#notification-type-filter').val();
+            const sortFilter = $('#notification-sort-filter').val();
+
+            let filteredNotifications = allNotifications;
+
+            if (typeFilter !== 'all') {
+                filteredNotifications = filteredNotifications.filter(n => n.type === typeFilter);
+            }
+
+            filteredNotifications.sort((a, b) => {
+                const dateA = new Date(a.date);
+                const dateB = new Date(b.date);
+                return sortFilter === 'newest' ? dateB - dateA : dateA - dateB;
+            });
+
+            $list.empty();
+            if (filteredNotifications.length === 0) {
+                 $list.append('<div class="p-8 text-center text-sm text-slate-500 bg-white rounded-lg shadow-md">No notifications match the current filters.</div>');
+                return;
+            }
+
+            const typeMap = {
+                'Suspension': {
+                    icon: '<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636" /></svg>',
+                    bgColor: 'bg-red-500',
+                    tagBgColor: 'bg-red-100',
+                    tagTextColor: 'text-red-800'
+                },
+                'Warning': {
+                    icon: '<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" /></svg>',
+                    bgColor: 'bg-yellow-500',
+                    tagBgColor: 'bg-yellow-100',
+                    tagTextColor: 'text-yellow-800'
+                },
+                 'Reminder': {
+                    icon: '<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" /></svg>',
+                    bgColor: 'bg-blue-500',
+                    tagBgColor: 'bg-blue-100',
+                    tagTextColor: 'text-blue-800'
+                }
+            };
+
+            filteredNotifications.forEach(n => {
+                const config = typeMap[n.type];
+                const itemHtml = `
+                    <div class="bg-white p-4 rounded-lg shadow-md flex items-center space-x-4">
+                        <div class="flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full ${config.bgColor}">
+                            ${config.icon}
+                        </div>
+                        <div class="flex-grow">
+                            <div class="flex justify-between items-center">
+                                <p class="text-sm font-semibold text-slate-800">${n.driverName} <span class="ml-2 font-normal text-slate-500 font-mono text-xs">${n.drivingLicNum}</span></p>
+                                <span class="text-xs font-semibold px-2 py-1 rounded-full ${config.tagBgColor} ${config.tagTextColor}">${n.type}</span>
+                            </div>
+                            <p class="text-sm text-slate-600 mt-1">${n.subject}</p>
+                            <p class="text-xs text-slate-400 mt-1">${n.date}</p>
+                        </div>
+                        <div class="flex-shrink-0">
+                            <button class="view-notification-btn text-sm font-medium text-[#0a58ca] hover:text-[#084a9e]" data-notification-id="${n.id}">View Details</button>
+                        </div>
+                    </div>
+                `;
+                 $list.append(itemHtml);
+            });
+        }
+
+        function openNotificationModal(notificationId) {
+            const notification = allNotifications.find(n => n.id === notificationId);
+            if (!notification) return;
+
+            $('#notification-modal-title').text(`${notification.type} Notification`);
+            $('#notification-modal-subtitle').text(`Sent on ${notification.date}`);
+            $('#notification-modal-to').text(notification.driverName);
+            $('#notification-modal-subject').text(notification.subject);
+            $('#notification-modal-body').html(notification.content);
+
+            $('#notification-modal').removeClass('hidden').addClass('flex');
+        }
+
+        function closeNotificationModal() {
+            $('#notification-modal').addClass('hidden').removeClass('flex');
+        }
+
+        function setupNotificationPageListeners() {
+            if (notificationListenersReady) return;
+
+            $('#notification-type-filter, #notification-sort-filter').on('change', renderNotifications);
+
+            $('#notification-list').on('click', '.view-notification-btn', function() {
+                const notificationId = $(this).data('notification-id');
+                openNotificationModal(notificationId);
+            });
+
+            $('#notification-modal-close-top, #notification-modal-close-bottom').on('click', closeNotificationModal);
+            $('#notification-modal').on('click', function(e) {
+                if ($(e.target).is('#notification-modal')) {
+                    closeNotificationModal();
+                }
+            });
+
+            notificationListenersReady = true;
+        }
+
+        // --- END NOTIFICATIONS PAGE LOGIC ---
+
+        // --- TRAINING PROGRAM PAGE LOGIC ---
+        function initializeTrainingPage() {
+            driversInTraining = [
+                { id: 4, name: 'Emily Davis', photo: 'https://i.pravatar.cc/150?u=emily_d', program: 'Defensive Driving', progress: 75, status: 'In Progress' },
+                { id: 7, name: 'Jessica Miller', photo: 'https://i.pravatar.cc/150?u=jessica_m', program: 'DUI Awareness', progress: 100, status: 'Completed' },
+                { id: 1, name: 'John Doe', photo: 'https://i.pravatar.cc/150?u=john_doe', program: 'High Points Intervention', progress: 40, status: 'In Progress' },
+                { id: 2, name: 'Jane Smith', photo: 'https://i.pravatar.cc/150?u=jane_smith', program: 'DUI Awareness', progress: 15, status: 'Not Started' },
+                { id: 5, name: 'Chris Brown', photo: 'https://i.pravatar.cc/150?u=chris_b', program: 'Financial Responsibility', progress: 90, status: 'In Progress' }
+            ];
+
+            availablePrograms = [
+                { name: 'Defensive Driving', description: 'Covers accident prevention techniques and safe driving strategies.', duration: '4 weeks' },
+                { name: 'DUI Awareness', description: 'Educational course on the dangers and consequences of impaired driving.', duration: '6 weeks' },
+                { name: 'High Points Intervention', description: 'Aimed at habitual offenders to correct risky driving behaviors.', duration: '8 weeks' },
+                { name: 'Rules of the Road Refresher', description: 'A comprehensive review of current traffic laws and regulations.', duration: '2 weeks' }
+            ];
+            renderTrainingPage();
+            setupTrainingPageListeners();
+        }
+
+        function renderTrainingPage() {
+            renderTrainingDrivers();
+            renderAvailablePrograms();
+        }
+
+        function renderTrainingDrivers() {
+            const $list = $('#training-driver-list');
+            $list.empty();
+            driversInTraining.forEach(driver => {
+                const progressBarColor = driver.progress === 100 ? 'bg-green-500' : 'bg-blue-500';
+                const itemHtml = `
+                    <div class="bg-slate-50 p-4 rounded-lg border border-slate-200">
+                        <div class="flex items-center justify-between mb-3">
+                            <div class="flex items-center">
+                                <img class="h-12 w-12 rounded-full object-cover" src="${driver.photo}" alt="${driver.name}">
+                                <div class="ml-3">
+                                    <p class="text-md font-bold text-slate-800">${driver.name}</p>
+                                    <p class="text-sm text-slate-600">${driver.program}</p>
+                                </div>
+                            </div>
+                            <span class="text-sm font-semibold text-slate-700">${driver.progress}%</span>
+                        </div>
+                        <div class="w-full bg-slate-200 rounded-full h-2.5">
+                            <div class="${progressBarColor} h-2.5 rounded-full" style="width: ${driver.progress}%"></div>
+                        </div>
+                    </div>
+                `;
+                $list.append(itemHtml);
+            });
+        }
+
+        function renderAvailablePrograms() {
+            const $list = $('#available-programs-list');
+            $list.empty();
+            availablePrograms.forEach(program => {
+                const itemHtml = `
+                    <div class="bg-slate-50 p-4 rounded-lg border border-slate-200">
+                        <h4 class="font-bold text-slate-800">${program.name}</h4>
+                        <p class="text-xs text-slate-500 mb-2">${program.duration}</p>
+                        <p class="text-sm text-slate-600">${program.description}</p>
+                        <button class="text-sm mt-3 w-full bg-white hover:bg-slate-100 text-slate-700 font-semibold py-2 px-3 border border-slate-300 rounded-lg shadow-sm transition-colors">View Enrolled</button>
+                    </div>
+                `;
+                $list.append(itemHtml);
+            });
+        }
+
+        function setupTrainingPageListeners() {
+            if (trainingListenersReady) return;
+            // Add listeners for future interactivity if needed
+            trainingListenersReady = true;
+        }
+        // --- END TRAINING PROGRAM PAGE LOGIC ---
+
+        // --- SUSPENDED LICENSES PAGE LOGIC ---
+        function initializeSuspendedPage() {
+            // Mock data with enhanced details
+            const suspendedDrivers = [
+                { id: 1, drivingLicNum: 'B345-67890-12', name: 'John Doe', suspensionDate: '2024-06-15', reason: 'High Points', photo: 'https://i.pravatar.cc/150?u=john_doe', status: 'Suspended', reinstatement_status: { period_served: 'Completed', fines_paid: 'Completed', course_completed: 'Pending', reinstatement_fee: 'Pending' }, timeline: [{date: '2024-06-15', event: 'Suspension Effective'}, {date: '2024-06-01', event: 'Suspension Notice Sent'}, {date: '2024-05-20', event: 'Final Warning Issued'}, {date: '2024-04-10', event: 'Violation: Speeding'}], communications: [{date: '2024-06-20 10:30', note: 'Called driver, left voicemail regarding reinstatement process.'}], triggeringViolation: { type: 'Speeding (3rd Offense)', date: '2024-05-18', points: 6, officerId: '7503' } },
+                { id: 2, drivingLicNum: 'C987-65432-10', name: 'Jane Smith', suspensionDate: '2024-07-01', reason: 'DUI', photo: 'https://i.pravatar.cc/150?u=jane_smith', status: 'Suspended', reinstatement_status: { period_served: 'Completed', fines_paid: 'Pending', course_completed: 'Pending', reinstatement_fee: 'Pending' }, timeline: [{date: '2024-07-01', event: 'Suspension Effective'}, {date: '2024-06-15', event: 'Court Mandate Received'}], communications: [], triggeringViolation: { type: 'Driving Under Influence', date: '2024-06-15', points: 12, officerId: '8112' } },
+                { id: 3, drivingLicNum: 'D123-45678-90', name: 'Michael Johnson', suspensionDate: '2024-05-20', reason: 'Other', photo: 'https://i.pravatar.cc/150?u=michael_j', status: 'Suspended', reinstatement_status: { period_served: 'Completed', fines_paid: 'Completed', course_completed: 'Completed', reinstatement_fee: 'Paid' }, timeline: [{date: '2024-05-20', event: 'Suspension Effective'}], communications: [{date: '2024-06-05 14:00', note: 'Email sent with reinstatement checklist.'}, {date: '2024-07-10 11:00', note: 'Driver called to confirm receipt of checklist.'}], triggeringViolation: { type: 'Failure to Appear in Court', date: '2024-05-10', points: 0, officerId: 'N/A' } },
+                { id: 4, drivingLicNum: 'E567-89012-34', name: 'Emily Davis', suspensionDate: '2024-07-10', reason: 'High Points', photo: 'https://i.pravatar.cc/150?u=emily_d', status: 'Suspended', reinstatement_status: { period_served: 'In Progress', fines_paid: 'Completed', course_completed: 'Pending', reinstatement_fee: 'Pending' }, timeline: [{date: '2024-07-10', event: 'Suspension Effective'}], communications: [], triggeringViolation: { type: 'Reckless Driving', date: '2024-07-02', points: 8, officerId: '9821' } },
+                { id: 5, drivingLicNum: 'F901-23456-78', name: 'Chris Brown', suspensionDate: '2024-06-25', reason: 'Unpaid Fines', photo: 'https://i.pravatar.cc/150?u=chris_b', status: 'Suspended', reinstatement_status: { period_served: 'Completed', fines_paid: 'Pending', course_completed: 'N/A', reinstatement_fee: 'Pending' }, timeline: [{date: '2024-06-25', event: 'Suspension Effective due to unpaid fines.'}], communications: [{date: '2024-07-01 09:15', note: 'Automated payment reminder sent.'}], triggeringViolation: { type: 'Multiple Unpaid Parking Tickets', date: '2024-06-01', points: 0, officerId: 'N/A' } },
+                { id: 6, drivingLicNum: 'G112-35813-21', name: 'David Wilson', suspensionDate: '2024-07-18', reason: 'Unpaid Fines', photo: 'https://i.pravatar.cc/150?u=david_w', status: 'Suspended', reinstatement_status: { period_served: 'In Progress', fines_paid: 'Pending', course_completed: 'N/A', reinstatement_fee: 'Pending' }, timeline: [{date: '2024-07-18', event: 'Suspension Effective'}], communications: [], triggeringViolation: { type: 'Red Light Camera Fine', date: '2024-06-20', points: 3, officerId: 'CAM-04' } },
+                { id: 7, drivingLicNum: 'H465-79135-18', name: 'Jessica Miller', suspensionDate: '2024-04-30', reason: 'DUI', photo: 'https://i.pravatar.cc/150?u=jessica_m', status: 'Suspended', reinstatement_status: { period_served: 'Completed', fines_paid: 'Completed', course_completed: 'Completed', reinstatement_fee: 'Pending' }, timeline: [{date: '2024-04-30', event: 'Suspension Effective'}], communications: [], triggeringViolation: { type: 'Driving Under Influence', date: '2024-04-15', points: 12, officerId: '7503' } }
+            ];
+            allSuspendedDrivers = suspendedDrivers;
+            renderSuspendedDriverList(allSuspendedDrivers);
+            renderSuspensionChart();
+            setupSuspendedPageListeners();
+        }
+
+        function renderSuspendedDriverList(drivers) {
+             const $list = $('#suspended-driver-list');
+            $list.empty();
+
+            if (drivers.length === 0) {
+                $list.append('<div class="p-4 text-center text-sm text-slate-500">No matching cases found.</div>');
+                return;
+            }
+
+            drivers.forEach(driver => {
+                const itemHtml = `
+                    <div class="flex items-center p-3 rounded-lg cursor-pointer hover:bg-sky-50 transition-colors" data-driver-id="${driver.id}">
+                        <img class="h-10 w-10 rounded-full object-cover" src="${driver.photo}" alt="${driver.name}">
+                        <div class="ml-3">
+                            <p class="text-sm font-semibold text-slate-800">${driver.name}</p>
+                            <p class="text-xs text-slate-500">${driver.drivingLicNum} &bull; Suspended: ${driver.suspensionDate}</p>
+                        </div>
+                    </div>
+                `;
+                $list.append(itemHtml);
+            });
+        }
+
+        function renderDriverDetail(driver) {
+            currentDriverId = driver.id;
+            $('#detail-pane-placeholder').addClass('hidden');
+            const $content = $('#detail-pane-content');
+            $content.removeClass('hidden');
+
+            // Populate header
+            $('#detail-driver-img').attr('src', driver.photo);
+            $('#detail-driver-name').text(driver.name);
+            $('#detail-driver-license').text(driver.drivingLicNum);
+            $('#detail-driver-reason').text(driver.reason);
+
+            // Populate Triggering Violation
+            const $violation = $('#detail-violation');
+            $violation.empty();
+            if (driver.triggeringViolation) {
+                const v = driver.triggeringViolation;
+                const violationHtml = `
+                    <p class="text-sm"><strong class="font-semibold text-slate-600">Violation:</strong> <span class="text-red-700 font-bold">${v.type}</span></p>
+                    <p class="text-sm"><strong class="font-semibold text-slate-600">Date:</strong> ${v.date}</p>
+                    <p class="text-sm"><strong class="font-semibold text-slate-600">Details:</strong> Added ${v.points} points, reported by Officer #${v.officerId}.</p>
+                `;
+                $violation.html(violationHtml);
+            }
+
+
+            // Populate checklist
+            const $checklist = $('#detail-checklist');
+            $checklist.empty();
+            const statusMap = {
+                'Completed': { text: 'Completed', icon: '<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-green-500" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" /></svg>'},
+                'Pending': { text: 'Pending', icon: '<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-yellow-500" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd" /></svg>'},
+                'Paid': { text: 'Paid', icon: '<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-green-500" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" /></svg>'},
+                 'In Progress': { text: 'In Progress', icon: '<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h5M20 20v-5h-5" /><path stroke-linecap="round" stroke-linejoin="round" d="M4 9a9 9 0 0114.13-6.364M20 15a9 9 0 01-14.13 6.364" /></svg>'},
+                 'N/A': { text: 'N/A', icon: '<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-slate-400" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM7 9a1 1 0 000 2h6a1 1 0 100-2H7z" clip-rule="evenodd" /></svg>'}
+            };
+            const items = [
+                {key: 'period_served', label: 'Suspension Period'},
+                {key: 'fines_paid', label: 'Fines Paid'},
+                {key: 'course_completed', label: 'Re-education Course'},
+                {key: 'reinstatement_fee', label: 'Reinstatement Fee'},
+            ];
+            items.forEach(item => {
+                const status = driver.reinstatement_status[item.key];
+                const itemHtml = `
+                <div class="flex items-center justify-between p-2.5 bg-slate-50 rounded-md">
+                    <span class="text-sm font-medium text-slate-700">${item.label}</span>
+                    <div class="flex items-center space-x-2">
+                        ${statusMap[status].icon}
+                        <span class="text-sm font-semibold text-slate-800">${statusMap[status].text}</span>
+                        <button class="update-status-btn text-xs text-[#0a58ca] hover:underline" data-item-key="${item.key}" ${status === 'N/A' ? 'disabled style="display:none;"' : ''}>Update</button>
+                    </div>
+                </div>`;
+                $checklist.append(itemHtml);
+            });
+
+            // Populate Timeline
+            const $timeline = $('#detail-timeline');
+            $timeline.empty();
+            driver.timeline.forEach(item => {
+                const itemHtml = `
+                    <div class="relative">
+                        <div class="absolute -left-[2.1rem] top-1 h-4 w-4 bg-[#0a58ca] rounded-full border-4 border-white"></div>
+                        <p class="text-sm font-semibold text-slate-800">${item.event}</p>
+                        <p class="text-xs text-slate-500">${item.date}</p>
+                    </div>`;
+                $timeline.append(itemHtml);
+            });
+
+            // Populate Comm Log
+            renderCommLog(driver);
+        }
+
+        function renderCommLog(driver) {
+            const $commLog = $('#detail-comm-log');
+            $commLog.empty();
+            if (driver.communications.length === 0) {
+                 $commLog.append('<div class="p-4 text-center text-sm text-slate-400">No communication logged.</div>');
+            } else {
+                [...driver.communications].reverse().forEach(item => {
+                    const itemHtml = `
+                    <div class="p-2.5 bg-slate-50 rounded-md">
+                        <p class="text-sm text-slate-700">${item.note}</p>
+                        <p class="text-xs text-slate-500 text-right mt-1">${item.date}</p>
+                    </div>`;
+                    $commLog.append(itemHtml);
+                });
+            }
+        }
+
+        function renderSuspensionChart() {
+            const reasons = allSuspendedDrivers.reduce((acc, driver) => {
+                acc[driver.reason] = (acc[driver.reason] || 0) + 1;
+                return acc;
+            }, {});
+            const chartData = {
+                labels: Object.keys(reasons),
+                datasets: [{
+                    data: Object.values(reasons),
+                    backgroundColor: ['#ef4444', '#f59e0b', '#3b82f6', '#6b7280'],
+                    hoverOffset: 4
+                }]
+            };
+            const ctx = document.getElementById('suspension-reasons-chart').getContext('2d');
+             if(suspensionChart) {
+                suspensionChart.destroy();
+            }
+            suspensionChart = new Chart(ctx, {
+                type: 'doughnut',
+                data: chartData,
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { position: 'bottom', labels: { boxWidth: 12, padding: 15, font: {size: 11} } }
+                    }
+                }
+            });
+        }
+
+        function setupSuspendedPageListeners() {
+            if (suspendedListenersReady) return;
+
+            function applyFilters() {
+                const searchTerm = $('#suspended-search-input').val().toLowerCase();
+                const reasonFilter = $('#suspension-reason-filter').val();
+
+                const filteredDrivers = allSuspendedDrivers.filter(driver => {
+                    const matchesSearch = driver.name.toLowerCase().includes(searchTerm) || driver.drivingLicNum.toLowerCase().includes(searchTerm);
+                    const matchesReason = reasonFilter === 'all' || driver.reason === reasonFilter;
+                    return matchesSearch && matchesReason;
+                });
+                renderSuspendedDriverList(filteredDrivers);
+                $('#detail-pane-placeholder').removeClass('hidden');
+                $('#detail-pane-content').addClass('hidden');
+                currentDriverId = null;
+            }
+
+            $('#suspended-search-input').on('keyup', applyFilters);
+            $('#suspension-reason-filter').on('change', applyFilters);
+
+            // Delegated click listener for driver list items
+            $('#suspended-driver-list').on('click', '[data-driver-id]', function() {
+                const driverId = $(this).data('driver-id');
+                const driverData = allSuspendedDrivers.find(d => d.id === driverId);
+                if (driverData) {
+                    $('#suspended-driver-list').find('[data-driver-id]').removeClass('bg-sky-100');
+                    $(this).addClass('bg-sky-100');
+                    renderDriverDetail(driverData);
+                }
+            });
+
+            // Delegated click listener for updating status
+            $('#detail-checklist').on('click', '.update-status-btn', function() {
+                const itemKey = $(this).data('item-key');
+                const driver = allSuspendedDrivers.find(d => d.id === currentDriverId);
+                if(driver){
+                    const currentStatus = driver.reinstatement_status[itemKey];
+                    const nextStatus = prompt(`Update status for "${$(this).closest('div').find('.font-medium').text()}" (Current: ${currentStatus}):\nEnter new status (e.g., Completed, Pending, Paid):`, currentStatus);
+                    if(nextStatus && nextStatus !== currentStatus){
+                         driver.reinstatement_status[itemKey] = nextStatus;
+                         renderDriverDetail(driver); // Re-render the detail pane to show changes
+                    }
+                }
+            });
+
+            // Communication log form submission
+            $('#add-comm-log-form').on('submit', function(e){
+                e.preventDefault();
+                const noteInput = $('#comm-log-input');
+                const noteText = noteInput.val().trim();
+                if(noteText && currentDriverId) {
+                    const driver = allSuspendedDrivers.find(d => d.id === currentDriverId);
+                    const now = new Date();
+                    const timestamp = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')} ${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}`;
+                    driver.communications.push({date: timestamp, note: noteText});
+                    renderCommLog(driver);
+                    noteInput.val('');
+                }
+            });
+
+            $('#assign-training-btn').on('click', function() {
+                if (currentDriverId) {
+                    navigateTo('training');
+                } else {
+                    alert('Please select a driver first.');
+                }
+            });
+
+            suspendedListenersReady = true;
+        }
+        // --- END SUSPENDED LICENSES LOGIC ---
+
+        // --- ADMIN MANAGEMENT LOGIC ---
+        const officers = [
+            { id: '101', name: 'Nimal Silva', email: 'nimal.silva@police.lk' },
+            { id: '102', name: 'Sunil Rathnayake', email: 'sunil.r@police.lk' },
+            { id: '103', name: 'Priya Fernando', email: 'p.fernando@police.lk' },
+            { id: '104', name: 'Ajith Bandara', email: 'ajith.b@police.lk' },
+            // Pre-existing admins for demo purposes
+            { id: '901', name: 'Jane Doe', email: 'jane.doe@example.com' },
+            { id: '902', name: 'John Smith', email: 'john.smith@example.com' }
+        ];
+        let availableOfficers = [];
+        let officerToAdd = null;
+        let adminToRemove = null;
+        let adminSearchInitialized = false;
+
+        function initializeOfficers() {
+            if (availableOfficers.length === 0 && officers.length > 0) {
+                 // Exclude officers who are already admins from the searchable list
+                const adminEmails = [];
+                $('#admin-list').find('.text-xs.text-slate-500').each(function() {
+                    adminEmails.push($(this).text());
+                });
+                availableOfficers = officers.filter(o => !adminEmails.includes(o.email));
+            }
+        }
+
+        function renderOfficerOptions(officersList) {
+            const $container = $('#admin-options-container');
+            $container.empty();
+            if (officersList.length === 0) {
+                $container.append('<div class="px-3 py-2 text-sm text-slate-500">No officers found.</div>');
+                return;
+            }
+            officersList.forEach(officer => {
+                const option = $(`<div class="px-3 py-2 text-sm text-slate-700 cursor-pointer hover:bg-slate-100" tabindex="0"></div>`);
+                option.text(`${officer.name} (ID: ${officer.id})`);
+                option.data('officer', officer);
+                $container.append(option);
+            });
+        }
+
+        function setupAdminSearch() {
+            if (adminSearchInitialized) return;
+
+            $('#admin-search').on('focus', function() {
+                renderOfficerOptions(availableOfficers);
+                $('#admin-options-container').removeClass('hidden');
+            });
+
+            $('#admin-search').on('input', function() {
+                const searchTerm = $(this).val().toLowerCase();
+                $('#selected-officer-data').val(''); // Clear selection on new input
+                const filtered = availableOfficers.filter(o =>
+                    o.name.toLowerCase().includes(searchTerm) ||
+                    o.id.toLowerCase().includes(searchTerm)
+                );
+                renderOfficerOptions(filtered);
+                $('#admin-options-container').removeClass('hidden');
+            });
+
+            $('#admin-options-container').on('click', 'div', function() {
+                const officerData = $(this).data('officer');
+                if (officerData) {
+                    $('#admin-search').val(`${officerData.name} (ID: ${officerData.id})`);
+                    $('#selected-officer-data').val(JSON.stringify(officerData));
+                    $('#admin-options-container').addClass('hidden');
+                }
+            });
+
+            $(document).on('click', function(e) {
+                const $form = $('#add-admin-form');
+                if (!$form.is(e.target) && $form.has(e.target).length === 0) {
+                    $('#admin-options-container').addClass('hidden');
+                }
+            });
+
+            adminSearchInitialized = true;
+        }
+
+        function openConfirmationModal() {
+            const selectedOfficerVal = $('#selected-officer-data').val();
+            if (!selectedOfficerVal) {
+                alert('Please select an officer from the list.');
+                return;
+            }
+            officerToAdd = JSON.parse(selectedOfficerVal);
+
+            $('#modal-prompt-message').text(`Please enter your password to add ${officerToAdd.name} as an administrator.`);
+            $('#password-confirm-modal').removeClass('hidden').addClass('flex');
+            $('#modal-password').focus();
+        }
+
+        function closeConfirmationModal() {
+            $('#password-confirm-modal').addClass('hidden').removeClass('flex');
+            $('#modal-password').val('');
+            $('#modal-error-message').addClass('hidden');
+            officerToAdd = null;
+        }
+
+        function openRemoveModal($listItem) {
+            adminToRemove = $listItem;
+            const adminName = $listItem.find('.text-sm.font-semibold').text();
+            $('#remove-modal-prompt-message').text(`Are you sure you want to remove ${adminName}? Please enter your password to confirm.`);
+            $('#remove-admin-modal').removeClass('hidden').addClass('flex');
+            $('#remove-modal-password').focus();
+        }
+
+        function closeRemoveModal() {
+            $('#remove-admin-modal').addClass('hidden').removeClass('flex');
+            $('#remove-modal-password').val('');
+            $('#remove-modal-error-message').addClass('hidden');
+            adminToRemove = null;
+        }
+        // --- END ADMIN MANAGEMENT LOGIC ---
+
+        function navigateTo(page) {
+            $('#page-overview, #page-drivers, #page-violations, #page-suspended, #page-profile, #page-notifications, #page-training').addClass('hidden');
+
+            $('.nav-link')
+            .removeClass('bg-[#084a9e] text-white')
+            .addClass('text-blue-100 hover:bg-[#084a9e] hover:text-white')
+            .find('span:first-child')
+            .addClass('hidden');
+
+            $(`#page-${page}`).removeClass('hidden');
+
+            if (page !== 'profile') {
+                $(`#nav-${page}, #mnav-${page}`)
+                .addClass('bg-[#084a9e] text-white')
+                .removeClass('text-blue-100 hover:bg-[#084a9e] hover:text-white')
+                .find('span:first-child')
+                .removeClass('hidden');
+            }
+
+            if (page === 'drivers') {
+                loadAllDrivers();
+            }
+
+            if (page === 'violations') {
+                initializeViolationsPage();
+            }
+
+            if (page === 'suspended') {
+                initializeSuspendedPage();
+            }
+
+            if (page === 'notifications') {
+                initializeNotificationsPage();
+            }
+
+            if (page === 'training') {
+                initializeTrainingPage();
+            }
+
+            if (page === 'profile') {
+                initializeOfficers();
+                setupAdminSearch();
+            }
+        }
+
+        function useGPS() {
+            const $locationInput = $('#location');
+            if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(
+                (position) => {
+                const lat = position.coords.latitude;
+                const lon = position.coords.longitude;
+                $locationInput.val(`${lat.toFixed(5)}, ${lon.toFixed(5)}`);
+                },
+                () => {
+                alert('Could not get your location. Using a default location.');
+                $locationInput.val('40.7128, -74.0060');
+                }
+            );
+            } else {
+            alert('Geolocation is not supported by this browser.');
+            $locationInput.val('Geolocation not supported');
+            }
+        }
+
+        $('#profile-image-input').on('change', function(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    $('#profile-image-preview, #sidebar-profile-image').attr('src', e.target.result);
+                }
+                reader.readAsDataURL(file);
+            }
+        });
+
+        $('#profile-info-form').on('submit', function() {
+            const newName = $('#profile-name').val();
+            $('#sidebar-profile-name').text(newName);
+             $('.nav-link').each(function() {
+                const mobileButton = $(`#m${this.id}`);
+                if ($(this).hasClass('bg-[#084a9e]')) {
+                    mobileButton.addClass('bg-[#084a9e] text-white').removeClass('text-blue-100 hover:bg-[#084a9e] hover:text-white').find('span:first-child').removeClass('hidden');
+                } else {
+                    mobileButton.removeClass('bg-[#084a9e] text-white').addClass('text-blue-100 hover:bg-[#084a9e] hover:text-white').find('span:first-child').addClass('hidden');
+                }
+            });
+        });
+
+        $('#add-admin-form').on('submit', function(event) {
+            event.preventDefault();
+            openConfirmationModal();
+        });
+
+        // Add Admin Modal Controls
+        $('#modal-cancel-button').on('click', closeConfirmationModal);
+        $('#password-confirm-modal').on('click', function(e) {
+            if ($(e.target).is('#password-confirm-modal')) {
+                closeConfirmationModal();
+            }
+        });
+
+        $('#modal-confirm-button').on('click', function() {
+            const password = $('#modal-password').val();
+            if (password.trim() === '') {
+                $('#modal-error-message').text('Password is required.').removeClass('hidden');
+                return;
+            }
+            if (password !== 'password123') {
+                $('#modal-error-message').text('Incorrect password. Please try again.').removeClass('hidden');
+                return;
+            }
+
+            if (officerToAdd) {
+                const userHash = officerToAdd.email.split('').reduce((acc, char) => char.charCodeAt(0) + ((acc << 5) - acc), 0);
+                const newAdminHtml = `
+                    <li class="flex items-center justify-between p-3 bg-slate-50 rounded-lg">
+                        <div class="flex items-center">
+                            <img class="h-10 w-10 rounded-full object-cover" src="https://i.pravatar.cc/150?u=${userHash}" alt="${officerToAdd.name} avatar">
+                            <div class="ml-3">
+                                <p class="text-sm font-semibold text-slate-800">${officerToAdd.name}</p>
+                                <p class="text-xs text-slate-500">${officerToAdd.email}</p>
+                            </div>
+                        </div>
+                        <button class="text-sm font-medium text-red-600 hover:text-red-800">Remove</button>
+                    </li>
+                `;
+                $('#admin-list').append(newAdminHtml);
+                availableOfficers = availableOfficers.filter(o => o.id !== officerToAdd.id);
+                closeConfirmationModal();
+                alert('Administrator added successfully!');
+                $('#add-admin-form')[0].reset();
+                $('#selected-officer-data').val('');
+            }
+        });
+
+        // Remove Admin Modal Controls & Logic
+        $('#admin-list').on('click', 'button', function() {
+             openRemoveModal($(this).closest('li'));
+        });
+
+        $('#remove-modal-cancel-button').on('click', closeRemoveModal);
+        $('#remove-admin-modal').on('click', function(e) {
+            if ($(e.target).is('#remove-admin-modal')) {
+                closeRemoveModal();
+            }
+        });
+
+        $('#remove-modal-confirm-button').on('click', function() {
+            const password = $('#remove-modal-password').val();
+             if (password.trim() === '') {
+                $('#remove-modal-error-message').text('Password is required.').removeClass('hidden');
+                return;
+            }
+            if (password !== 'password123') {
+                $('#remove-modal-error-message').text('Incorrect password. Please try again.').removeClass('hidden');
+                return;
+            }
+
+            if (adminToRemove) {
+                const email = adminToRemove.find('.text-xs.text-slate-500').text();
+                const removedOfficer = officers.find(o => o.email === email);
+
+                adminToRemove.remove();
+                alert('Administrator has been removed.');
+
+                if (removedOfficer && !availableOfficers.some(o => o.id === removedOfficer.id)) {
+                    availableOfficers.push(removedOfficer);
+                    availableOfficers.sort((a, b) => parseInt(a.id) - parseInt(b.id));
+                }
+                closeRemoveModal();
+            }
+        });
+
+        $('#logout-button').on('click', function() {
+            // Clear the authentication token
+            localStorage.removeItem("authToken");
+
+            // Inform the user
+            alert("You have been logged out successfully.");
+
+            // Redirect to the login page
+            window.location.href = '../Pages/sing_in_And_Sing_up.html';
+        });
+
+
+        navigateTo('overview');
+
+        window.navigateTo = navigateTo;
+        window.useGPS = useGPS;
+    });
+    </script>
   </body>
 </html>

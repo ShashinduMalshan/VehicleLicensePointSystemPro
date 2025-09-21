@@ -1,31 +1,25 @@
     const token = localStorage.getItem("authToken");
     window.PageFunctions = window.PageFunctions || {};
 
-    PageFunctions.loadViolation = function() {
 
-        console.log("violation");
+    let violationPage = 0;
+    const pageSize = 8;
+
+    PageFunctions.loadViolation = function(page = 0, size = pageSize) {
         if (!token) {
             alert("You are not logged in! Please log in first.");
             window.location.href = '../Pages/sing_in_And_Sing_up.html';
-
+            return;
         }
 
         $.ajax({
-            url: "http://localhost:8080/api/v1/violation/all",
+            url: `http://localhost:8080/api/v1/violation/all?page=${page}&size=${size}`,
             method: "GET",
-            headers: {
-                "Authorization": "Bearer " + token
-            },
-            success: function (response) {
-
-
-
-                // Clear old data
+            headers: { "Authorization": "Bearer " + token },
+            success: function(response) {
                 $('#violationTbody').empty();
 
-                // Loop through each job and append to a table
-                response.forEach(function (violation) {
-
+                response.content.forEach(function(violation) {
                     let row = `
                         <tr style="border-bottom:1px solid #ddd;">
                             <td style="padding:10px 15px;">${violation.driver}</td>
@@ -36,22 +30,41 @@
                             <td style="padding:10px 15px;">${violation.location}</td>
                             <td style="padding:10px 15px;">${violation.description}</td>
                             <td style="padding:10px 15px;">${violation.lawId}</td>
-                            <td
-                                <button class="font-medium text-[#0a58ca] hover:text-[#084a9e]">
-                                View Details</button>
+                            <td>
+                                <button class="font-medium text-[#0a58ca] hover:text-[#084a9e]">View Details</button>
                             </td>
                         </tr>`;
-
                     $('#violationTbody').append(row);
                 });
+
+                // Update page info & buttons
+                $('#violation-page-info').text(`Page ${response.number + 1} of ${response.totalPages}`);
+                $('#violation-prev-btn').prop('disabled', response.first);
+                $('#violation-next-btn').prop('disabled', response.last);
             },
-
-
-            error: function (error) {
+            error: function() {
                 alert("Failed to load violation list.");
             }
         });
-    }
+    };
+
+    // Pagination buttons
+    $('#violation-prev-btn').on('click', function() {
+        if (violationPage > 0) {
+            violationPage--;
+            PageFunctions.loadViolation(violationPage, pageSize);
+        }
+    });
+
+    $('#violation-next-btn').on('click', function() {
+        violationPage++;
+        PageFunctions.loadViolation(violationPage, pageSize);
+    });
+
+    // Initial load
+    $(document).ready(function() {
+        PageFunctions.loadViolation(violationPage, pageSize);
+    });
 
     const $lawModal = $('#lawModal');
         const $openLawModalBtn = $('#openLawModalBtn');

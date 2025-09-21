@@ -58,10 +58,26 @@
                     </svg>
                     <span class="ml-3">Points System</span>
                 </button>
-                  <button id="mnav-report" onclick="navigateTo('report');window.__closeMobile&&window.__closeMobile()" class="nav-link flex items-center w-full px-4 py-2.5 text-sm font-medium rounded-lg transition-colors duration-200 relative text-left">
+                <button id="mnav-report" onclick="navigateTo('report');window.__closeMobile&&window.__closeMobile()" class="nav-link flex items-center w-full px-4 py-2.5 text-sm font-medium rounded-lg transition-colors duration-200 relative text-left">
                   <span class="hidden absolute left-0 top-0 bottom-0 w-1 bg-sky-300 rounded-r-full"></span>
                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-6 w-6"><path stroke-linecap="round" stroke-linejoin="round" d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z"></path></svg>
                   <span class="ml-3">Report</span>
+                </button>
+                <button id="mnav-suspend" onclick="navigateTo('suspend');window.__closeMobile&&window.__closeMobile()" class="nav-link flex items-center w-full px-4 py-2.5 text-sm font-medium rounded-lg transition-colors duration-200 relative text-left">
+                  <span class="hidden absolute left-0 top-0 bottom-0 w-1 bg-sky-300 rounded-r-full"></span>
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-6 w-6"><path stroke-linecap="round" stroke-linejoin="round" d="M15 9h3.75M15 12h3.75M15 15h3.75M4.5 19.5h15a2.25 2.25 0 0 0 2.25-2.25V6.75A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25v10.5A2.25 2.25 0 0 0 4.5 19.5Z" /><path stroke-linecap="round" stroke-linejoin="round" d="M6.75 12a1.125 1.125 0 1 0 0-2.25 1.125 1.125 0 0 0 0 2.25Z" /><path stroke-linecap="round" stroke-linejoin="round" d="M9.75 14.25a3 3 0 0 0-3-3H4.5v3h2.25Z" /></svg>
+                  <span class="ml-3">Suspended License</span>
+                </button>
+                <button id="mnav-training" onclick="navigateTo('training');window.__closeMobile&&window.__closeMobile()" class="nav-link flex items-center w-full px-4 py-2.5 text-sm font-medium rounded-lg transition-colors duration-200 relative text-left">
+                  <span class="hidden absolute left-0 top-0 bottom-0 w-1 bg-sky-300 rounded-r-full"></span>
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-6 w-6"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 0 0 6 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 0 1 6 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 0 1 6-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0 0 18 18a8.967 8.967 0 0 0-6 2.292m0-14.25v14.25" /></svg>
+                  <span class="ml-3">Training Programs</span>
+                </button>
+                <button id="mnav-notification" onclick="navigateTo('notification');window.__closeMobile&&window.__closeMobile()" class="nav-link flex items-center w-full px-4 py-2.5 text-sm font-medium rounded-lg transition-colors duration-200 relative text-left">
+                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-6 w-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M14.857 17.082a23.848 23.848 0 0 0 5.454-1.31A8.967 8.967 0 0 1 18 9.75V9A6 6 0 0 0 6 9v.75a8.967 8.967 0 0 1-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 0 1-5.714 0m5.714 0a3 3 0 1 1-5.714 0" />
+                </svg>
+                <span class="ml-3">Notifications</span>
                 </button>
               </nav>
             </aside>
@@ -101,7 +117,17 @@
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-6 w-6"><path stroke-linecap="round" stroke-linejoin="round" d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z" /></svg>
             <span class="ml-3">Reports</span>
           </button>
-          <button class="flex items-center w-full px-4 py-2.5 text-sm font-medium rounded-lg transition-colors duration-200 relative text-left text-blue-100 hover:bg-[#084a9e] hover:text-white">
+          <button id="nav-suspend" onclick="navigateTo('suspend')" class="nav-link flex items-center w-full px-4 py-2.5 text-sm font-medium rounded-lg transition-colors duration-200 relative text-left">
+            <span class="hidden absolute left-0 top-0 bottom-0 w-1 bg-sky-300 rounded-r-full"></span>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-6 w-6"><path stroke-linecap="round" stroke-linejoin="round" d="M15 9h3.75M15 12h3.75M15 15h3.75M4.5 19.5h15a2.25 2.25 0 0 0 2.25-2.25V6.75A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25v10.5A2.25 2.25 0 0 0 4.5 19.5Z" /><path stroke-linecap="round" stroke-linejoin="round" d="M6.75 12a1.125 1.125 0 1 0 0-2.25 1.125 1.125 0 0 0 0 2.25Z" /><path stroke-linecap="round" stroke-linejoin="round" d="M9.75 14.25a3 3 0 0 0-3-3H4.5v3h2.25Z" /></svg>
+            <span class="ml-3">Suspended License</span>
+          </button>
+          <button id="nav-training" onclick="navigateTo('training');window.__closeMobile&&window.__closeMobile()" class="nav-link flex items-center w-full px-4 py-2.5 text-sm font-medium rounded-lg transition-colors duration-200 relative text-left">
+            <span class="hidden absolute left-0 top-0 bottom-0 w-1 bg-sky-300 rounded-r-full"></span>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-6 w-6"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 0 0 6 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 0 1 6 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 0 1 6-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0 0 18 18a8.967 8.967 0 0 0-6 2.292m0-14.25v14.25" /></svg>
+            <span class="ml-3">Training Programs</span>
+          </button>
+          <button id="nav-notification" onclick="navigateTo('notification');window.__closeMobile&&window.__closeMobile()" class="nav-link flex items-center w-full px-4 py-2.5 text-sm font-medium rounded-lg transition-colors duration-200 relative text-left">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-6 w-6">
               <path stroke-linecap="round" stroke-linejoin="round" d="M14.857 17.082a23.848 23.848 0 0 0 5.454-1.31A8.967 8.967 0 0 1 18 9.75V9A6 6 0 0 0 6 9v.75a8.967 8.967 0 0 1-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 0 1-5.714 0m5.714 0a3 3 0 1 1-5.714 0" />
             </svg>
@@ -252,6 +278,13 @@
               </div>
 
               <div class="bg-white p-4 sm:p-6 rounded-lg shadow-md"><div class="overflow-x-auto"><table class="w-full text-sm text-left text-slate-600"><thead class="text-xs text-slate-700 uppercase bg-slate-100"><tr><th scope="col" class="px-6 py-3 hidden lg:table-cell">License Number</th><th scope="col" class="px-6 py-3">Driver Name</th><th scope="col" class="px-6 py-3 hidden md:table-cell">Email</th><th scope="col" class="px-6 py-3">Total Points</th><th scope="col" class="px-6 py-3">Status</th><th scope="col" class="px-6 py-3 text-center">Actions</th></tr></thead><tbody id="driverTbody" class="divide-y divide-slate-200"></tbody></table></div></div>
+             <div class="flex justify-between items-center mt-4 px-4 py-2">
+                 <span id="driver-page-info" class="text-sm text-slate-600"></span>
+                 <div class="flex space-x-2">
+                            <button id="driver-prev-btn" class="px-3 py-1 text-sm font-medium text-slate-700 bg-white border border-slate-300 rounded-md hover:bg-slate-50 disabled:opacity-50 disabled:cursor-not-allowed">Previous</button>
+                            <button id="driver-next-btn" class="px-3 py-1 text-sm font-medium text-slate-700 bg-white border border-slate-300 rounded-md hover:bg-slate-50 disabled:opacity-50 disabled:cursor-not-allowed">Next</button>
+                        </div>
+            </div>
             </div>
           </div>
 
@@ -329,6 +362,13 @@
 
                         </tbody>
                     </table>
+                </div>
+                <div class="flex justify-between items-center mt-4 px-4 py-2">
+                    <span id="violation-page-info" class="text-sm text-slate-600"></span>
+                    <div class="flex space-x-2">
+                            <button id="violation-prev-btn" class="px-3 py-1 text-sm font-medium text-slate-700 bg-white border border-slate-300 rounded-md hover:bg-slate-50 disabled:opacity-50 disabled:cursor-not-allowed">Previous</button>
+                            <button id="violation-next-btn" class="px-3 py-1 text-sm font-medium text-slate-700 bg-white border border-slate-300 rounded-md hover:bg-slate-50 disabled:opacity-50 disabled:cursor-not-allowed">Next</button>
+                        </div>
                 </div>
                 </div>
               </div>
@@ -561,17 +601,201 @@
             </div>
         </main>
 
+<!--            suspended page-->
+        <div id="page-suspend" class="hidden">
+            <div class="container mx-auto h-full flex flex-col">
+                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6">
+                    <div>
+                        <h1 class="text-2xl lg:text-3xl font-bold text-slate-800">Suspended License Case Management</h1>
+                        <p class="text-sm text-slate-500 mt-1">Select a case to review details, update status, and log actions.</p>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+                    <div class="md:col-span-1 bg-white p-6 rounded-lg shadow-md">
+                        <h3 class="text-lg font-semibold text-slate-800 mb-4">Suspension Reason Breakdown</h3>
+                        <div class="h-48 flex justify-center items-center">
+                            <canvas id="suspension-reasons-chart"></canvas>
+                        </div>
+                    </div>
+                    <div class="md:col-span-2 grid grid-cols-2 gap-6">
+                        <div class="bg-white p-6 rounded-lg shadow-md flex flex-col justify-center"><div class="flex items-center justify-between"><div><p class="text-sm text-slate-500">Total Suspended Cases</p><p class="text-4xl font-bold text-slate-800 mt-1">89</p></div><div class="flex-shrink-0 flex items-center justify-center h-14 w-14 rounded-full bg-red-100"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-7 w-7 text-red-500"><path stroke-linecap="round" stroke-linejoin="round" d="M18.364 18.364A9 9 0 0 0 5.636 5.636m12.728 12.728A9 9 0 0 1 5.636 5.636m12.728 12.728L5.636 5.636"></path></svg></div></div></div>
+                        <div class="bg-white p-6 rounded-lg shadow-md flex flex-col justify-center"><div class="flex items-center justify-between"><div><p class="text-sm text-slate-500">Reinstated This Month</p><p class="text-4xl font-bold text-slate-800 mt-1">2</p></div><div class="flex-shrink-0 flex items-center justify-center h-14 w-14 rounded-full bg-green-100"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-7 w-7 text-green-500"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"></path></svg></div></div></div>
+                    </div>
+                </div>
+
+                <div class="flex-grow grid grid-cols-1 lg:grid-cols-3 gap-6 min-h-0">
+                    <!-- Left Column: Driver List -->
+                    <div class="lg:col-span-1 bg-white rounded-lg shadow-md flex flex-col">
+                        <div class="p-4 border-b border-slate-200">
+                            <div class="relative">
+                                <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-5 w-5 text-slate-400"><path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z"></path></svg></div>
+                                <input type="text" id="suspended-search-input" placeholder="Search by name or license..." class="w-full pl-10 pr-4 py-2 text-sm text-slate-700 bg-white border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#0a58ca]">
+                            </div>
+                            <select id="suspension-reason-filter" class="mt-2 w-full text-sm text-slate-700 bg-white border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#0a58ca] p-2">
+                                <option value="all">All Suspension Reasons</option>
+                                <option value="High Points">High Points</option>
+                                <option value="DUI">DUI</option>
+                                <option value="Unpaid Fines">Unpaid Fines</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+                        <div id="suspended-driver-list" class="flex-grow overflow-y-auto p-2 space-y-2">
+                            <!-- Driver list items will be populated by JS -->
+                        </div>
+                    </div>
+
+                    <!-- Right Column: Details Pane -->
+                    <div id="suspended-detail-pane" class="lg:col-span-2 bg-white rounded-lg shadow-md flex flex-col min-h-0">
+                        <div id="detail-pane-placeholder" class="flex-grow flex flex-col justify-center items-center text-center p-8">
+                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-16 w-16 text-slate-300 mb-4"><path stroke-linecap="round" stroke-linejoin="round" d="M11.25 11.25l.041-.02a.75.75 0 011.063.852l-.708 2.836a.75.75 0 001.063.853l.041-.021M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 15.75l-2.489-2.489m0 0a3.375 3.375 0 10-4.773-4.773 3.375 3.375 0 004.774 4.774zM21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                             <h3 class="text-lg font-semibold text-slate-600">No Case Selected</h3>
+                             <p class="text-sm text-slate-500 mt-1">Please select a driver from the list on the left to view their case file.</p>
+                        </div>
+                        <div id="detail-pane-content" class="hidden flex-grow flex flex-col min-h-0">
+                           <div class="p-4 border-b border-slate-200 flex items-center space-x-4">
+                               <img id="detail-driver-img" class="h-16 w-16 rounded-full object-cover" src="" alt="Driver photo" />
+                               <div>
+                                   <h3 id="detail-driver-name" class="text-xl font-bold text-slate-800"></h3>
+                                   <p id="detail-driver-license" class="text-sm font-mono text-slate-500"></p>
+                                   <p class="text-sm text-slate-600">Reason: <span id="detail-driver-reason" class="font-semibold"></span></p>
+                               </div>
+                           </div>
+                           <div class="flex-grow p-4 overflow-y-auto grid grid-cols-1 md:grid-cols-2 gap-6">
+                               <!-- Checklist and Timeline -->
+                               <div class="space-y-6">
+                                   <div>
+                                       <h4 class="text-md font-semibold text-slate-700 mb-3">Triggering Violation</h4>
+                                       <div id="detail-violation" class="p-3 bg-red-50 border border-red-200 rounded-lg space-y-2">
+                                           <!-- Content populated by JS -->
+                                       </div>
+                                   </div>
+                                   <div>
+                                       <h4 class="text-md font-semibold text-slate-700 mb-3">Reinstatement Checklist</h4>
+                                       <div id="detail-checklist" class="space-y-2"></div>
+                                   </div>
+                                   <div>
+                                      <h4 class="text-md font-semibold text-slate-700 mb-3">Case Timeline</h4>
+                                      <div id="detail-timeline" class="space-y-3 border-l-2 border-slate-200 pl-4"></div>
+                                   </div>
+                               </div>
+                               <!-- Communications Log -->
+                               <div>
+                                   <h4 class="text-md font-semibold text-slate-700 mb-3">Communication Log</h4>
+                                   <div id="detail-comm-log" class="space-y-3 max-h-64 overflow-y-auto pr-2"></div>
+                                   <form id="add-comm-log-form" class="mt-4 space-y-2">
+                                       <textarea id="comm-log-input" rows="3" class="w-full text-sm p-2 border border-slate-300 rounded-md focus:ring-2 focus:ring-[#0a58ca] focus:outline-none" placeholder="Add a new communication note..."></textarea>
+                                       <button type="submit" class="w-full text-sm bg-[#0a58ca] hover:bg-[#084a9e] text-white font-bold py-2 px-3 rounded-lg transition-colors">Add Log Entry</button>
+                                   </form>
+                               </div>
+                           </div>
+                           <div class="p-4 bg-slate-50 border-t border-slate-200 flex flex-wrap justify-end gap-3">
+                               <button class="text-sm bg-white hover:bg-slate-100 text-slate-700 font-semibold py-2 px-4 border border-slate-300 rounded-lg shadow-sm transition-colors">Send Reinstatement Info</button>
+                               <button class="text-sm bg-white hover:bg-slate-100 text-slate-700 font-semibold py-2 px-4 border border-slate-300 rounded-lg shadow-sm transition-colors">Schedule Hearing</button>
+                               <button id="assign-training-btn" class="text-sm bg-[#0a58ca] hover:bg-[#084a9e] text-white font-bold py-2 px-4 rounded-lg shadow-sm transition-colors">Assign to Training Program</button>
+                           </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+         <div id="page-training" class="hidden">
+            <div class="container mx-auto">
+                <h1 class="text-2xl lg:text-3xl font-bold text-slate-800 mb-2">Driver Training Programs</h1>
+                <p class="text-sm text-slate-500 mb-8">Manage drivers assigned to remedial training and track their progress.</p>
+
+                <!-- Stats -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+                    <div class="bg-white p-6 rounded-lg shadow-md"><div class="flex items-center justify-between"><div><p class="text-sm text-slate-500">Drivers in Training</p><p class="text-3xl font-bold text-slate-800 mt-1">14</p></div><div class="flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-blue-100"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.653-.125-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.653.125-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" /></svg></div></div></div>
+                    <div class="bg-white p-6 rounded-lg shadow-md"><div class="flex items-center justify-between"><div><p class="text-sm text-slate-500">Available Programs</p><p class="text-3xl font-bold text-slate-800 mt-1">4</p></div><div class="flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-indigo-100"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-indigo-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25" /></svg></div></div></div>
+                    <div class="bg-white p-6 rounded-lg shadow-md"><div class="flex items-center justify-between"><div><p class="text-sm text-slate-500">Average Completion</p><p class="text-3xl font-bold text-slate-800 mt-1">68%</p></div><div class="flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-green-100"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg></div></div></div>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                    <!-- Drivers in Training -->
+                    <div class="lg:col-span-2 bg-white p-6 rounded-lg shadow-md">
+                        <h3 class="text-lg font-semibold text-slate-800 mb-4">Drivers in Training</h3>
+                        <div id="training-driver-list" class="space-y-4 max-h-[60vh] overflow-y-auto pr-2">
+                            <!-- Driver list populated by JS -->
+                        </div>
+                    </div>
+
+                    <!-- Available Programs -->
+                    <div class="lg:col-span-1 bg-white p-6 rounded-lg shadow-md">
+                        <h3 class="text-lg font-semibold text-slate-800 mb-4">Available Programs</h3>
+                        <div id="available-programs-list" class="space-y-4">
+                            <!-- Programs populated by JS -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <div id="notification-modal" class="fixed inset-0 bg-black/60 z-50 hidden items-center justify-center p-4" aria-labelledby="notification-modal-title" role="dialog" aria-modal="true">
+        <div class="bg-white rounded-lg shadow-xl w-full max-w-2xl transform transition-all">
+            <div class="p-6 border-b border-slate-200 flex justify-between items-start">
+                <div>
+                    <h3 id="notification-modal-title" class="text-lg font-bold text-slate-800">Notification Details</h3>
+                    <p id="notification-modal-subtitle" class="text-sm text-slate-500 mt-1"></p>
+                </div>
+                <button id="notification-modal-close-top" type="button" class="p-1 rounded-full text-slate-500 hover:bg-slate-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#0a58ca]">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-6 w-6"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" /></svg>
+                </button>
+            </div>
+            <div class="p-6">
+                <div class="prose prose-sm max-w-none text-slate-600 bg-slate-50 p-4 rounded-md border border-slate-200">
+                    <p><strong>To:</strong> <span id="notification-modal-to"></span></p>
+                    <p><strong>Subject:</strong> <span id="notification-modal-subject"></span></p>
+                    <hr class="my-3">
+                    <div id="notification-modal-body"></div>
+                </div>
+            </div>
+            <div class="bg-slate-50 px-6 py-4 flex justify-end rounded-b-lg">
+                <button id="notification-modal-close-bottom" type="button" class="px-4 py-2 text-sm font-medium text-slate-700 bg-white border border-slate-300 rounded-lg hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#0a58ca]">Close</button>
+            </div>
+        </div>
+    </div>
+             <div id="page-notification" class="hidden">
+            <div class="container mx-auto">
+                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8">
+                    <div>
+                        <h1 class="text-2xl lg:text-3xl font-bold text-slate-800">System Notifications</h1>
+                        <p class="text-sm text-slate-500 mt-1">Track all automated communications sent to drivers.</p>
+                    </div>
+                    <div class="flex items-center space-x-2 mt-4 sm:mt-0 w-full sm:w-auto">
+                        <select id="notification-type-filter" class="w-full sm:w-auto text-sm text-slate-700 bg-white border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#0a58ca] p-2">
+                            <option value="all">All Notification Types</option>
+                            <option value="Suspension">Suspension Notice</option>
+                            <option value="Warning">High Points Warning</option>
+                            <option value="Reminder">Fine Payment Reminder</option>
+                        </select>
+                        <select id="notification-sort-filter" class="w-full sm:w-auto text-sm text-slate-700 bg-white border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#0a58ca] p-2">
+                            <option value="newest">Newest First</option>
+                            <option value="oldest">Oldest First</option>
+                        </select>
+                    </div>
+                </div>
+                <div id="notification-list" class="space-y-4">
+                    <!-- Notifications will be populated here by JS -->
+                </div>
+            </div>
+        </div>
+
 
         </main>
       </div>
     </div>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://unpkg.com/html5-qrcode"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="../JS/DashBord.js"></script>
     <script src="../JS/Driver.js"></script>
     <script src="../JS/ViolationsPoint.js"></script>
     <script src="../JS/Profile.js"></script>
     <script src="../JS/report.js"></script>
+    <script src="../JS/suspended.js"></script>
+    <script src="../JS/TrainingProgram.js"></script>
+    <script src="../JS/Notification.js"></script>
 
 
   </body>

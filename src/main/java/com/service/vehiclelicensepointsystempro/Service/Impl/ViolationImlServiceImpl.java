@@ -11,6 +11,10 @@ import jakarta.mail.MessagingException;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -19,7 +23,6 @@ import org.springframework.web.server.ResponseStatusException;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -55,11 +58,11 @@ public class ViolationImlServiceImpl implements ViolationImlService {
 
 
     @Override
-    public List<ViolationPointDto> getAllViolations() {
+    public Page<ViolationPointDto> getAllViolations(int page, int size) {
+        Pageable pageable = PageRequest.of(page, size, Sort.by("violationDate").descending());
+        Page<ViolationPoint> all = violationRepository.findAll(pageable);
 
-    List<ViolationPoint> all = violationRepository.findAll();
-
-    return all.stream().map(vp -> {
+        return all.map(vp -> {
             ViolationPointDto dto = new ViolationPointDto();
             dto.setPointId(vp.getPointId());
             dto.setDescription(vp.getDescription());
@@ -67,16 +70,14 @@ public class ViolationImlServiceImpl implements ViolationImlService {
             dto.setViolationTime(vp.getViolationTime());
             dto.setViolationDate(vp.getViolationDate());
 
-            // Map IDs from related entities
             dto.setOfficerId(vp.getOfficer() != null ? vp.getOfficer().getOfficerId() : null);
             dto.setDriver(vp.getDriver() != null ? vp.getDriver().getDrivingLicNum() : null);
             dto.setRevenueLic(vp.getRevenueLic() != null ? vp.getRevenueLic().getLicNum() : null);
             dto.setLawId(vp.getLaw() != null ? vp.getLaw().getLawId() : null);
 
             return dto;
-        }).toList();
+        });
     }
-
 
     @Override
     @Transactional
