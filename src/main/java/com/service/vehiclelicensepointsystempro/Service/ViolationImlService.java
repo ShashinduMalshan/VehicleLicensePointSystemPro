@@ -12,4 +12,6 @@ public interface ViolationImlService {
     Page<ViolationPointDto> getAllViolations(int page, int size);
 
     ResponseEntity<String> save(ViolationPointDto violationPointDto) throws MessagingException;
+
+    List<ViolationPointDto> getViolationByDriverId(String driverId, int page, int size);
 }

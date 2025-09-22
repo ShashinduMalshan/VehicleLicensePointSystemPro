@@ -48,6 +48,21 @@ public class ViolationsController {
     }
 }
 
+    @GetMapping("/driver/{driverId}")
+    public ResponseEntity<List<ViolationPointDto>> getViolationsByDriverId(
+            @PathVariable String driverId,
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "15") int size) {
+        try {
+            List<ViolationPointDto> violations = violationService.getViolationByDriverId(driverId, page, size);
+            return ResponseEntity.ok(violations);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                                 .body(null);
+        }
+    }
+
 
 
 }

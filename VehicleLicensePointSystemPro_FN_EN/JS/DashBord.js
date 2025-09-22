@@ -64,6 +64,8 @@ $(document).ready(function() {
          initializeNotificationsPage();
     }else if (page === 'report') {
          fetchDistrictReports();
+    }else if (page === 'suspend') {
+         initializeSuspendedPage();
     }
   }
 

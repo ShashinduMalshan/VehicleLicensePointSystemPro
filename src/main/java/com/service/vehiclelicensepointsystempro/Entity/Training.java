@@ -23,6 +23,7 @@ public class Training {
     private String name;
     private LocalDate duration;
     private Integer suspendedPoint;
+    private LocalDate TrainingStartDate;
 
     @ManyToOne
     @JoinColumn(name = "driver_id")

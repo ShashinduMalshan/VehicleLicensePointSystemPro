@@ -23,7 +23,9 @@ import org.springframework.web.server.ResponseStatusException;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -129,7 +131,7 @@ public class ViolationImlServiceImpl implements ViolationImlService {
               if (suspendLic.isEmpty()){
                  SuspendLic suspend = SuspendLic.builder()
                                 .driverName(driver.getName())
-                                .timeDuration(String.valueOf(LocalTime.now().plusHours(1)))
+                                .timeDuration(String.valueOf(LocalDate.now().plusYears(1)))
                                 .points(driver.getTotalPoint())
                                 .driver(driver)
                                 .build();
@@ -157,6 +159,35 @@ public class ViolationImlServiceImpl implements ViolationImlService {
 
         return ResponseEntity.ok("Violation logged successfully");
     }
+
+
+    @Override
+    public List<ViolationPointDto> getViolationByDriverId(String driverId, int page, int size)  {
+        Pageable pageable = PageRequest.of(page, size, Sort.by("violationDate").descending());
+
+        Page<ViolationPoint> violations = violationRepository.findViolationsByDriverId(driverId, pageable);
+
+        return violations.stream()
+                .map(vp -> {
+                    ViolationPointDto dto = new ViolationPointDto();
+                    dto.setPointId(vp.getPointId());
+                    dto.setDescription(vp.getDescription());
+                    dto.setLocation(vp.getLocation());
+                    dto.setViolationTime(vp.getViolationTime());
+                    dto.setViolationDate(vp.getViolationDate());
+
+                    dto.setOfficerId(vp.getOfficer() != null ? vp.getOfficer().getOfficerId() : null);
+                    dto.setDriver(vp.getDriver() != null ? vp.getDriver().getDrivingLicNum() : null);
+                    dto.setRevenueLic(vp.getRevenueLic() != null ? vp.getRevenueLic().getLicNum() : null);
+                    dto.setLawId(vp.getLaw() != null ? vp.getLaw().getLawId() : null);
+
+                    return dto;
+                })
+                .collect(Collectors.toList());
+
+    }
+
+
 
 
 
