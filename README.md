@@ -164,13 +164,16 @@ A typical workflow for an administrator:
 *These are placeholder images. Replace them with actual screenshots of your running application.*
 
 **Overview Dashboard**
-![Overview Dashboard](https://via.placeholder.com/800x450.png?text=Overview+Dashboard+Screenshot)
+![Overview Dashboard](VehicleLicensePointSystemPro_FN_EN/assets/Screenshot%20from%202025-09-22%2016-17-46.png)
 
 **Driver Management Page**
-![Driver Management](https://via.placeholder.com/800x450.png?text=Driver+Management+Screenshot)
+![Driver Management](VehicleLicensePointSystemPro_FN_EN/assets/Screenshot%20from%202025-09-22%2016-17-53.png)
+
+**Report Page**
+![Driver Management](VehicleLicensePointSystemPro_FN_EN/assets/Screenshot%20from%202025-09-22%2016-18-18.png)
 
 **Suspended License Case File**
-![Suspended License Management](https://via.placeholder.com/800x450.png?text=Suspended+License+Case+File)
+![Suspended License Management](VehicleLicensePointSystemPro_FN_EN/assets/Screenshot%20from%202025-09-22%2016-18-44.png)
 
 
 ---
