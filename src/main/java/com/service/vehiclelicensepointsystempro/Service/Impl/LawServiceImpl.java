@@ -7,6 +7,10 @@ import com.service.vehiclelicensepointsystempro.Service.LawService;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,14 +20,23 @@ import java.util.List;
 public class LawServiceImpl implements LawService {
 
     private final LawRepository lawRepository;
-    private final ModelMapper modelMApper;
+    private final ModelMapper modelMapper;
 
     @Override
     public List<LawDto> getAllTrafficLaw() {
              List<TrafficViolationLaw> all = lawRepository.findAll();
-            return modelMApper.map(all,new TypeToken<List<LawDto>>(){}.getType());
+            return modelMapper.map(all,new TypeToken<List<LawDto>>(){}.getType());
 
     }
+    @Override
+    public Page<LawDto> getAllTrafficLaw(int page, int size) {
+        Pageable pageable = PageRequest.of(page, size, Sort.by("lawId").ascending());
+        Page<TrafficViolationLaw> lawPage = lawRepository.findAll(pageable);
+
+        return lawPage.map(law -> modelMapper.map(law, LawDto.class));
+    }
+
+
 
 
 }

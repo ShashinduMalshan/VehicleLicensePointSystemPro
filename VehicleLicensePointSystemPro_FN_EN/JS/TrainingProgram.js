@@ -1,6 +1,9 @@
 window.trainingListenersReady = window.trainingListenersReady || false;
 window.driversInTraining = window.driversInTraining || [];
 window.selectedTrainingDriverId = window.selectedTrainingDriverId || null;
+
+let trainingPhotoUrl = "https://cdn-icons-png.flaticon.com/512/219/219983.png"
+
 function initializeTrainingPage() {
             const token = localStorage.getItem("authToken");
             const $list = $('#training-driver-list');
@@ -23,7 +26,7 @@ function initializeTrainingPage() {
                         id: driver.driverId,
                         name: driver.name,
                         program: driver.program,
-                        photo: driver.photo || `https://i.pravatar.cc/150?u=${driver.driverId}`,
+                        photo: trainingPhotoUrl,
                         startDate: driver.duration,
                         status: driver.suspendedPoint
                     }));

@@ -4,6 +4,8 @@ let trainingListenersReady = false;
 let suspensionChart = null;
 let currentDriverId = null;
 let allSuspendedDrivers = [];
+let photoUrl =" https://cdn-icons-png.flaticon.com/512/147/147142.png"
+
 
 function initializeSuspendedPage() {
     const token = localStorage.getItem("authToken");
@@ -14,10 +16,10 @@ function initializeSuspendedPage() {
         headers: { "Authorization": "Bearer " + token },
         dataType: "json",
         success: function(data) {
-            console.log(data); // check what the backend returns
 
             // Use the array inside `content` if pagination is used
             allSuspendedDrivers = Array.isArray(data) ? data : data.content || [];
+
 
             renderSuspendedDriverList(allSuspendedDrivers);
             renderSuspensionChart();
@@ -42,7 +44,7 @@ function renderSuspendedDriverList(drivers) {
     drivers.forEach(driver => {
         const itemHtml = `
             <div class="flex items-center p-3 rounded-lg cursor-pointer hover:bg-sky-50 transition-colors" data-driver-id="${driver.id}">
-                <img class="h-10 w-10 rounded-full object-cover" src="${driver.photo}" alt="${driver.name}">
+                <img class="h-10 w-10 rounded-full object-cover" src="${photoUrl}" alt="${driver.name}">
                 <div class="ml-3">
                     <p class="text-sm font-semibold text-slate-800">${driver.name}</p>
                     <p class="text-xs text-slate-500">${driver.drivingLicNum} &bull; Suspended: ${driver.suspensionDate}</p>
@@ -63,7 +65,7 @@ function renderDriverDetail(driver) {
     $content.removeClass('hidden');
 
     // Header
-    $('#detail-driver-img').attr('src', driver.photo);
+    $('#detail-driver-img').attr('src', photoUrl);
     $('#detail-driver-name').text(driver.name);
     $('#detail-driver-license').text(driver.drivingLicNum);
     $('#detail-driver-reason').text(driver.reason);

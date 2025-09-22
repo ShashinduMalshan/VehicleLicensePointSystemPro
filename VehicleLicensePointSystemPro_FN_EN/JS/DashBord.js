@@ -34,7 +34,7 @@ $(document).ready(function() {
   $mobileOverlay.on('click', closeMobile);
   $(document).on('keydown', function(e){ if(e.key === 'Escape') closeMobile(); });
   function navigateTo(page) {
-    $('#page-overview, #page-drivers, #page-violations, #page-points, #page-reports,#page-notifications,#page-report,#page-suspend,#page-training').addClass('hidden');
+    $('#page-overview, #page-drivers, #page-violations, #page-points, #page-reports,#page-notification,#page-report,#page-suspend,#page-training').addClass('hidden');
 
     $('.nav-link')
       .removeClass('bg-[#084a9e] text-white')
@@ -66,6 +66,8 @@ $(document).ready(function() {
          fetchDistrictReports();
     }else if (page === 'suspend') {
          initializeSuspendedPage();
+    }else if (page === 'points') {
+        initializePointsSystemPage();
     }
   }
 

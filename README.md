@@ -166,6 +166,9 @@ A typical workflow for an administrator:
 **Overview Dashboard**
 ![Overview Dashboard](VehicleLicensePointSystemPro_FN_EN/assets/Screenshot%20from%202025-09-22%2016-17-46.png)
 
+**Violations Page**
+![Overview Dashboard](VehicleLicensePointSystemPro_FN_EN/assets/Screenshot%20from%202025-09-22%2016-18-02.png)
+
 **Driver Management Page**
 ![Driver Management](VehicleLicensePointSystemPro_FN_EN/assets/Screenshot%20from%202025-09-22%2016-17-53.png)
 
@@ -174,6 +177,10 @@ A typical workflow for an administrator:
 
 **Suspended License Case File**
 ![Suspended License Management](VehicleLicensePointSystemPro_FN_EN/assets/Screenshot%20from%202025-09-22%2016-18-44.png)
+
+
+**Training Program Management Page**
+![Training Program Management](VehicleLicensePointSystemPro_FN_EN/assets/Screenshot%20from%202025-09-22%2016-18-55.png)
 
 
 ---

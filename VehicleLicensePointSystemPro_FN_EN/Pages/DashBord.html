@@ -52,7 +52,7 @@
                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-6 w-6"><path stroke-linecap="round" stroke-linejoin="round" d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z"></path></svg>
                   <span class="ml-3">Violations</span>
                 </button>
-                <button id="mnav-Points-System" class="nav-link flex items-center w-full px-4 py-2.5 text-sm font-medium rounded-lg transition-colors duration-200 relative text-left">
+                <button id="mnav-Points-System" onclick="navigateTo('points');window.__closeMobile&&window.__closeMobile()" class="nav-link flex items-center w-full px-4 py-2.5 text-sm font-medium rounded-lg transition-colors duration-200 relative text-left">
                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-6 w-6">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 15.75V18m-7.5-6.75h.008v.008H8.25v-.008Zm0 3h.008v.008H8.25v-.008Zm0 3h.008v.008H8.25v-.008Zm3-6h.008v.008h-.008v-.008Zm0 3h.008v.008h-.008v-.008Zm0 3h.008v.008h-.008v-.008Zm3-6h.008v.008h-.008v-.008Zm0 3h.008v.008h-.008v-.008ZM21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
                     </svg>
@@ -106,9 +106,10 @@
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-6 w-6"><path stroke-linecap="round" stroke-linejoin="round" d="m11.25 11.25.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9-3.75h.008v.008H12V8.25Z" /></svg>
             <span class="ml-3">Violations</span>
           </button>
-           <button class="flex items-center w-full px-4 py-2.5 text-sm font-medium rounded-lg transition-colors duration-200 relative text-left text-blue-100 hover:bg-[#084a9e] hover:text-white">
+          <button id="nav-points" onclick="navigateTo('points')" class="nav-link flex items-center w-full px-4 py-2.5 text-sm font-medium rounded-lg transition-colors duration-200 relative text-left">
+            <span class="hidden absolute left-0 top-0 bottom-0 w-1 bg-sky-300 rounded-r-full"></span>
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-6 w-6">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 15.75V18m-7.5-6.75h.008v.008H8.25v-.008Zm0 3h.008v.008H8.25v-.008Zm0 3h.008v.008H8.25v-.008Zm3-6h.008v.008h-.008v-.008Zm0 3h.008v.008h-.008v-.008Zm0 3h.008v.008h-.008v-.008Zm3-6h.008v.008h-.008v-.008Zm0 3h.008v.008h-.008v-.008ZM21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 15.75V18m-7.5-6.75h.008v.008H8.25v-.008Zm0 3h.008v.008H8.25v-.008Zm0 3h.008v.008H8.25v-.008Zm3-6h.008v.008h-.008v-.008Zm0 3h.008v.008h-.008v-.008Zm0 3h.008v.008h-.008v-.008Zm3-6h.008v.008h-.008v-.008Zm0 3h.008v.008h-.008v-.008ZM21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
             </svg>
             <span class="ml-3">Points System</span>
           </button>
@@ -135,10 +136,7 @@
           </button>
         </nav>
         <div class="p-4 border-t border-[#084a9e]">
-          <button class="flex items-center w-full px-4 py-2.5 text-sm font-medium rounded-lg transition-colors duration-200 relative text-left text-blue-100 hover:bg-[#084a9e] hover:text-white">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-6 w-6"><path stroke-linecap="round" stroke-linejoin="round" d="M9.594 3.94c.09-.542.56-1.007 1.11-.95.542.057 1.007.56 1.065 1.11L12 10.5M12 10.5l-2.094 2.094c-.21.21-.47.364-.746.466-1.143.426-2.016 1.29-2.485 2.485C6.364 16.03 6.21 16.29 6 16.5m6-6l2.094 2.094c.21.21.47.364.746.466 1.143.426 2.016 1.29 2.485 2.485.099.276.254.536.466.746L18 16.5m-6-6-2.094-2.094c-.21-.21-.47-.364-.746-.466-1.143-.426-2.016-1.29-2.485-2.485C6.364 7.97 6.21 7.71 6 7.5m6 3 2.094-2.094c.21-.21.47-.364.746-.466 1.143.426 2.016-1.29 2.485 2.485.099-.276.254-.536.466-.746L18 7.5m-6 9v3.406c0 .818.662 1.48 1.48 1.48h.04c.818 0 1.48-.662 1.48-1.48V16.5" /></svg>
-            <span class="ml-3">Settings</span>
-          </button>
+
            <button onclick="navigateTo('profile')" class="w-full text-left">
             <div class="flex items-center mt-4 p-2 bg-[#084a9e] rounded-lg hover:bg-[#0a58ca] transition-colors">
               <img id="sidebar-profile-image" class="h-10 w-10 rounded-full object-cover" src="https://i.pravatar.cc/150?u=admin" alt="User avatar" />
@@ -648,7 +646,6 @@
                     <!-- Right Column: Details Pane -->
                     <div id="suspended-detail-pane" class="lg:col-span-2 bg-white rounded-lg shadow-md flex flex-col min-h-0">
                         <div id="detail-pane-placeholder" class="flex-grow flex flex-col justify-center items-center text-center p-8">
-                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-16 w-16 text-slate-300 mb-4"><path stroke-linecap="round" stroke-linejoin="round" d="M11.25 11.25l.041-.02a.75.75 0 011.063.852l-.708 2.836a.75.75 0 001.063.853l.041-.021M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 15.75l-2.489-2.4cm0 0a3.375 3.375 0 10-4.773-4.773 3.375 3.375 0 004.774 4.774zM21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
                              <h3 class="text-lg font-semibold text-slate-600">No Case Selected</h3>
                              <p class="text-sm text-slate-500 mt-1">Please select a driver from the list on the left to view their case file.</p>
                         </div>
@@ -683,8 +680,6 @@
 
                            </div>
                            <div class="p-4 bg-slate-50 border-t border-slate-200 flex flex-wrap justify-end gap-3">
-                               <button class="text-sm bg-white hover:bg-slate-100 text-slate-700 font-semibold py-2 px-4 border border-slate-300 rounded-lg shadow-sm transition-colors">Send Reinstatement Info</button>
-                               <button class="text-sm bg-white hover:bg-slate-100 text-slate-700 font-semibold py-2 px-4 border border-slate-300 rounded-lg shadow-sm transition-colors">Schedule Hearing</button>
                                <button id="assign-training-btn" class="text-sm bg-[#0a58ca] hover:bg-[#084a9e] text-white font-bold py-2 px-4 rounded-lg shadow-sm transition-colors">Assign to Training Program</button>
                            </div>
                         </div>
@@ -747,6 +742,47 @@
             </div>
         </div>
     </div>
+
+
+            <div id="page-points" class="hidden">
+            <div class="container mx-auto">
+                <h1 class="text-2xl lg:text-3xl font-bold text-slate-800 mb-2">Points System & Law Reference</h1>
+                <p class="text-sm text-slate-500 mb-8">Review and search for traffic laws and their corresponding demerit points.</p>
+                <div class="bg-white p-4 sm:p-6 rounded-lg shadow-md">
+                    <div class="relative mb-4">
+                        <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-5 w-5 text-slate-400">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z"></path>
+                            </svg>
+                        </div>
+                        <input type="text" id="law-search-input" placeholder="Search by law description or ID..." class="w-full pl-10 pr-4 py-2 text-sm text-slate-700 bg-white border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#0a58ca]">
+                    </div>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-sm text-left text-slate-600">
+                            <thead class="text-xs text-slate-700 uppercase bg-slate-100">
+                                <tr>
+                                    <th scope="col" class="px-6 py-3 w-1/6">Law ID</th>
+                                    <th scope="col" class="px-6 py-3 w-3/6">Description</th>
+                                    <th scope="col" class="px-6 py-3 w-1/6">Category</th>
+                                    <th scope="col" class="px-6 py-3 w-1/6 text-center">Points</th>
+                                </tr>
+                            </thead>
+                            <tbody id="laws-tbody">
+                                <!-- Law data will be populated by JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="flex justify-between items-center mt-4 px-4 py-2">
+                        <span id="law-page-info" class="text-sm text-slate-600"></span>
+                        <div class="flex space-x-2">
+                            <button id="law-prev-btn" class="px-3 py-1 text-sm font-medium text-slate-700 bg-white border border-slate-300 rounded-md hover:bg-slate-50 disabled:opacity-50 disabled:cursor-not-allowed">Previous</button>
+                            <button id="law-next-btn" class="px-3 py-1 text-sm font-medium text-slate-700 bg-white border border-slate-300 rounded-md hover:bg-slate-50 disabled:opacity-50 disabled:cursor-not-allowed">Next</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
              <div id="page-notification" class="hidden">
             <div class="container mx-auto">
                 <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8">
@@ -786,6 +822,7 @@
     <script src="../JS/Profile.js"></script>
     <script src="../JS/report.js"></script>
     <script src="../JS/suspended.js"></script>
+    <script src="../JS/point.js"></script>
     <script src="../JS/TrainingProgram.js"></script>
     <script src="../JS/Notification.js"></script>
 
