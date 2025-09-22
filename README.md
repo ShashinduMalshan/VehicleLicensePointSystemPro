@@ -189,5 +189,5 @@ A typical workflow for an administrator:
 
 A video demonstration of the project, showcasing its features and functionality.
 
-**[Watch the Demo on YouTube](https://www.youtube.com/watch?v=your_video_id)**
-*(Please replace the link with your actual YouTube video URL)*
+**[Watch the Demo on YouTube](https://youtu.be/8bGC0mFnb_I)**
+
